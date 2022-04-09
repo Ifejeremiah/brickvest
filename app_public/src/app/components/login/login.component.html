@@ -1,0 +1,61 @@
+<div class="main-container">
+
+  <!-- Container -->
+  <div class="main rounded">
+
+    <!-- Left -->
+    <div class="con-left d-none d-lg-block">
+      <div class="left">
+        <img src="../../../assets/images/login-backgorund.png" alt="">
+
+      </div>
+    </div>
+
+    <!-- Right -->
+    <div class="con-right px-3 py-5 px-lg-none">
+      <div class="right my-3">
+
+        <div class="header">
+          <div class="title">
+            <h1 id="wgt-01">Sign in to</h1>
+            <h1 id="wgt-01" class="color-red">Onebrick</h1>
+          </div>
+          <div class="pt-3">
+            <p id="wgt-0" class="">Not a member? Please
+              <a routerLink="/register" class="color-red">register</a>
+              first.
+            </p>
+          </div>
+        </div>
+
+
+        <!-- Forms  -->
+        <form (submit)="onLoginSubmit()">
+
+          <div *ngIf="message" class="message"> {{message}} </div>
+
+          <div class="form-element">
+            <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="removeMsg()"
+              autocomplete="off" spellcheck="false">
+          </div>
+
+          <div class="form-element">
+            <input type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password"
+              (input)="removeMsg()">
+          </div>
+
+          <button id="wgt-02" type="submit">Login</button>
+
+        </form>
+
+        <!-- Forgot password -->
+        <div class="forgot py-4 py-lg-none px-2 px-lg-none">
+          <a routerLink="/recover-account">Forgot password?</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

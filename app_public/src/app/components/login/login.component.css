@@ -1,0 +1,107 @@
+.main-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.main {
+  width: 90%;
+  height: 80vh;
+  max-width: 1100px;
+  display: grid;
+  grid-template-columns: 1fr;
+  box-shadow: 0 20px 40px rgb(172, 172, 172);
+}
+
+.color-red {
+  color: var(--primary-color);
+}
+
+
+
+/* Left */
+
+
+
+/* Right */
+.right .title h1 {
+  font-size: 2.4rem;
+}
+
+/* Forms */
+.right form .message {
+  background: var(--primary-color);
+  padding: 12px 18px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.right form .form-element {
+  background: rgb(223, 218, 218);
+  border-radius: .25rem;
+  margin: 30px 0;
+  transition: .25s ease;
+}
+
+.right form .form-element input {
+  padding: 12px 18px;
+  width: 100%;
+}
+
+.right form .form-element:focus-within {
+  background: #fff;
+  border: 1px solid #333;
+  padding-left: 10px;
+}
+
+.right form button[type="submit"] {
+  background: var(--primary-color);
+  padding: 12px 18px;
+  color: #fff;
+  border-radius: .25rem;
+  width: 140px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .9rem;
+  transition: .25s ease;
+}
+
+.right form button[type="submit"]:hover {
+  transform: scale(.97);
+}
+
+/* Forgot password */
+.forgot a {
+  color: var(--primary-color);
+  font-size: .9rem;
+}
+
+
+
+/* Media Queries */
+@media (min-width: 992px) {
+  .main {
+    grid-template-columns: repeat(2, 1fr);
+    height: unset;
+  }
+
+
+  /* Right */
+  /* Forms */
+  .right form .message {
+    width: 86%;
+  }
+
+  .right form .form-element {
+    width: 86%;
+  }
+
+
+  /* Forgot password */
+  .forgot {
+    text-align: right;
+    width: 86%;
+  }
+}
