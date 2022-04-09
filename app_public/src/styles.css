@@ -22,11 +22,6 @@ body {
   line-height: 1.5;
 }
 
-img {
-  height: auto;
-  object-fit: cover;
-}
-
 a {
   color: inherit;
 }

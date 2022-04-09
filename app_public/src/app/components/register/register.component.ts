@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent implements OnInit {
 
   constructor() { }
 
@@ -13,8 +13,10 @@ export class LoginComponent implements OnInit {
   }
 
   public credentials = {
+    name: '',
     email: '',
-    password: ''
+    password: '',
+    password2: ''
   }
 
   public message: string = '';
@@ -29,9 +31,9 @@ export class LoginComponent implements OnInit {
 
   public onLoginSubmit(): void {
     this.message = '';
-    let { email, password } = this.credentials;
+    let { name, email, password, password2 } = this.credentials;
 
-    if (!email || !password) {
+    if (!name || !email || !password || !password2) {
       this.message = 'Please fill in all fields';
     } else if (email != '0001@gmail.com' || password != '12345678') {
       this.message = 'Incorrect email or password';

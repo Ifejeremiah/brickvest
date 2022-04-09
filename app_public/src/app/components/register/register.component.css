@@ -10,7 +10,7 @@
 
 .main {
   width: 90%;
-  max-width: 1100px;
+  max-width: 1200px;
   display: grid;
   grid-template-columns: 1fr;
   box-shadow: 0 20px 40px rgb(172, 172, 172);
@@ -64,21 +64,20 @@
 }
 
 .right form .form-element input {
-  padding: 12px 18px;
+  padding: 12px;
   width: 100%;
 }
 
 .right form .form-element:focus-within {
   background: #fff;
-  border: 1px solid #333;
+  border: 1px solid rgb(88, 88, 88);
   padding-left: 10px;
 }
 
 .right form button[type="submit"] {
   background: var(--primary-color);
-  padding: 12px 18px;
+  padding: 12px 40px;
   color: #fff;
-  width: 140px;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: .9rem;
@@ -87,17 +86,6 @@
 
 .right form button[type="submit"]:hover {
   transform: scale(.97);
-}
-
-
-/* Forgot password */
-.right .forgot {
-  padding: 20px 10px;
-}
-
-.right .forgot a {
-  color: var(--primary-color);
-  font-size: .9rem;
 }
 
 
@@ -115,12 +103,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgb(66, 133, 244);
+  background: rgb(44 124 255);
   margin-top: 20px;
 }
 
 .right .con-google .google-icon {
-  border: 1px solid rgb(66, 133, 244);
+  border: 1px solid rgb(44 124 255);
 }
 
 .right .con-google .con-btn {
@@ -144,7 +132,11 @@
 
   /* Right */
   .con-right {
-    padding: 60px 30px;
+    padding: 60px 40px;
+  }
+
+  .right .prompt {
+    padding: 10px 0;
   }
 
 
@@ -153,17 +145,30 @@
     padding: 0;
   }
 
-
-  /* Forgot password  */
-  .right .forgot {
-    text-align: right;
-    padding: 0;
+  .right form .message {
+    padding: 10px 20px;
   }
 
+  .right form .form-element {
+    background: rgb(236, 234, 234);
+    margin: 16px 0;
+    transition: .4s ease;
+  }
+
+  .right form .form-element input {
+    padding: 12px;
+  }
+  
 
   /* Directive */
   .right .direct {
     font-size: 1.2rem;
+    margin: 20px;
   }
 
+
+  /* Google Sign In */
+  .right .con-google {
+    margin-top: 0;
+  }
 }

@@ -19,13 +19,12 @@
 
         <div class="header">
           <div class="title">
-            <h1 id="wgt-01">Sign in to</h1>
+            <h1 id="wgt-01">Sign up for</h1>
             <h1 id="wgt-01" class="color-red">Onebrick</h1>
           </div>
           <div class="prompt">
-            <p id="wgt-0" class="">Not a member? Please
-              <a routerLink="/register" class="color-red">register</a>
-              first.
+            <p id="wgt-0" class="">Already have an account? Please
+              <a routerLink="" class="color-red">login</a>.
             </p>
           </div>
         </div>
@@ -35,32 +34,42 @@
 
           <div *ngIf="message" class="message"> {{message}}</div>
 
+          <div class="flex">
+            <div class="form-element">
+              <input type="text" placeholder="Name" [(ngModel)]="credentials.name" name="name" (input)="removeMsg()">
+            </div>
 
-          <div class="form-element">
-            <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="removeMsg()">
+            <div class="form-element">
+              <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="removeMsg()">
+            </div>
           </div>
 
-          <div class="form-element">
-            <input type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password"
-              (input)="removeMsg()">
+          <div class="flex">
+            <div class="form-element">
+              <input type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password"
+                (input)="removeMsg()">
+            </div>
+
+            <div class="form-element">
+              <input type="password" placeholder="Confirm password" [(ngModel)]="credentials.password2" name="password2"
+                (input)="removeMsg()">
+            </div>
           </div>
 
-          <button id="wgt-02" type="submit">Login</button>
+          <button id="wgt-02" type="submit">sign up</button>
 
         </form>
 
-        <!-- Forgot password -->
-        <div class="forgot">
-          <a routerLink="/recover-account" id="wgt-03">Forgot password?</a>
-        </div>
 
         <!-- Directive -->
         <div class="direct">
           or
         </div>
 
+
         <!-- Google Sign In -->
         <div class="con-google" (click)="googleAuth()">
+
           <!-- Google Icon -->
           <div class="google-icon">
             <svg width="40" height="40">
@@ -85,9 +94,10 @@
             </svg>
           </div>
 
+
           <!-- Google login button -->
           <div class="con-btn" id="wgt-02">
-            Login with Google
+            Sign up with Google
           </div>
         </div>
 

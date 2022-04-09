@@ -15,11 +15,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 
-// Angular Build
+// Angular front-end build
 app.use(express.static(path.join(__dirname, 'app_public', 'build')));
 
 
-// Routers
+// @desc API version 1
 app.use('/api/v1', apiRouter);
 
 // Handle 'not found' requests
