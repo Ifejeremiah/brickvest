@@ -1,11 +1,27 @@
 const express = require('express');
 const router = express.Router();
 
-const { getUsers } = require('../contollers');
+const authRoute = require('./auth.route');
+const dashboardRoute = require('./dashboard.route');
 
 
-// Route to get all users
-router.get('/', getUsers);
+
+const routes = [
+  {
+    path: '/',
+    route: authRoute
+  },
+  {
+    path: '/',
+    route: dashboardRoute
+  },
+];
+
+
+
+routes.forEach((route) => {
+  router.use(route.path, route.route);
+});
 
 
 

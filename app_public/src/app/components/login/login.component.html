@@ -31,18 +31,18 @@
         </div>
 
         <!-- Forms  -->
-        <form (submit)="onLoginSubmit()">
+        <form (submit)="onSubmit()">
 
           <div *ngIf="message" class="message"> {{message}}</div>
 
 
           <div class="form-element">
-            <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="removeMsg()">
+            <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="clearMsg()">
           </div>
 
           <div class="form-element">
             <input type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password"
-              (input)="removeMsg()">
+              (input)="clearMsg()">
           </div>
 
           <button id="wgt-02" type="submit">Login</button>

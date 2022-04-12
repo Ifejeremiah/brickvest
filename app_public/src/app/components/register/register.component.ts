@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-register',
@@ -7,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -21,26 +28,34 @@ export class RegisterComponent implements OnInit {
 
   public message: string = '';
 
-  public removeMsg(): void {
+  public clearMsg(): void {
     this.message = '';
   }
 
   public googleAuth(): void {
-    this.message = 'Logged In through Google';
+    this.message = 'Feature not available for now';
   }
 
-  public onLoginSubmit(): void {
-    this.message = '';
+  public onSubmit(): void {
     let { name, email, password, password2 } = this.credentials;
 
     if (!name || !email || !password || !password2) {
       this.message = 'Please fill in all fields';
-    } else if (email != '0001@gmail.com' || password != '12345678') {
-      this.message = 'Incorrect email or password';
+    } else if (password.length < 6) {
+      this.message = 'Passwords should be at least 6 characters';
+    } else if (password !== password2) {
+      this.message = 'Passwords do not match';
     } else {
-      this.message = 'Logged In';
-      false;
+      this.doRegister();
     }
+  }
+
+  private doRegister(): void {
+    this.authService.register(this.credentials)
+      .then(() => {
+        this.router.navigateByUrl('/dashboard');
+      })
+      .catch(err => { this.message = err.error.error });
   }
 
 }

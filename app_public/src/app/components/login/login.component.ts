@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -7,7 +11,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
   }
@@ -17,28 +24,32 @@ export class LoginComponent implements OnInit {
     password: ''
   }
 
-  public message: string = '';
+  public message!: string;
 
-  public removeMsg(): void {
+  public clearMsg(): void {
     this.message = '';
   }
 
   public googleAuth(): void {
-    this.message = 'Logged In through Google';
+    this.message = 'Feature not available for now';
   }
 
-  public onLoginSubmit(): void {
-    this.message = '';
+  public onSubmit(): void {
     let { email, password } = this.credentials;
 
     if (!email || !password) {
       this.message = 'Please fill in all fields';
-    } else if (email != '0001@gmail.com' || password != '12345678') {
-      this.message = 'Incorrect email or password';
     } else {
-      this.message = 'Logged In';
-      false;
+      this.doLogin();
     }
+  }
+
+  private doLogin(): void {
+    this.authService.login(this.credentials)
+      .then(() => {
+        this.router.navigateByUrl('/dashboard');
+      })
+      .catch(err => { this.message = err.error.error });
   }
 
 }

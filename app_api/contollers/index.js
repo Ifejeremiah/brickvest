@@ -1,10 +1,6 @@
-
-// Get all users 
-const getUsers = (req, res) => {
-  res.json({ 'msg': 'Hello World' });
-}
+// @desc Register and login
+module.exports.userCtrl = require('./auths.control');
 
 
-module.exports = {
-  getUsers
-}
+// @desc Dashboard
+module.exports.dashboardCtrl = require('./dashboard.conrol');

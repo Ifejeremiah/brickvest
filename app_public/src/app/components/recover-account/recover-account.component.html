@@ -1,0 +1,70 @@
+<!-- Main Container -->
+
+<div class="main">
+
+  <!-- Email Section -->
+  <div class="first rounded" *ngIf="!isValidEmail">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="title">
+        <h1 id="wgt-01" class="color-red">Recover your account</h1>
+      </div>
+
+      <div class="prompt">
+        <h2>Please enter your account's email.</h2>
+      </div>
+    </div>
+
+
+
+    <!-- Forms  -->
+    <form (submit)="onSubmitEmail()">
+
+      <div *ngIf="message" class="message"> {{message}}</div>
+
+      <div class="form-element">
+        <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="clearMsg()">
+      </div>
+
+      <button id="wgt-02" type="submit">Submit</button>
+
+    </form>
+
+  </div>
+
+
+
+  <!-- Token Section -->
+  <div class="second rounded" *ngIf="isValidEmail">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="title">
+        <h1 id="wgt-01" class="color-red">Recover your account</h1>
+      </div>
+
+      <div class="prompt">
+        <h2>Enter the recovery code sent to your email.</h2>
+      </div>
+    </div>
+
+
+
+    <!-- Forms  -->
+    <form (submit)="onSubmitToken()">
+
+      <div *ngIf="message" class="message"> {{message}}</div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Recovery Token" [(ngModel)]="credentials.token" name="token"
+          (input)="clearMsg()">
+      </div>
+
+      <button id="wgt-02" type="submit">Submit</button>
+
+    </form>
+
+  </div>
+
+</div>

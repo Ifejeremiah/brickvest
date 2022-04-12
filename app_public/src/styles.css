@@ -22,6 +22,10 @@ body {
   line-height: 1.5;
 }
 
+.color-red {
+  color: var(--primary-color);
+}
+
 a {
   color: inherit;
 }

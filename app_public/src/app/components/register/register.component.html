@@ -30,29 +30,29 @@
         </div>
 
         <!-- Forms  -->
-        <form (submit)="onLoginSubmit()">
+        <form (submit)="onSubmit()">
 
           <div *ngIf="message" class="message"> {{message}}</div>
 
           <div class="flex">
             <div class="form-element">
-              <input type="text" placeholder="Name" [(ngModel)]="credentials.name" name="name" (input)="removeMsg()">
+              <input type="text" placeholder="Name" [(ngModel)]="credentials.name" name="name" (input)="clearMsg()">
             </div>
 
             <div class="form-element">
-              <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="removeMsg()">
+              <input type="email" placeholder="Email" [(ngModel)]="credentials.email" name="email" (input)="clearMsg()">
             </div>
           </div>
 
           <div class="flex">
             <div class="form-element">
               <input type="password" placeholder="Password" [(ngModel)]="credentials.password" name="password"
-                (input)="removeMsg()">
+                (input)="clearMsg()">
             </div>
 
             <div class="form-element">
               <input type="password" placeholder="Confirm password" [(ngModel)]="credentials.password2" name="password2"
-                (input)="removeMsg()">
+                (input)="clearMsg()">
             </div>
           </div>
 
