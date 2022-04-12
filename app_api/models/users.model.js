@@ -49,12 +49,17 @@ const userSchema = new mongoose.Schema(
       default: false,
     },
 
+    is_verified: {
+      type: Boolean,
+      default: false,
+    },
+
     google_oauth_token: {
       type: String,
       default: null
     },
 
-    recovery_token: {
+    verify_token: {
       salt: {
         type: String,
         default: null
@@ -95,13 +100,13 @@ userSchema.methods.validPassword = function (password) {
 
 
 // Set and store recovery tokens
-userSchema.methods.createRecoveryToken = function () {
+userSchema.methods.createVerifyToken = function () {
   const random_code = crypto.randomBytes(5).toString('hex');
 
-  this.recovery_token.salt = crypto.randomBytes(16).toString('hex');
-  this.recovery_token.hash = crypto.pbkdf2Sync(
+  this.verify_token.salt = crypto.randomBytes(16).toString('hex');
+  this.verify_token.hash = crypto.pbkdf2Sync(
     random_code,
-    this.recovery_token.salt,
+    this.verify_token.salt,
     10000, 64, 'sha512'
   ).toString('hex');
 
@@ -111,22 +116,22 @@ userSchema.methods.createRecoveryToken = function () {
 
 
 // Validate recovery token
-userSchema.methods.validRecoveryToken = function (code) {
+userSchema.methods.isValidVerifyToken = function (code) {
   let isValid;
 
-  if (this.recovery_token.salt != null) {
+  if (this.verify_token.salt != null) {
     const hash = crypto.pbkdf2Sync(
-      code, this.recovery_token.salt, 10000, 64, 'sha512'
+      code, this.verify_token.salt, 10000, 64, 'sha512'
     ).toString('hex');
 
-    isValid = this.recovery_token.hash === hash;
+    isValid = this.verify_token.hash === hash;
   } else {
     isValid = false
   }
 
   if (isValid) {
-    this.recovery_token.salt = null;
-    this.recovery_token.hash = null;
+    this.verify_token.salt = null;
+    this.verify_token.hash = null;
   }
 
   return isValid;

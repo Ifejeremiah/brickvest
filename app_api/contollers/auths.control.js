@@ -86,11 +86,12 @@ const recoverEmail = (req, res) => {
       }
 
       // Get the recovery token
-      const token = user.createRecoveryToken();
+      const token = user.createVerifyToken();
 
       user.save()
         .then(() => {
           
+          // Model email
           const mail = emailBody.mail(token);
 
           // Send token to email address
@@ -120,7 +121,7 @@ const recoverToken = (req, res) => {
       }
 
       // Verify recovery token
-      const validToken = user.validRecoveryToken(token);
+      const validToken = user.isValidVerifyToken(token);
 
       // Send error msg if token is invalid
       if (!validToken) {
