@@ -3,8 +3,9 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport')
-require('dotenv').config();
 const cors = require('cors');
+
+require('dotenv').config();
 
 
 require('./app_api/models');
@@ -26,6 +27,10 @@ app.use(cookieParser());
 
 // Angular front-end build
 app.use(express.static(path.join(__dirname, 'app_public', 'build')));
+
+
+// Catch all routes
+// app.use('/*', express.static(path.join(__dirname, 'app_public', 'build', 'index.html')))
 
 
 // Initialize passport
@@ -69,7 +74,6 @@ app.use(function (req, res) {
 // Handle server errors
 app.use(function (err, req, res, next) {
   req.app.get('env') !== 'production' ? console.log(err) : null;
-
   return res.status(500).json({ error: 'internal error on server' });
 });
 

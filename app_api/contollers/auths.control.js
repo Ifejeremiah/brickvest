@@ -49,7 +49,7 @@ const register = (req, res) => {
 
   User.findOne({ email: email.toLowerCase() }).then(user => {
     if (user) {
-      return res.status(400).json({ error: 'Email is already in use' });
+      return res.status(409).json({ error: 'Email is already in use' });
     }
 
     const newUser = new User();
@@ -76,7 +76,7 @@ const register = (req, res) => {
 // @return ERROR if email is not found
 // @return SUCCESS if email found and send a token to email address
 
-const recoverEmail = (req, res) => {
+const verifyEmail = (req, res) => {
   const { email } = req.params;
 
   User.findOne({ email })
@@ -90,7 +90,7 @@ const recoverEmail = (req, res) => {
 
       user.save()
         .then(() => {
-          
+
           // Model email
           const mail = emailBody.mail(token);
 
@@ -111,7 +111,7 @@ const recoverEmail = (req, res) => {
 // @return ERROR if email is not found or token is invalid
 // @return SUCCESS if email and token is good
 // @return JWT 
-const recoverToken = (req, res) => {
+const verifyToken = (req, res) => {
   const { email, token } = req.params;
 
   User.findOne({ email })
@@ -127,6 +127,9 @@ const recoverToken = (req, res) => {
       if (!validToken) {
         return res.status(400).json({ error: 'invalid recovery token' });
       }
+
+      // Update account verified status
+      user.is_verified = true;
 
       user.save()
         .then(() => {
@@ -147,6 +150,6 @@ const recoverToken = (req, res) => {
 module.exports = {
   login,
   register,
-  recoverEmail,
-  recoverToken
+  verifyEmail,
+  verifyToken
 }

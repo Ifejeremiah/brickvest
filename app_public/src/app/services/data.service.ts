@@ -45,11 +45,11 @@ export class DataService {
 
 
   public login(userData: LoginData): Promise<AuthToken> {
-    return this.makeAuthApiCall('login', userData);
+    return this.makeAuthApiCall('auth/login', userData);
   }
 
   public register(userData: RegisterData): Promise<AuthToken> {
-    return this.makeAuthApiCall('register', userData);
+    return this.makeAuthApiCall('auth/register', userData);
   }
 
 
@@ -64,8 +64,8 @@ export class DataService {
   }
 
 
-  public recoverAccountByEmail(email: string): Promise<any> {
-    const url: string = `${this.apiBase}/recover-account/${email}`;
+  public verifyAccountByEmail(email: string): Promise<any> {
+    const url: string = `${this.apiBase}/verify-account/${email}`;
 
     return this.http
       .get(url)
@@ -75,8 +75,8 @@ export class DataService {
   }
 
 
-  public recoverAccountByToken(email: string, token: string): Promise<AuthToken> {
-    const url: string = `${this.apiBase}/recover-account/${email}/${token}`;
+  public verifyAccountByToken(email: string, token: string): Promise<AuthToken> {
+    const url: string = `${this.apiBase}/verify-account/${email}/${token}`;
 
     return this.http
       .post(url, null)

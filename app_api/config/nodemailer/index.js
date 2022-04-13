@@ -34,7 +34,7 @@ module.exports = () => {
       })
         .catch(err => console.log(err));
 
-      console.log("Message sent: %s", info.messageId ? info.messageId : '');
+      console.log("Message sent: %s", info.messageId ? info.messageId : null);
     },
 
 
@@ -59,7 +59,7 @@ module.exports = () => {
       })
         .catch(err => console.log(err));
 
-      console.log("Message sent: %s", info.messageId ? info.messageId : '');
+      console.log("Message sent: %s", info.messageId ? info.messageId : null);
     }
   };
 }

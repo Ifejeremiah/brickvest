@@ -16,6 +16,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
+import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 
 
 
@@ -28,7 +29,8 @@ import { RecoverAccountComponent } from './components/recover-account/recover-ac
     SidebarComponent,
     FooterComponent,
     RegisterComponent,
-    RecoverAccountComponent
+    RecoverAccountComponent,
+    VerifyAccountComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<!-- Main Container -->
+<div class="main">
+
+  <!-- Token Section -->
+  <div class="second rounded">
+
+    <!-- Header -->
+    <div class="header">
+      <div class="title">
+        <h1 id="wgt-01" class="color-red">Verify your account</h1>
+      </div>
+
+      <div class="prompt">
+        <h2>Please enter the verification code that was just sent to your email.</h2>
+      </div>
+    </div>
+
+
+
+    <!-- Forms  -->
+    <form (submit)="onSubmit()">
+
+      <div *ngIf="message" class="message"> {{message}}</div>
+
+      <div class="form-element">
+        <input type="text" placeholder="Verify Code" [(ngModel)]="credentials.token" name="token"
+          (input)="clearMsg()">
+      </div>
+
+      <button id="wgt-02" type="submit">Submit</button>
+
+    </form>
+
+  </div>
+</div>

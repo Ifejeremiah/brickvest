@@ -1,0 +1,77 @@
+/* Main Container */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 60vh;
+}
+
+
+.main .second {
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 0 30px rgb(206, 206, 206);
+}
+
+
+/* Header */
+.main .header {
+  text-align: center;
+  padding: 40px 0 0 0;
+}
+
+.main .header h1 {
+  font-size: 1.6rem;
+}
+
+.main .header .prompt h2 {
+  font-size: 1.2rem;
+}
+
+
+
+/* Forms */
+.main form {
+  padding: 20px 30px 50px 30px;
+}
+
+.main form .message {
+  padding: 12px 20px;
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+}
+
+.main form .form-element {
+  background: rgb(236, 234, 234);
+  margin: 30px 0;
+  transition: .4s ease;
+}
+
+.main form .form-element input {
+  padding: 12px 18px;
+  width: 100%;
+}
+
+.main form .form-element:focus-within {
+  background: #fff;
+  border: 1px solid #333;
+  padding-left: 10px;
+}
+
+
+form button[type="submit"] {
+  background: var(--primary-color);
+  padding: 12px 20px;
+  width: 160px;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .9rem;
+  transition: .25s ease;
+}
+
+form button[type="submit"]:hover {
+  transform: scale(.97);
+}

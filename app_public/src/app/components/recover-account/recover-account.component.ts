@@ -39,7 +39,7 @@ export class RecoverAccountComponent implements OnInit {
     if (!email) {
       this.message = 'Please enter email address'
     } else {
-      this.dataService.recoverAccountByEmail(email)
+      this.dataService.verifyAccountByEmail(email)
         .then(() => {
           this.isValidEmail = true;
         }).catch(err => {
@@ -56,7 +56,7 @@ export class RecoverAccountComponent implements OnInit {
     if (!token) {
       this.message = 'Please enter your recovery code';
     } else {
-      this.dataService.recoverAccountByToken(email, token)
+      this.dataService.verifyAccountByToken(email, token)
         .then((response) => {
           this.authService.saveToken(response.token);
           this.accessAcount();

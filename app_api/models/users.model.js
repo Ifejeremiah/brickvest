@@ -46,7 +46,7 @@ const userSchema = new mongoose.Schema(
 
     is_active: {
       type: Boolean,
-      default: false,
+      default: true,
     },
 
     is_verified: {
@@ -119,7 +119,7 @@ userSchema.methods.createVerifyToken = function () {
 userSchema.methods.isValidVerifyToken = function (code) {
   let isValid;
 
-  if (this.verify_token.salt != null) {
+  if (this.verify_token.salt !== null) {
     const hash = crypto.pbkdf2Sync(
       code, this.verify_token.salt, 10000, 64, 'sha512'
     ).toString('hex');
@@ -146,6 +146,7 @@ userSchema.methods.generateJwt = function () {
     name: this.name,
     email: this.email,
     role: this.role,
+    is_verified: this.is_verified,
     is_active: this.is_active
   }, process.env.JWT_SECRET, { expiresIn: '1h' });
 };

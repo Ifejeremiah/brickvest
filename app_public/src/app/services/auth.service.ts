@@ -44,7 +44,7 @@ export class AuthService {
 
 
   public logout(): void {
-    this.storage.removeItem('starhub-token');
+    this.storage.removeItem('auth-token');
   }
 
 
@@ -64,8 +64,11 @@ export class AuthService {
     const token: string = this.getToken();
 
     if (token) {
-      const { name, email, role, is_active } = JSON.parse(atob(token.split('.')[1]));
-      return { name, email, role, is_active };
+      const { name, email, role, is_verified } = JSON.parse(atob(token.split('.')[1]));
+
+      return { name, email, role, is_verified };
+    } else {
+      return { is_verified: false };
     }
   }
 
