@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
   private doRegister(): void {
     this.authService.register(this.credentials)
       .then(() => {
-        this.router.navigateByUrl('/verify-account');
+        this.router.navigateByUrl('/dashboard');
       })
       .catch(err => { this.message = err.error.error });
   }

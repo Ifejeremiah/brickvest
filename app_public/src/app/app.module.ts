@@ -17,6 +17,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
+import { OverviewComponent } from './components/dashboard-items/overview/overview.component';
 
 
 
@@ -30,7 +31,8 @@ import { VerifyAccountComponent } from './components/verify-account/verify-accou
     FooterComponent,
     RegisterComponent,
     RecoverAccountComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    OverviewComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -11,14 +11,25 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authSevice: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.reloadAllScripts();
+    this.loadOverviewPage();
   }
 
-  public doLogout(): void {
-    this.authSevice.logout();
-    this.router.navigateByUrl('/login');
+  private reloadAllScripts(): void {
+    if (!localStorage.getItem('abc')) {
+      localStorage.setItem('abc', 'def');
+      location.reload();
+    } else {
+      localStorage.removeItem('abc');
+    }
   }
+
+  private loadOverviewPage(): void {
+    this.router.navigate(['', 'overview']);
+  }
+
+
 }

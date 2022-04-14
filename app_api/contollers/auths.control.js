@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const passport = require('passport');
 const sendEmail = require('../config/nodemailer')();
-const emailBody = require('../config/emails')
+const emailBody = require('../config/emails');
 
 
 

@@ -1,1 +1,46 @@
-<p>header works!</p>
+<header class="main-header d-flex ailgn-items-center">
+  <!-- Header Navbar -->
+  <nav class="navbar navbar-static-top" role="navigation">
+    <!-- Sidebar toggle button-->
+    <a class="sidebar-toggle" data-toggle="push-menu" role="button">
+      <span class="sr-only">Toggle navigation</span>
+    </a>
+
+    <div class="logo-01 color-red">
+      <h2>Brick Vest</h2>
+    </div>
+
+    <!-- Navbar Right Menu -->
+    <div class="navbar-custom-menu">
+      <ul class="nav navbar-nav">
+        <!-- User Account Menu -->
+        <li class="dropdown user user-menu">
+
+          <!-- Menu Toggle Button -->
+          <a class="dropdown-toggle" data-toggle="dropdown">
+            <span>John</span>&nbsp;&nbsp;
+            <i class="fas fa-caret-down"></i>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li class="user-header">
+              <p>
+                John
+                <small style="font-size: 1.4rem; color: rgb(228, 228, 228);">
+                  John@gmail.com
+                </small>
+                <small style="font-size: 1.6rem; color: #fff;">User</small>
+              </p>
+            </li>
+            <!-- Menu Footer-->
+            <li class="user-footer">
+              <div class="pull-right" (click)="doLogout()">
+                <a class="btn btn-default btn-flat">Log out</a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

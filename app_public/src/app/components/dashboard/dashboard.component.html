@@ -1,6 +1,12 @@
-<p>dashboard works!</p>
+<div class="wrapper">
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
 
-
-<button class="btn" (click)="doLogout()">
-  Logout
-</button>
+  <div class="content-wrapper" style="min-height: 585.002px;">
+    <section class="content container-fluid">
+      <router-outlet></router-outlet>
+    </section>
+  </div>
+  
+  <app-footer></app-footer>
+</div>

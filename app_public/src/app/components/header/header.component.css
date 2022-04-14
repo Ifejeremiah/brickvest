@@ -1,0 +1,16 @@
+.main-header .navbar {
+  padding: 0 20px;
+  border: 1px solid #333;
+}
+
+
+.navbar .logo-01 h2 {
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+
+.navbar-custom-menu {
+  cursor: pointer;
+}

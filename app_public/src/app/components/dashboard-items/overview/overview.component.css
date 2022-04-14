@@ -1,0 +1,11 @@
+.con-section {
+  border: 1px solid #333;
+  height: 83vh;
+}
+
+
+@media (min-width: 992px) {
+  .con-section {
+    height: 80vh;
+  }
+}
