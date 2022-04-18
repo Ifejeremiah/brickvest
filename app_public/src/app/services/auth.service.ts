@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 
 import { BROWSER_STORAGE } from '../classes/local-storage';
-import { AuthToken, DataService, LoginData, RegisterData } from './data.service';
+import { AuthResponse, DataService, LoginData, RegisterData } from './data.service';
 
 
 @Injectable({
@@ -23,6 +23,7 @@ export class AuthService {
 
 
   public saveToken(token: string): void {
+    console.log(token);
     this.storage.setItem('auth-token', token);
   }
 
@@ -30,7 +31,7 @@ export class AuthService {
   public login(data: LoginData): Promise<any> {
     return this.dataService.login(data)
       .then(
-        (authResponse: AuthToken) => this.saveToken(authResponse.token)
+        (authResponse: AuthResponse) => this.saveToken(authResponse.data.token)
       );
   }
 
@@ -38,7 +39,7 @@ export class AuthService {
   public register(data: RegisterData): Promise<any> {
     return this.dataService.register(data)
       .then(
-        (authResponse: AuthToken) => this.saveToken(authResponse.token)
+        (authResponse: AuthResponse) => this.saveToken(authResponse.data.token)
       );
   }
 

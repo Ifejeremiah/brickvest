@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.router.navigateByUrl('/dashboard');
       })
-      .catch(err => { this.message = err.error.error });
+      .catch(err => { this.message = err.error.message });
   }
 
 }

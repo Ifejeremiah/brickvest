@@ -3,7 +3,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400..900&display=swap');
 
 :root {
-  --primary-color: rgb(206, 16, 16);
+  --primary-color: rgb(228, 0, 0);
+  --ash-color-01: #e9e8e8;
+  --ash-color-02: rgb(241, 237, 237);
 }
 
 * {
@@ -30,12 +32,34 @@ a {
   color: inherit;
 }
 
-.h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
+a:hover {
+  color: inherit;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: 0;
 }
 
-a:hover {
-  color: inherit;
+img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.table-hover>tbody>tr:hover>* {
+  --bs-table-accent-bg: var(--ash-color-02);
+  cursor: pointer;
 }
 
 input {
@@ -56,4 +80,33 @@ button {
 
 #wgt-03 {
   font-weight: 500;
+}
+
+.animated-bg {
+  background-image: linear-gradient(to right,
+      #f6f7f8 0%,
+      #edeef1 10%,
+      #f6f7f8 20%,
+      #f6f7f8 100%);
+  background-size: 200% 100%;
+  animation: bgPos 1s linear infinite;
+}
+
+.animated-bg-text {
+  border-radius: 20px;
+  display: inline-block;
+  margin: 0;
+  height: 20px;
+  width: 100%;
+}
+
+
+@keyframes bgPos {
+  0% {
+    background-position: 50% 0;
+  }
+
+  100% {
+    background-position: -150% 0;
+  }
 }

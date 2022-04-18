@@ -20,8 +20,12 @@ export class RegisterData {
   password2!: string;
 }
 
-export class AuthToken {
-  token !: string;
+export class AuthResponse {
+  status!: string;
+  message!: string;
+  data!: {
+    token: string
+  }
 }
 
 
@@ -44,22 +48,22 @@ export class DataService {
   }
 
 
-  public login(userData: LoginData): Promise<AuthToken> {
+  public login(userData: LoginData): Promise<AuthResponse> {
     return this.makeAuthApiCall('auth/login', userData);
   }
 
-  public register(userData: RegisterData): Promise<AuthToken> {
+  public register(userData: RegisterData): Promise<AuthResponse> {
     return this.makeAuthApiCall('auth/register', userData);
   }
 
 
-  private makeAuthApiCall(path: string, data: LoginData): Promise<AuthToken> {
+  private makeAuthApiCall(path: string, data: LoginData): Promise<AuthResponse> {
     const url: string = `${this.apiBase}/${path}`;
 
     return this.http
       .post(url, data)
       .toPromise()
-      .then(response => response as AuthToken)
+      .then(response => response as AuthResponse)
       .catch(this.handleError);
   }
 
@@ -75,13 +79,13 @@ export class DataService {
   }
 
 
-  public verifyAccountByToken(email: string, token: string): Promise<AuthToken> {
+  public verifyAccountByToken(email: string, token: string): Promise<AuthResponse> {
     const url: string = `${this.apiBase}/verify-account/${email}/${token}`;
 
     return this.http
       .post(url, null)
       .toPromise()
-      .then(response => response as AuthToken)
+      .then(response => response as AuthResponse)
       .catch(this.handleError);
   }
 

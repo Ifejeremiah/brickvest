@@ -40,7 +40,10 @@ app.use(passport.initialize());
 // @desc Allow CORS requests for development purposes only
 // @route GET /api
 const corsOptions = {
-  origin: 'http://localhost:4200',
+  origin: [
+    'http://localhost:4200',
+    `http://localhost:${app.get('port')}`
+  ],
   credentials: true,
   optionSuccessStatus: 200
 }
@@ -73,7 +76,7 @@ app.use(function (req, res) {
 
 // Handle server errors
 app.use(function (err, req, res, next) {
-  req.app.get('env') !== 'production' ? console.log(err) : null;
+  app.get('env') !== 'production' ? console.log(err) : null;
   return res.status(500).json({ error: 'internal error on server' });
 });
 

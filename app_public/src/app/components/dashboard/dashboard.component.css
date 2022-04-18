@@ -5,3 +5,7 @@ button.btn {
   width: 140px;
   font-weight: 700;
 }
+
+section.content {
+  background: var(--ash-color-01);
+}

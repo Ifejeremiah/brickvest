@@ -2,18 +2,23 @@ const express = require('express');
 const router = express.Router();
 
 const { userCtrl } = require('../contollers');
-const { login, register, verifyEmail, verifyToken } = userCtrl
+const { login, register, verifyEmail, verifyToken } = userCtrl;
+
+const validate = require('../config/validations');
+
+const { authSchema } = require('../config/schemas');
+const { registerSchema, loginSchema } = authSchema;
 
 
 
 // @desc login
 // @route POST /login
-router.post('/auth/login', login)
+router.post('/auth/login', validate(loginSchema), login)
 
 
 // @desc register 
 // @route POST /register
-router.post('/auth/register', register)
+router.post('/auth/register', validate(registerSchema), register)
 
 
 // @desc forgot password

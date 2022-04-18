@@ -1,8 +1,11 @@
+const res = require('express/lib/response');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const passport = require('passport');
 const sendEmail = require('../config/nodemailer')();
 const emailBody = require('../config/emails');
+
+const { successResponse, errorResponse } = require('../config/responses');
 
 
 
@@ -12,21 +15,19 @@ const emailBody = require('../config/emails');
 // @return JWT
 
 const login = (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ error: 'Please fill all fields' });
-  }
-
   passport.authenticate('local', (err, user, info) => {
     if (err) {
-      return res.status(400).json(err);
+      return errorResponse(res, err);
+
     } else if (user) {
       const token = user.generateJwt();
-      return res.status(200).json({ token });
+
+      return successResponse(res, 'User login successful', { token });
+    } else {
+      return errorResponse(res, info.error, 401);
     }
-    return res.status(401).json(info);
   })(req, res);
+
 };
 
 
@@ -37,19 +38,11 @@ const login = (req, res) => {
 // @return JWT
 
 const register = (req, res) => {
-  const { name, email, password, password2 } = req.body;
-
-  if (!name || !email || !password || !password2) {
-    return res.status(400).json({ error: 'please fill all fields' });
-  } else if (password.length < 6) {
-    return res.status(400).json({ error: 'passwords should be at least 6 characters' });
-  } else if (password !== password2) {
-    return res.status(403).json({ error: 'passwords do not match' });
-  }
+  const { name, email, password } = req.body;
 
   User.findOne({ email: email.toLowerCase() }).then(user => {
     if (user) {
-      return res.status(409).json({ error: 'Email is already in use' });
+      return errorResponse(res, 'Email is already in use', 409);
     }
 
     const newUser = new User();
@@ -59,11 +52,11 @@ const register = (req, res) => {
 
     newUser.save().then(() => {
       const token = newUser.generateJwt();
+      successResponse(res, 'User created successfully', { token }, 201);
 
-      return res.status(201).json({ token });
     }).catch(err => {
       console.log(err);
-      return res.status(400).json({ error: err.message });
+      return errorResponse(res, err.message)
     });
 
   }).catch(err => console.log(err));
@@ -82,7 +75,7 @@ const verifyEmail = (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        return res.status(404).json({ error: 'user not found' });
+        return errorResponse(res, 'User not found', 404)
       }
 
       // Get the recovery token
@@ -93,11 +86,12 @@ const verifyEmail = (req, res) => {
 
           // Model email
           const mail = emailBody.mail(token);
+          console.log(token);
 
           // Send token to email address
-          sendEmail.send(email, mail.sub, mail.body);
+          // sendEmail.send(email, mail.sub, mail.body);
 
-          return res.status(200).json({ msg: `user found, recovery token sent to email` });
+          return successResponse(res, 'user found, recovery token sent to email');
         })
         .catch(err => console.log(err));
     })
@@ -117,7 +111,7 @@ const verifyToken = (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        return res.status(404).json({ error: 'user not found' });
+        return errorResponse(res, 'User not found', 404)
       }
 
       // Verify recovery token
@@ -125,7 +119,7 @@ const verifyToken = (req, res) => {
 
       // Send error msg if token is invalid
       if (!validToken) {
-        return res.status(400).json({ error: 'invalid recovery token' });
+        return errorResponse(res, 'Invalid recovery token')
       }
 
       // Update account verified status
@@ -135,11 +129,11 @@ const verifyToken = (req, res) => {
         .then(() => {
           // Send JWT if token is valid
           const token = user.generateJwt();
-          return res.status(200).json({ token });
+          return successResponse(res, 'User verified successfully', token)
         })
         .catch(err => {
-          console.log('Hey, there is an error here')
           console.log(err)
+          return errorResponse(res)
         });
     })
     .catch(err => console.log(err));

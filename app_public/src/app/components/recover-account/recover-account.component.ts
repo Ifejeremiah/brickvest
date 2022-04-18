@@ -58,7 +58,7 @@ export class RecoverAccountComponent implements OnInit {
     } else {
       this.dataService.verifyAccountByToken(email, token)
         .then((response) => {
-          this.authService.saveToken(response.token);
+          this.authService.saveToken(response.data.token);
           this.accessAcount();
         })
         .catch(err => {
