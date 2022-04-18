@@ -39,11 +39,15 @@ app.use(passport.initialize());
 
 // @desc Allow CORS requests for development purposes only
 // @route GET /api
+const allowedOrigins = ['http://localhost:4200', `http://localhost:${app.get('port')}`]
 const corsOptions = {
-  origin: [
-    'http://localhost:4200',
-    `http://localhost:${app.get('port')}`
-  ],
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
   credentials: true,
   optionSuccessStatus: 200
 }
