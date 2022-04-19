@@ -29,25 +29,17 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'app_public', 'build')));
 
 
-// Catch all routes
-// app.use('/*', express.static(path.join(__dirname, 'app_public', 'build', 'index.html')))
-
-
 // Initialize passport
 app.use(passport.initialize());
 
 
 // @desc Allow CORS requests for development purposes only
 // @route GET /api
-const allowedOrigins = ['http://localhost:4200', 'http://localhost:3000']
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
+  origin: [
+    'http://localhost:4200',
+    'http://localhost:3000'
+  ],
   credentials: true,
   optionSuccessStatus: 200
 }
@@ -61,6 +53,17 @@ app.use(cors(corsOptions));
 // @desc Handle routes to API 
 // @route GET /api
 app.use('/api', apiRouter);
+
+
+// Define routes and respond with Frontend build
+app.get(
+
+  /(\/login)|(\/register)|(\/overview)|(\/explore)|(\/co-own)|(\/requests)|(\/profile)|(\/location\/[a-z0-9]{24})/,
+
+  (req, res) => {
+    res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
+  }
+);
 
 
 // @desc Handle Unauthorized actions

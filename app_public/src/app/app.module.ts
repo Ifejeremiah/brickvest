@@ -18,6 +18,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 import { OverviewComponent } from './components/dashboard-items/overview/overview.component';
+import { ExploreComponent } from './components/dashboard-items/explore/explore.component';
+import { RequestComponent } from './components/dashboard-items/request/request.component';
+import { CoOwnComponent } from './components/dashboard-items/co-own/co-own.component';
+import { ProfileComponent } from './components/dashboard-items/profile/profile.component';
 
 
 
@@ -32,7 +36,11 @@ import { OverviewComponent } from './components/dashboard-items/overview/overvie
     RegisterComponent,
     RecoverAccountComponent,
     VerifyAccountComponent,
-    OverviewComponent
+    OverviewComponent,
+    ExploreComponent,
+    RequestComponent,
+    CoOwnComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
