@@ -8,6 +8,14 @@
   width: 140px;
 }
 
+.control-label.message {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 700;
+  padding: 12px 30px;
+  width: 80%;
+}
+
 
 @media (min-width:992px) {
   .btn-block {

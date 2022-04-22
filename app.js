@@ -58,7 +58,7 @@ app.use('/api', apiRouter);
 // Define routes and respond with Frontend build
 app.get(
 
-  /(\/login)|(\/register)|(\/overview)|(\/explore)|(\/co-own)|(\/requests)|(\/profile)|(\/location\/[a-z0-9]{24})/,
+  /(\/login)|(\/register)|(\/overview)|(\/explore)|(\/co-own)|(\/requests)|(\/profile)|(\/verify-account)|(\/recover-account)|(\/update-password)|(\/delete-account)|(\/location\/[a-z0-9]{24})/,
 
   (req, res) => {
     res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));

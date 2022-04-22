@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { string } from 'joi';
 
 @Component({
   selector: 'app-profile',
@@ -11,5 +12,29 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  public credentials = {
+    image: '',
+    name: 'John',
+    email: 'johndoe@gmail.com'
+  }
+
+  public message: string = '';
+
+  public clearMsg(): void {
+    this.message = '';
+  }
+
+  public onSubmit(): void {
+    const { name, email } = this.credentials;
+
+    if (!name || !email) {
+      this.message = 'Your name and emails can not be empty';
+    } else {
+      this.message = 'Your account is updated successfully';
+      setTimeout(() => this.clearMsg(), 4000);
+    }
+  }
+
 
 }

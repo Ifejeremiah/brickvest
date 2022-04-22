@@ -1,6 +1,7 @@
 .sidebar {
   height: 100vh;
   padding: 50px 0;
+  box-shadow: 0 0 20px rgb(207, 205, 205);
 }
 
 .sidebar-menu>li {

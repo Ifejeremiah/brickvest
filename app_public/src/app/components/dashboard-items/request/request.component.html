@@ -14,17 +14,21 @@
                 </h2>
               </div>
 
+              <div class="d-flex justify-content-center mb-3">
+                <div class="message text-center" *ngIf="message">{{message}}</div>
+              </div>
+
               <div class="box-body">
                 <div class="form-group">
-                  <input class="form-control" name="title" placeholder="Title:">
+                  <input class="form-control" name="title" placeholder="Title:" [(ngModel)]="requestBody.title">
                 </div>
 
                 <div class="form-group">
-                  <input class="form-control" name="subject" placeholder="Subject:">
+                  <input class="form-control" name="subject" placeholder="Subject:" [(ngModel)]="requestBody.subject">
                 </div>
 
                 <div class="form-group">
-                  <textarea class="form-control" name="body" cols="20" rows="10">
+                  <textarea class="form-control" name="body" cols="20" rows="10" [(ngModel)]="requestBody.description">
                 </textarea>
                 </div>
 
@@ -32,13 +36,14 @@
 
               <div class="box-footer">
                 <div class="pull-right">
-                  <button type="submit" class="btn btn-primary">
+                  <button type="submit" class="btn btn-primary" (click)="onSubmit()">
                     <i class="fa fa-envelope-o"></i>
                     Send
                   </button>
                 </div>
 
-                <button type="reset" class="btn btn-default"><i class="fa fa-times"></i> Discard</button>
+                <button type="reset" class="btn btn-default" (click)="doDiscard()"><i class="fa fa-times"></i>
+                  Discard</button>
               </div>
 
             </div>

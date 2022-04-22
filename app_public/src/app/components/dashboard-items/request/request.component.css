@@ -1,0 +1,7 @@
+.message {
+  background: var(--primary-color);
+  padding: 12px 0;
+  color: #fff;
+  width: 80%;
+  font-weight: 700;
+}
