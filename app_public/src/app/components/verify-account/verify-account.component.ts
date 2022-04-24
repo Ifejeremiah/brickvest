@@ -51,7 +51,7 @@ export class VerifyAccountComponent implements OnInit {
       this.dataService.verifyAccountByToken(this.getCurrentUserEmail(), token)
         .then((response) => {
 
-          this.authService.saveToken(response.data.token);
+          this.authService.saveToken(response.data.jwtToken);
           this.accessAcount();
         })
         .catch(err => {

@@ -58,7 +58,7 @@ export class RecoverAccountComponent implements OnInit {
     } else {
       this.dataService.verifyAccountByToken(email, token)
         .then((response) => {
-          this.authService.saveToken(response.data.token);
+          this.authService.saveToken(response.data.jwtToken);
           this.accessAcount();
         })
         .catch(err => {
@@ -69,7 +69,7 @@ export class RecoverAccountComponent implements OnInit {
 
     }
   }
-  
+
 
   public accessAcount() {
     this.router.navigateByUrl('/dashboard');

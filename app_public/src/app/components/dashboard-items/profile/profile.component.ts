@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { string } from 'joi';
 
 @Component({
   selector: 'app-profile',

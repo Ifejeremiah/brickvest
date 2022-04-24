@@ -1,9 +1,8 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 import { environment } from 'src/environments/environment';
-import { BROWSER_STORAGE } from '../classes/local-storage';
 
 
 
@@ -24,10 +23,13 @@ export class AuthResponse {
   status!: string;
   message!: string;
   data!: {
-    token: string
+    id: string,
+    name: string,
+    email: string,
+    role: string,
+    jwtToken: string
   }
 }
-
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +37,6 @@ export class AuthResponse {
 export class DataService {
   constructor(
     private http: HttpClient,
-    @Inject(BROWSER_STORAGE) private storage: Storage
   ) { }
 
 
@@ -56,7 +57,6 @@ export class DataService {
     return this.makeAuthApiCall('auth/register', userData);
   }
 
-
   private makeAuthApiCall(path: string, data: LoginData): Promise<AuthResponse> {
     const url: string = `${this.apiBase}/${path}`;
 
@@ -67,20 +67,18 @@ export class DataService {
       .catch(this.handleError);
   }
 
-
   public verifyAccountByEmail(email: string): Promise<any> {
-    const url: string = `${this.apiBase}/verify-account/${email}`;
+    const url: string = `${this.apiBase}/verify/${email}`;
 
     return this.http
-      .get(url)
+      .post(url, email)
       .toPromise()
       .then()
       .catch(this.handleError);
   }
 
-
   public verifyAccountByToken(email: string, token: string): Promise<AuthResponse> {
-    const url: string = `${this.apiBase}/verify-account/${email}/${token}`;
+    const url: string = `${this.apiBase}/verify/${email}/${token}`;
 
     return this.http
       .post(url, null)
