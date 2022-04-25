@@ -11,7 +11,7 @@ module.exports = {
 
 
 function getAll(req, res, next) {
-  requestService.getAll()
+  requestService.getAll(req.query.page)
     .then(data => successResponse(res, 'Requests fetched', data))
     .catch(next);
 }

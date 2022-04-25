@@ -8,7 +8,7 @@ module.exports = {
 }
 
 function getAll(req, res, next) {
-  activityService.getAll()
+  activityService.getAll(req.query.page)
     .then(data => successResponse(res, 'User actions fetched', data))
     .catch(next);
 }

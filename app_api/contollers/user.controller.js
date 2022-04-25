@@ -33,7 +33,7 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  userService.getAll()
+  userService.getAll(req.query.page)
     .then(users => {
       return successResponse(res, 'Users gotten successfully', users)
     })

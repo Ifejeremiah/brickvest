@@ -2,7 +2,7 @@ const secret = process.env.JWT_SECRET;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const { db } = require('../config');
+const { db, build } = require('../config');
 
 module.exports = {
   authenticate,
@@ -35,9 +35,12 @@ async function register({ name, email, password }) {
   };
 }
 
-async function getAll() {
-  const users = await db.User.find();
-  return users.map(x => basicDetails(x));
+async function getAll(page) {
+  const query = db.User.aggregate();
+  const customLabels = { totalDocs: 'totalResults', limit: 'perPage', page: 'currentPage' };
+  const options = { page: page ? page : 1, limit: 10, customLabels }
+  const users = await db.User.aggregatePaginate(query, options);
+  return build(users, basicDetails);
 }
 
 async function getById(id) {
@@ -72,11 +75,16 @@ async function saveUser({ name, email, password }) {
 }
 
 async function updateUser({ id, name, email, password, role }) {
+  if (email) {
+    const exists = await db.User.findOne({ email });
+    if (exists) throw 'Email in use';
+  }
+
   const user = await getUser(id);
   user.name = name ? name : user.name;
-  user.email = email ? email : user.email;
   user.role = role ? role : user.role;
   user.passwordHash = password ? bcrypt.hashSync(password, 12) : user.passwordHash;
+  user.email = email ? email : user.email;
   user.save();
   return user;
 }
@@ -94,6 +102,7 @@ function generateJwtToken(user) {
 }
 
 function basicDetails(user) {
-  const { id, name, email, role } = user;
+  let { id, name, email, role } = user;
+  if (!id) id = user._id
   return { id, name, email, role };
 }

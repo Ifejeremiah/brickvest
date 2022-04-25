@@ -1,4 +1,4 @@
-const { db } = require('../config');
+const { db, build } = require('../config');
 
 module.exports = {
   getAll,
@@ -6,8 +6,12 @@ module.exports = {
   save
 }
 
-async function getAll() {
-  return await db.Action.find();
+async function getAll(page) {
+  const query = db.Action.aggregate();
+  const customLabels = { totalDocs: 'totalResults', limit: 'perPage', page: 'currentPage' };
+  const options = { page: page ? page : 1, limit: 10, customLabels }
+  const actions = await db.Action.aggregatePaginate(query, options);
+  return build(actions, basicDetails);
 }
 
 async function getByUserId(id) {
@@ -26,4 +30,9 @@ async function getAction(id) {
   const action = await db.Action.findOne({ user: id });
   if (!action) throw 'No activities yet';
   return action;
+}
+
+function basicDetails(request) {
+  let { _id, user, body } = request;
+  return { id: _id, user, body };
 }

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 
 const schema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: 'User' },
@@ -23,5 +24,6 @@ schema.set('toJSON', {
   }
 });
 
+schema.plugin(aggregatePaginate);
 
 module.exports = mongoose.model('Request', schema);
