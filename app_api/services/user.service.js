@@ -48,8 +48,8 @@ async function getById(id) {
   return basicDetails(user);
 }
 
-async function updateById({ id, name, email, password, role }) {
-  const user = await updateUser({ id, name, email, password, role });
+async function updateById(id, body) {
+  const user = await updateUser(id, body);
   return {
     ...basicDetails(user)
   };
@@ -74,18 +74,19 @@ async function saveUser({ name, email, password }) {
   });
 }
 
-async function updateUser({ id, name, email, password, role }) {
+async function updateUser(id, body) {
+  const { email, password } = body;
+  const user = await getUser(id);
+
   if (email) {
     const exists = await db.User.findOne({ email });
-    if (exists) throw 'Email in use';
+    if (exists && user.email !== exists.email) throw 'Email already in use';
+  } else if (password) {
+    body['password'] = bcrypt.hashSync(password, 12)
   }
 
-  const user = await getUser(id);
-  user.name = name ? name : user.name;
-  user.role = role ? role : user.role;
-  user.passwordHash = password ? bcrypt.hashSync(password, 12) : user.passwordHash;
-  user.email = email ? email : user.email;
-  user.save();
+  Object.assign(user, body);
+  await user.save();
   return user;
 }
 
@@ -98,7 +99,7 @@ async function getUser(id) {
 
 function generateJwtToken(user) {
   // create a jwt token containing the user id that expires in 60 minutes
-  return jwt.sign({ sub: user.id, id: user.id }, secret, { expiresIn: '60mins' });
+  return jwt.sign({ id: user.id }, secret, { expiresIn: '60mins' });
 }
 
 function basicDetails(user) {

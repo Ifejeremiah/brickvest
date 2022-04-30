@@ -1,5 +1,4 @@
-<div class="row">
-
+<div class="main-row row">
   <div class="col-12 col-lg-4">
     <div id="con-ht-01" class="con-section sections">
 
@@ -27,85 +26,38 @@
     </div>
   </div>
 
-
   <div class="col-12 col-lg-8 mt-3 mt-lg-0">
     <div id="con-ht-01" class="con-section sections">
       <div class="con-content contents">
 
-        <div class="nav-tabs-custom">
-          <ul class="nav nav-tabs">
-            <li class="active"><a href="#timeline" data-toggle="tab" aria-expanded="false">Timeline</a></li>
-            <li class=""><a href="#settings" data-toggle="tab" aria-expanded="false">Settings</a></li>
-          </ul>
+        <div>
+          <div class="content-header d-flex align-items justify-content-between flex-column flex-lg-row">
+            <div>
+              <button [ngClass]="firstBtn" (click)="doShowHistory()">History</button>
+              <button class="ms-4" [ngClass]="secondBtn" (click)="doShowSettings()">Settings</button>
+            </div>
+            <div class="me-lg-5 mt-3 mt-lg-0 d-flex align-items-center" *ngIf="!toggle">
+              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
+            </div>
+            <div class="me-lg-5 mt-3 mt-lg-0 d-flex align-items-center color-red" id="wgt-02" *ngIf="toggle">
+              Update Your Account
+            </div>
+          </div>
 
-
-          <div class="tab-content">
-            <div class="tab-pane active" id="timeline">
-              <!-- The timeline -->
-              <ul class="timeline timeline-inverse">
-                <!-- timeline time label -->
-                <li class="time-label">
-                  <span class="bg-red">
-                    10 Feb. 2014
-                  </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                  <i class="fa fa-envelope bg-blue"></i>
-
-                  <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
-
-                    <h3 class="timeline-header">Support Team sent you an email</h3>
-                  </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <li>
-                  <i class="fa fa-user bg-aqua"></i>
-
-                  <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
-
-                    <h3 class="timeline-header no-border">Sarah Young accepted your friend request
-                    </h3>
-                  </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline item -->
-                <li>
-                  <i class="fa fa-comments bg-yellow"></i>
-
-                  <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
-
-                    <h3 class="timeline-header">Jay White commented on your post</h3>
-                  </div>
-                </li>
-                <!-- END timeline item -->
-                <!-- timeline time label -->
-                <li class="time-label">
-                  <span class="bg-green">
-                    3 Jan. 2014
-                  </span>
-                </li>
-                <!-- /.timeline-label -->
-                <!-- timeline item -->
-                <li>
-                  <i class="fa fa-camera bg-purple"></i>
-
-                  <div class="timeline-item">
-                    <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
-
-                    <h3 class="timeline-header">Mina Lee uploaded new photos</h3>
-                  </div>
+          <div class="content-body">
+            <!-- First Section  -->
+            <div class="con-first" *ngIf="!toggle">
+              <ul>
+                <li *ngFor="let action of actions">
+                  <div>{{action.body}}</div>
+                  <div>{{action.createdAt | date:'medium'}}</div>
                 </li>
               </ul>
             </div>
 
 
-            <div class="tab-pane" id="settings">
+            <!-- Second Section -->
+            <div class="con-second" *ngIf="toggle">
               <form class="form-horizontal mt-4" (submit)="onSubmit()">
 
                 <div class="form-group d-flex justify-content-center">
@@ -145,26 +97,11 @@
                 </div>
               </form>
 
-              <div class="col-sm-offset-2 d-flex justify-content-between mt-5">
-                <a [routerLink]="['/update-password']">
-                  <div class="btn btn-primary">
-                    Change Password
-                  </div>
-                </a>
 
-                <a [routerLink]="['/delete-account']">
-                  <div class="btn btn-danger">
-                    Delete account
-                  </div>
-                </a>
-              </div>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </div>
-
 </div>

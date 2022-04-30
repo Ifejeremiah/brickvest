@@ -42,19 +42,19 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
   checkUser(req, res, req.params.id);
-
   userService.getById(req.params.id)
     .then(user => user ? successResponse(res, 'User gotten successfully', user) : errorResponse(res, 'Not found', 404))
     .catch(next);
 }
 
 function updateById(req, res, next) {
-  const { name, email, password } = req.body;
-  checkUser(req, res, req.params.id);
-
-  userService.updateById({ id: req.params.id, name, email, password })
+  const { password } = req.body;
+  const { id } = req.params;
+  checkUser(req, res, id);
+  // console.log(req.body)
+  userService.updateById(id, req.body)
     .then((response) => {
-      password ? activityService.save({ id: req.params.id, body: 'Password changed' }) : null;
+      password ? activityService.save({ id, body: 'Password changed' }) : null;
       return successResponse(res, 'User updated successfully', response, 200);
     })
     .catch(next);

@@ -8,14 +8,18 @@ module.exports = {
 }
 
 function getAll(req, res, next) {
-  activityService.getAll(req.query.page)
+  const { page, limit } = req.query;
+  activityService.getAll(page, limit)
     .then(data => successResponse(res, 'User actions fetched', data))
     .catch(next);
 }
 
 function getById(req, res, next) {
-  checkUser(req, res, req.params.id);
-  activityService.getByUserId(req.params.id)
+  const { page, limit } = req.query;
+  const { id } = req.params;
+  checkUser(req, res, id);
+  
+  activityService.getByUserId(id, page, limit)
     .then(data => successResponse(res, 'User action fetched', data))
     .catch(next);
 }

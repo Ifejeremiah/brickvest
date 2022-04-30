@@ -24,6 +24,7 @@ import { ProfileComponent } from './components/dashboard-items/profile/profile.c
 import { UpdatePasswordComponent } from './components/dashboard-items/update-password/update-password.component';
 import { DeleteAccountComponent } from './components/dashboard-items/delete-account/delete-account.component';
 import { VerifyPasswordComponent } from './components/dashboard-items/verify-password/verify-password.component';
+import { PaginateComponent } from './components/dashboard-items/paginate/paginate.component';
 
 
 
@@ -44,7 +45,8 @@ import { VerifyPasswordComponent } from './components/dashboard-items/verify-pas
     ProfileComponent,
     UpdatePasswordComponent,
     DeleteAccountComponent,
-    VerifyPasswordComponent
+    VerifyPasswordComponent,
+    PaginateComponent
   ],
   imports: [
     BrowserModule,

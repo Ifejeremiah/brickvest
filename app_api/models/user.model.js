@@ -7,14 +7,13 @@ const schema = new Schema({
     type: String,
     required: [true, 'Name is required'],
     trim: true,
-    lowercase: true
   },
 
   email: {
     type: String,
     unique: [true, 'Can not accept duplicate emails'],
     required: [true, 'Email is required'],
-    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'enter valid email address'],
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Enter valid email address'],
     trim: true,
     lowercase: true
   },

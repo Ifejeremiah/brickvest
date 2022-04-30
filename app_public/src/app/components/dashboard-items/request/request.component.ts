@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
+import { RequestData, RequestService } from 'src/app/services/request.service';
 
 @Component({
   selector: 'app-request',
@@ -7,40 +9,83 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RequestComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private requestService: RequestService,
+    private authService: AuthService,
+  ) { }
 
   ngOnInit(): void {
+    this.getRequests(this.getUserId(), 1, this.totalLimit);
   }
 
+  public requests: any;
+
+  public userRequest: any;
+
+  public data!: any;
+
   public message: string = '';
+
+  private totalLimit: number = 10;
+
+  public clicked: any;
 
   public requestBody = {
     title: '',
     subject: '',
-    description: ''
+    body: ''
   }
 
   public clearMsg(): void {
     this.message = ''
   }
 
-  public doDiscard(): void {
-    this.requestBody.title = '';
-    this.requestBody.subject = '';
-    this.requestBody.description = '';
+  private clearForm(): void {
+    this.requestBody['title'] = ''
+    this.requestBody['subject'] = ''
+    this.requestBody['body'] = ''
   }
 
   public onSubmit(): void {
-    let { title, subject, description } = this.requestBody;
-
-    if (!title || !subject || !description) {
-      false;
+    let { title, subject, body } = this.requestBody;
+    if (!title.trim() || !subject.trim() || !body.trim()) {
+      this.message = 'Please fill all fields to make a request';
+      setTimeout(() => { this.message = '' }, 4000)
     } else {
-      this.message = 'Your request has been taken successfully';
-      this.doDiscard();
-
-      setTimeout(() => this.clearMsg(), 4000)
+      this.postRequest(this.requestBody);
     }
   }
 
+  public postRequest(data: RequestData) {
+    this.requestService.postRequests(data)
+      .then(() => {
+        this.clearForm();
+        this.message = 'Your request has been taken successfully';
+        setTimeout(() => this.clearMsg(), 4000);
+        this.getRequests(this.getUserId(), 1, this.totalLimit);
+      });
+  }
+
+  public getRequests(id: string, page: number, limit: number) {
+    this.requestService.getRequests(id, page, limit)
+      .then(response => {
+        this.requests = response.data.results;
+        response.data['totalLimit'] = this.totalLimit
+        this.data = response.data;
+      });
+  }
+
+  public getParamsFromChild(value: any): void {
+    const { userId, page, limit } = value;
+    this.getRequests(userId, page, limit);
+  }
+
+  public getUserId(): string {
+    return this.authService.getCurrentUserId()
+  }
+
+  public doShowId(id: string): void {
+    this.requestService.getRequestById(id)
+      .then(response => { this.userRequest = response.data });
+  }
 }

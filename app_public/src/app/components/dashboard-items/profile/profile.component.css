@@ -1,28 +1,64 @@
-.row {
-  height: 83vh;
+.main-row {
+  height: 80vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
 
-.btn-block {
-  width: 140px;
-}
-
-.control-label.message {
+.message {
   background: var(--primary-color);
   color: #fff;
+  font-weight: 600;
+  padding: 14px 30px;
+}
+
+.content-header {
+  padding: 20px;
+}
+
+.content-header button {
   font-weight: 700;
-  padding: 12px 30px;
-  width: 80%;
+  padding: 10px 30px;
+  border-radius: .5rem;
+  color: var(--primary-color);
+  background: var(--ash-color-01);
+}
+
+.content-header button.active {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.content-body {
+  height: 58vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.content-body .con-first ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid rgb(228, 225, 225);
+}
+
+.content-body .con-first ul li:hover {
+  background: var(--ash-color-02);
 }
 
 
+/* Media Queries */
 @media (min-width:992px) {
-  .btn-block {
-    width: 200px;
+  .content-body {
+    height: 60vh;
   }
 
-  .row {
-    height: unset;
+  .content-body .con-first {
+    padding: 30px 0;
+  }
+
+  .content-body .con-first .header {
+    padding: 14px 50px 10px 0;
+    text-align: right;
   }
 }

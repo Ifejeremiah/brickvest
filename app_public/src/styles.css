@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400..900&display=swap');
 
 :root {
-  --primary-color: rgb(228, 0, 0);
+  --primary-color: #ca2233;
   --ash-color-01: #e9e8e8;
   --ash-color-02: rgb(241, 237, 237);
 }
@@ -51,6 +51,17 @@ h6 {
   margin-bottom: 0;
 }
 
+ul, ol {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+h4, .h4, h5, .h5, h6, .h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 img {
   width: 100%;
   height: auto;
@@ -62,7 +73,7 @@ img {
   cursor: pointer;
 }
 
-.btn-block + .btn-block {
+.btn-block+.btn-block {
   margin-top: 0;
 }
 

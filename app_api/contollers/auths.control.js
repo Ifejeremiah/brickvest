@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const emailBody = require('../config/emails');
 
-const { successResponse, errorResponse } = require('../config/responses');
+const { Response } = require('../middlewares')
 
 
 const verifyEmail = (req, res) => {
@@ -11,7 +11,7 @@ const verifyEmail = (req, res) => {
   User.findOne({ email })
     .then(user => {
       if (!user) {
-        return errorResponse(res, 'User not found', 404)
+        return Response.errorResponse(res, 'User not found', 404)
       }
 
       // Get the recovery token
@@ -27,7 +27,7 @@ const verifyEmail = (req, res) => {
           // Send token to email address
           // sendEmail.send(email, mail.sub, mail.body);
 
-          return successResponse(res, 'user found, recovery token sent to email');
+          return Response.successResponse(res, 'user found, recovery token sent to email');
         })
         .catch(err => console.log(err));
     })

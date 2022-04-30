@@ -17,8 +17,8 @@ export class VerifyAccountComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getCurrentUserEmail();
-    this.sendTokenEmail();
+    // this.getCurrentUserEmail();
+    // this.sendTokenEmail();
   }
 
 
@@ -32,36 +32,36 @@ export class VerifyAccountComponent implements OnInit {
     this.message = ''
   }
 
-  private getCurrentUserEmail(): string {
-    const user = this.authService.getCurrentUser()
-    return user.email;
-  }
+  // private getCurrentUserEmail(): string {
+  //   const user = this.authService.getCurrentUser()
+  //   return user.email;
+  // }
 
-  private sendTokenEmail(): void {
-    this.dataService.verifyAccountByEmail(this.getCurrentUserEmail())
-  }
+  // private sendTokenEmail(): void {
+  //   this.dataService.verifyAccountByEmail(this.getCurrentUserEmail())
+  // }
 
   public onSubmit(): void {
-    const { token } = this.credentials;
+    // const { token } = this.credentials;
 
-    if (!token) {
-      this.message = 'Please enter your verification code';
-    } else {
+    // if (!token) {
+    //   this.message = 'Please enter your verification code';
+    // } else {
 
-      this.dataService.verifyAccountByToken(this.getCurrentUserEmail(), token)
-        .then((response) => {
+    //   this.dataService.verifyAccountByToken(this.getCurrentUserEmail(), token)
+    //     .then((response) => {
 
-          this.authService.saveToken(response.data.jwtToken);
-          this.accessAcount();
-        })
-        .catch(err => {
-          if (err.status === 400) {
-            this.message = 'Incorrect code, please check your email';
-          } else if (err.status === 404) {
-            this.message = 'We could not find you';
-          }
-        });
-    }
+    //       this.authService.saveToken(response.data.jwtToken);
+    //       this.accessAcount();
+    //     })
+    //     .catch(err => {
+    //       if (err.status === 400) {
+    //         this.message = 'Incorrect code, please check your email';
+    //       } else if (err.status === 404) {
+    //         this.message = 'We could not find you';
+    //       }
+    //     });
+    // }
   }
 
   public accessAcount() {

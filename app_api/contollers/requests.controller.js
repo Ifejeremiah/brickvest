@@ -1,25 +1,41 @@
 const { requestService } = require('../services');
+const { Role } = require('../config');
 const { Response, checkUser } = require('../middlewares');
-const { successResponse } = Response;
+const { successResponse, errorResponse } = Response;
 
 module.exports = {
   getAll,
+  getByUserId,
   getById,
   saveById,
   deleteById
 }
 
-
 function getAll(req, res, next) {
-  requestService.getAll(req.query.page)
+  const { page, limit } = req.query;
+  requestService.getAll(page, limit)
+    .then(data => successResponse(res, 'Requests fetched', data))
+    .catch(next);
+}
+
+function getByUserId(req, res, next) {
+  const { page, limit } = req.query;
+  checkUser(req, res, req.params.id, true);
+  requestService.getByUserId(req.params.id, page, limit)
     .then(data => successResponse(res, 'Requests fetched', data))
     .catch(next);
 }
 
 function getById(req, res, next) {
-  checkUser(req, res, req.params.id, true);
-  requestService.getByUserId(req.params.id)
-    .then(data => successResponse(res, 'Requests fetched', data))
+  const { userid, id } = req.params;
+  requestService.getById(id, userid)
+    .then(response => {
+      const role = [Role.Facilitator, Role.Admin]
+      if (response.user != userid && !role.includes(req.user.role)) {
+        return errorResponse(res, 'You can not access this resource')
+      }
+      return successResponse(res, 'Request fetched successfully', response)
+    })
     .catch(next);
 }
 

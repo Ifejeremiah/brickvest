@@ -60,16 +60,14 @@ export class AuthService {
   }
 
 
-  public getCurrentUser(): any {
+  public getCurrentUserId(): string {
     const token: string = this.getToken();
-
+    let result;
     if (token) {
-      const { name, email, role, is_verified } = JSON.parse(atob(token.split('.')[1]));
-
-      return { name, email, role, is_verified };
-    } else {
-      return { is_verified: false };
+      const { id } = JSON.parse(atob(token.split('.')[1]));
+      result = id;
     }
+    return result;
   }
 
 }

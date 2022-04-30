@@ -1,0 +1,13 @@
+.right {
+  width: 80px;
+}
+
+.right i {
+  cursor: pointer;
+  padding: 10px;
+  border-radius: .5rem;
+}
+
+.right i:hover {
+  background: rgb(238, 237, 237);
+}

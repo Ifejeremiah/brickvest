@@ -1,0 +1,11 @@
+<div>
+  <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row">
+    <div class="left pe-lg-3" *ngIf="allData">
+      {{allData.currentPage}} of {{allData.totalPages}} : {{allData.totalResults}}
+    </div>
+    <div class="right d-flex justify-content-between align-items-center">
+      <i class="fa-solid fa-chevron-left" (click)="previous()"></i>
+      <i class="fa-solid fa-chevron-right" (click)="next()"></i>
+    </div>
+  </div>
+</div>

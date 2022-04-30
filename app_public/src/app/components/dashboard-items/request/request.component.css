@@ -5,3 +5,98 @@
   width: 80%;
   font-weight: 700;
 }
+
+button.submit {
+  background: var(--primary-color);
+  font-weight: 700;
+  color: #fff;
+}
+
+
+/* Left Container */
+.con-left .con-requests .con-list {
+  height: 56vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.con-left .con-requests .con-list li {
+  border-bottom: 1px solid rgb(237 227 227);
+  padding: 12px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.con-left .con-requests .con-list li.active {
+  background: var(--primary-color);
+  color: #fff;
+  font-weight: 600;
+}
+
+.con-left .con-requests .con-list li:hover {
+  box-shadow: 0 0 10px rgb(228, 227, 227);
+}
+
+.con-left .con-requests .con-new {
+  padding: 20px 0;
+}
+
+.con-left .con-requests .con-new .con-btn {
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 26px;
+  border-radius: .5rem;
+  background: var(--primary-color);
+}
+
+
+/* Right Container */
+.con-right .con-title {
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-align: center;
+  padding: 0 0 14px 0;
+}
+
+.con-right .con-request .header,
+.con-right .con-response .header {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.con-right .con-request,
+.con-right .con-response {
+  width: 92%;
+}
+
+.con-right .con-timestamp {
+  padding: 4px 0 10px 0;
+  color: rgb(102, 101, 101);
+  font-size: .98rem;
+}
+
+.con-right .con-request {
+  margin-bottom: 40px;
+}
+
+.con-right .con-response {
+  text-align: right;
+}
+
+
+/* Media Queries */
+@media (min-width:992px) {
+  .con-left .con-requests .con-list {
+    height: 50vh;
+  }
+
+  .con-left .con-requests .con-list li {
+    padding: 12px 30px;
+  }
+
+  .con-left .con-requests .con-new {
+    padding: 12px 0;
+  }
+}

@@ -4,13 +4,11 @@ const router = express.Router();
 const { dashboardCtrl } = require('../contollers')
 
 // Auth Guard
-const auth = require('../config/auth');
-
 
 
 // @desc  Dashboard handle
 // @route   GET /dashboard
-router.get('/dashboard', auth, dashboardCtrl.allProperties)
+router.get('/dashboard', dashboardCtrl.allProperties)
 
 
 
