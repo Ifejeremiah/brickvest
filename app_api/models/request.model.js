@@ -9,7 +9,15 @@ const schema = new Schema({
 
   subject: String,
 
-  body: String
+  body: String,
+
+  response: String,
+
+  repliedBy: { type: Schema.Types.ObjectId, ref: 'User' },
+
+  responseTime: { type: Date },
+
+  hasViewed: { type: Boolean, default: false }
 
 }, { timestamps: true });
 

@@ -8,6 +8,7 @@ module.exports = {
   getByUserId,
   getById,
   saveById,
+  respondById,
   deleteById
 }
 
@@ -44,6 +45,16 @@ function saveById(req, res, next) {
   requestService.save({ id: req.user.id, title, subject, body })
     .then(data => successResponse(res, 'Request taken successfully', data, 201))
     .catch(next);
+}
+
+function respondById(req, res, next) {
+  const { response } = req.body;
+  req.body['repliedBy'] = req.user.id;
+  req.body['responseTime'] = Date.now()
+  const { id } = req.params;
+  requestService.updateById(id, req.body)
+    .then(data => successResponse(res, 'Response taken successfully', data))
+    .catch(next)
 }
 
 function deleteById(req, res, next) {

@@ -25,7 +25,7 @@ export class UserService {
     return new HttpHeaders({ 'Authorization': `Bearer ${token}` })
   }
 
-  private setParams(page: number, limit: number) {
+  public setParams(page: number, limit: number) {
     let params = new HttpParams();
     params = params.append('page', page);
     params = params.append('limit', limit);
@@ -33,7 +33,7 @@ export class UserService {
   }
 
   public getUserActions(id: string, page: number, limit: number) {
-    const url: string = `${this.apiBase}/users/actions/${id}`;
+    const url = `${this.apiBase}/users/actions/${id}`;
     return this.http
       .get(url, { headers: this.sendTokenHeader(), params: this.setParams(page, limit) })
       .toPromise()
@@ -54,7 +54,7 @@ export class UserService {
   }
 
   private async makeRequest(id: string, method: any, formBody = {}): Promise<any> {
-    const url: string = `${this.apiBase}/users/${id}`;
+    const url = `${this.apiBase}/users/${id}`;
     const options = { headers: this.sendTokenHeader() }
 
     switch (method) {
@@ -79,6 +79,18 @@ export class UserService {
           .then(response => response)
           .catch(this.handleError);
     }
+  }
+
+  public updatePassword(id: string, formBody = {}) {
+    const url = `${this.apiBase}/users/${id}/passwords`;
+    const options = { headers: this.sendTokenHeader() }
+
+    return this.http
+      .patch(url, formBody, options)
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+
   }
 
 

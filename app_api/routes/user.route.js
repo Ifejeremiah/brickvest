@@ -7,6 +7,7 @@ const {
   getById,
   updateById,
   updateRole,
+  updatePassword,
   deleteById
 } = userController;
 const { Role } = require('../config')
@@ -26,5 +27,7 @@ router.route('/:id')
   .delete(authorize(), deleteById);
 
 router.patch('/:id/roles', authorize([Role.Facilitator]), updateRole);
+
+router.patch('/:id/passwords', authorize(), userSchema.updatePassword, updatePassword)
 
 module.exports = router;

@@ -22,9 +22,11 @@ export class RequestComponent implements OnInit {
 
   public userRequest: any;
 
-  public data!: any;
+  public data: any;
 
   public message: string = '';
+
+  public toggle: boolean = false;
 
   private totalLimit: number = 10;
 
@@ -34,6 +36,11 @@ export class RequestComponent implements OnInit {
     title: '',
     subject: '',
     body: ''
+  }
+
+  public doToggle(): void {
+    if (this.toggle) this.toggle = false
+    else this.toggle = true
   }
 
   public clearMsg(): void {
@@ -52,11 +59,12 @@ export class RequestComponent implements OnInit {
       this.message = 'Please fill all fields to make a request';
       setTimeout(() => { this.message = '' }, 4000)
     } else {
+      console.log(this.requestBody)
       this.postRequest(this.requestBody);
     }
   }
 
-  public postRequest(data: RequestData) {
+  public postRequest(data: RequestData): void {
     this.requestService.postRequests(data)
       .then(() => {
         this.clearForm();
@@ -66,13 +74,18 @@ export class RequestComponent implements OnInit {
       });
   }
 
-  public getRequests(id: string, page: number, limit: number) {
+  public getRequests(id: string, page: number, limit: number): void {
     this.requestService.getRequests(id, page, limit)
       .then(response => {
         this.requests = response.data.results;
         response.data['totalLimit'] = this.totalLimit
         this.data = response.data;
+        console.log(this.data)
       });
+  }
+
+  public isMobile(): boolean {
+    return this.authService.isMobile(768)
   }
 
   public getParamsFromChild(value: any): void {

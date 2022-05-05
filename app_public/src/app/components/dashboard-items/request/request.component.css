@@ -30,9 +30,20 @@ button.submit {
 }
 
 .con-left .con-requests .con-list li.active {
-  background: var(--primary-color);
-  color: #fff;
-  font-weight: 600;
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+.con-left .con-requests .con-list li.new-response {
+  font-weight: 700;
+  color: #333;
+}
+
+.con-left .con-requests .con-list li.seen {
+  font-weight: 400;
+  color: #333;
+  background: var(--ash-color-02);
 }
 
 .con-left .con-requests .con-list li:hover {
@@ -53,11 +64,41 @@ button.submit {
 
 
 /* Right Container */
+.image-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  flex-direction: column;
+}
+
+.image-default .con-img {
+  width: 200px;
+}
+
+.image-default .text {
+  width: 230px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: rgb(155, 155, 155);
+}
+
 .con-right .con-title {
   font-weight: 800;
   font-size: 1.3rem;
   text-align: center;
   padding: 0 0 14px 0;
+}
+
+.con-right .con-title i {
+  color: #333;
+  padding: 10px;
+  border-radius: .25rem;
+}
+
+.con-right .con-title i:hover {
+  background: var(--ash-color-02);
 }
 
 .con-right .con-request .header,
@@ -83,6 +124,12 @@ button.submit {
 
 .con-right .con-response {
   text-align: right;
+}
+
+.con-right .con-response .no-response {
+  text-align: center;
+  color: rgb(168, 165, 165);
+  font-weight: bold;
 }
 
 

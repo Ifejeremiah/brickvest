@@ -11,6 +11,7 @@ module.exports = {
   getAll,
   getById,
   updateById,
+  updatePassword,
   deleteById
 };
 
@@ -86,6 +87,14 @@ async function updateUser(id, body) {
   }
 
   Object.assign(user, body);
+  await user.save();
+  return user;
+}
+
+async function updatePassword(id, current, update) {
+  const user = await getUser(id)
+  if (!bcrypt.compareSync(current, user.passwordHash)) throw 'Password is incorrect'
+  user['passwordHash'] = bcrypt.hashSync(update, 12)
   await user.save();
   return user;
 }

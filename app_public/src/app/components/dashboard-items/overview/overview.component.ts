@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.css']
+  styleUrls: ['./overview.component.css', './modals.css']
 })
 export class OverviewComponent implements OnInit {
 
@@ -16,12 +16,19 @@ export class OverviewComponent implements OnInit {
 
   public toggle: boolean = false;
 
-  
+  public message = '';
+
   public firstBtn = 'active';
 
-  
-  
   public secondBtn!: string;
+
+  public propertyCost = 987
+
+  public estimate = this.propertyCost
+
+  public details = {
+    unitNumber: 1
+  }
 
   public doShowFirstRow() {
     this.toggle = false;
@@ -34,4 +41,11 @@ export class OverviewComponent implements OnInit {
     this.firstBtn = ''
     this.secondBtn = 'active';
   }
+
+  public calculate() {
+    const { unitNumber } = this.details
+    this.estimate = (unitNumber === null || unitNumber === 0) ? this.propertyCost : unitNumber * this.propertyCost
+  }
+
+
 }

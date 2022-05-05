@@ -3,7 +3,8 @@ const { validateRequest } = require('../middlewares');
 
 
 module.exports = {
-  updateUserSchema
+  updateUserSchema,
+  updatePassword
 }
 
 
@@ -16,6 +17,14 @@ function updateUserSchema(req, res, next) {
   validateRequest(req, next, schema);
 }
 
+function updatePassword(req, res, next) {
+  const schema = Joi.object({
+    currentPassword: Joi.string().required(),
+    newPassword: Joi.string().custom(password).required(),
+    confirmPassword: Joi.string().valid(Joi.ref('newPassword')).required()
+  });
+  validateRequest(req, next, schema);
+}
 
 function password(value, helpers) {
   if (value.length < 8) {

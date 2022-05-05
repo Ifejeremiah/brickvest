@@ -51,13 +51,19 @@ h6 {
   margin-bottom: 0;
 }
 
-ul, ol {
+ul,
+ol {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 0;
 }
 
-h4, .h4, h5, .h5, h6, .h6 {
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   margin-top: 0;
   margin-bottom: 0;
 }
@@ -85,7 +91,37 @@ button {
   background: unset;
 }
 
+.button-01 {
+  font-weight: 700;
+  padding: 10px 26px;
+  border-radius: .5rem;
+  margin-right: 20px;
+  color: var(--primary-color);
+  background: var(--ash-color-01);
+}
+
+.button-02 {
+  font-weight: 700;
+  padding: 10px 26px;
+  border-radius: .5rem;
+  margin-right: 20px;
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.button-01:hover {
+  color: var(--primary-color);
+}
+
+.button-02:hover {
+  color: #fff;
+}
+
 #wgt-01 {
+  font-weight: 900;
+}
+
+.wgt-01 {
   font-weight: 900;
 }
 
@@ -93,7 +129,15 @@ button {
   font-weight: 700;
 }
 
+.wgt-02 {
+  font-weight: 700;
+}
+
 #wgt-03 {
+  font-weight: 500;
+}
+
+.wgt-03 {
   font-weight: 500;
 }
 
@@ -120,6 +164,14 @@ button {
   margin: 0;
   height: 20px;
   width: 100%;
+}
+
+.message {
+  background: var(--primary-color);
+  padding: 12px 0;
+  color: #fff;
+  width: 80%;
+  font-weight: 700;
 }
 
 @keyframes bgPos {

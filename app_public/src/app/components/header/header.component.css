@@ -2,16 +2,49 @@
   padding: 0px 20px;
 }
 
-
 .navbar .logo-01 h2 {
   text-transform: uppercase;
   font-size: 1.4rem;
   font-weight: 800;
 }
 
+.navbar-nav {
+  display: flex;
+  flex-direction: row;
+}
 
-.navbar-custom-menu {
+.settings-menu .dropdown-menu,
+.notifications-menu .dropdown-menu {
+  width: 300px;
+}
+
+.notifications-menu .dropdown-menu {
+  padding: 40px 10px;
+}
+
+.notifications-menu .dropdown-menu li {
+  background: var(--ash-color-02);
+  padding: 12px 20px;
+  font-size: 1rem;
   cursor: pointer;
+}
+
+
+.settings-menu ul li {
+  width: 86%;
+  display: flex;
+  margin: 20px auto 0 auto;
+  justify-content: flex-end;
+}
+
+.settings-menu ul li button {
+  font-weight: 700;
+  width: 100%;
+  padding: 10px;
+}
+
+.settings-menu ul li .btn-flat {
+  font-weight: 700;
 }
 
 

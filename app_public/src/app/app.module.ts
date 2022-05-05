@@ -25,6 +25,7 @@ import { UpdatePasswordComponent } from './components/dashboard-items/update-pas
 import { DeleteAccountComponent } from './components/dashboard-items/delete-account/delete-account.component';
 import { VerifyPasswordComponent } from './components/dashboard-items/verify-password/verify-password.component';
 import { PaginateComponent } from './components/dashboard-items/paginate/paginate.component';
+import { HtmlLimeBreaksPipe } from './pipes/html-lime-breaks.pipe';
 
 
 
@@ -46,7 +47,8 @@ import { PaginateComponent } from './components/dashboard-items/paginate/paginat
     UpdatePasswordComponent,
     DeleteAccountComponent,
     VerifyPasswordComponent,
-    PaginateComponent
+    PaginateComponent,
+    HtmlLimeBreaksPipe
   ],
   imports: [
     BrowserModule,

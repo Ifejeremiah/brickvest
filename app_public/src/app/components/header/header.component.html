@@ -13,24 +13,37 @@
     <!-- Navbar Right Menu -->
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
-        <!-- User Account Menu -->
-        <li class="dropdown user user-menu">
 
-          <!-- Menu Toggle Button -->
-          <a class="dropdown-toggle" data-toggle="dropdown">
-            <span>John</span>&nbsp;&nbsp;
-            <i class="fas fa-caret-down"></i>
+        <!-- Notifications Toggle -->
+        <li class="dropdown notifications-menu">
+          <a data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+            <span class="label label-danger" *ngIf="notify">&nbsp;1&nbsp;</span>
           </a>
 
           <ul class="dropdown-menu">
-            <li class="user-header">
-              <p>
-                John
-                <small style="font-size: 1.4rem; color: rgb(228, 228, 228);">
-                  John@gmail.com
-                </small>
-                <small style="font-size: 1.6rem; color: #fff;">User</small>
-              </p>
+            <li routerLink="/requests" *ngIf="notify" (click)="checkOut()">You have a new response from <b>Support
+                Team</b></li>
+            <li routerLink="/requests" *ngIf="!notify">You have no notifications yet</li>
+          </ul>
+        </li>
+
+        <!-- Settings toggle -->
+        <li class="dropdown settings-menu ms-0 ms-lg-3">
+          <a class="" data-toggle="dropdown">
+            <i class="fa-solid fa-gear" style="color: rgb(87, 86, 86)"></i>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li>
+              <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#update-password">
+                Update Password
+              </button>
+            </li>
+            <li>
+              <button class="btn btn-danger" data-bs-toggle="modal" href="#delete-account">
+                Delete account
+              </button>
             </li>
             <!-- Menu Footer-->
             <li class="user-footer">
@@ -41,6 +54,84 @@
           </ul>
         </li>
       </ul>
+
     </div>
   </nav>
 </header>
+
+
+<div class="con-modal">
+  <div class="modal" id="delete-account" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title wgt-02 color-red" id="exampleModalToggleLabel">Delete account</h5>
+        </div>
+        <div class="modal-body">
+          As part of our terms and conditions, and for users data saftey, you need to reach out, via request, to
+          administrators to terminate
+          your account.
+        </div>
+        <div class="modal-footer">
+          <button class="btn button-02" data-bs-target="#not-understand" data-bs-toggle="modal"
+            data-bs-dismiss="modal">I do not understand</button>
+          <button type="button" class="btn button-01" data-bs-dismiss="modal" aria-label="Close">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="not-understand" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title wgt-02 color-red" id="exampleModalToggleLabel2">Delete account</h5>
+        </div>
+        <div class="modal-body">
+          As part of our terms and conditions, and for users data saftey, you need to reach out via request, to
+          administrators to terminate
+          your account. <br>This is a safety measure to protect your data and history.
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn button-02" data-bs-dismiss="modal" aria-label="Close">Done</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="update-password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title color-red wgt-02">Update Password</h5>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-center mb-3">
+            <div class="message text-center" *ngIf="message">{{message}}</div>
+          </div>
+          <form>
+            <div class="mb-3">
+              <label for="current-password" class="col-form-label">Current Password:</label>
+              <input type="password" name="currentPassword" class="form-control" id="current-password"
+                [(ngModel)]="body.currentPassword">
+            </div>
+            <div class="mb-3">
+              <label for="new-password" class="col-form-label">New Password:</label>
+              <input type="password" name="newPassword" class="form-control" id="new-password"
+                [(ngModel)]="body.newPassword">
+            </div>
+            <div class="mb-3">
+              <label for="confirm-password" class="col-form-label">Confirm Password:</label>
+              <input type="password" name="confirmPassword" class="form-control" id="confirm-password"
+                [(ngModel)]="body.confirmPassword">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn button-01" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn button-02" (click)="onSubmit()">Save</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

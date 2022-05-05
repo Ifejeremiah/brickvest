@@ -25,7 +25,6 @@ export class AuthService {
 
 
   public saveToken(token: string): void {
-    console.log(token);
     this.storage.setItem(this.token, token);
   }
 
@@ -68,6 +67,10 @@ export class AuthService {
       result = id;
     }
     return result;
+  }
+
+  public isMobile(width: Number): boolean {
+    return window.matchMedia(`(max-width:${width}px)`).matches
   }
 
 }

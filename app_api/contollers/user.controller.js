@@ -10,6 +10,7 @@ module.exports = {
   getById,
   updateById,
   updateRole,
+  updatePassword,
   deleteById
 }
 
@@ -48,16 +49,26 @@ function getById(req, res, next) {
 }
 
 function updateById(req, res, next) {
-  const { password } = req.body;
   const { id } = req.params;
   checkUser(req, res, id);
-  // console.log(req.body)
   userService.updateById(id, req.body)
     .then((response) => {
-      password ? activityService.save({ id, body: 'Password changed' }) : null;
+      activityService.save({ id, body: `Account credentials updated` })
       return successResponse(res, 'User updated successfully', response, 200);
     })
     .catch(next);
+}
+
+function updatePassword(req, res, next) {
+  const { id } = req.params
+  const { currentPassword, newPassword } = req.body
+  checkUser(req, res, id);
+  userService.updatePassword(id, currentPassword, newPassword)
+    .then((response) => {
+      activityService.save({ id, body: 'Password changed' })
+      return successResponse(res, 'Password updated successfully', response, 200);
+    })
+    .catch(next)
 }
 
 function deleteById(req, res, next) {
@@ -70,8 +81,10 @@ function deleteById(req, res, next) {
 }
 
 function updateRole(req, res, next) {
-  userService.updateById({ id: req.params.id, role: req.body.role })
+  const { role } = req.body, { id } = req.params
+  userService.updateById({ id, role })
     .then((response) => {
+      activityService.save({ id, body: `Role updated to ${role}` })
       return successResponse(res, 'User role updated successfully', response, 200);
     })
     .catch(next);
