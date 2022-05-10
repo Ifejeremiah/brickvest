@@ -5,7 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile.component.css', './placeholder-anime.css']
 })
 export class ProfileComponent implements OnInit {
 
@@ -21,6 +21,8 @@ export class ProfileComponent implements OnInit {
 
   public toggle: boolean = false;
 
+  public animatedBg: boolean = true;
+
   public firstBtn = 'active';
 
   public secondBtn!: string;
@@ -33,7 +35,16 @@ export class ProfileComponent implements OnInit {
 
   private totalLimit: number = 10;
 
-  public credentials = { image: '', name: '', email: '' }
+  public credentials = {
+    name: '',
+    email: '',
+    bank: '',
+    state: '',
+    city: '',
+    accountNumber: '',
+    accountName: '',
+    phoneNumber: '',
+  }
 
   public message: string = '';
 
@@ -59,6 +70,7 @@ export class ProfileComponent implements OnInit {
         this.actions = response.data.results;
         response.data['totalLimit'] = this.totalLimit
         this.data = response.data;
+        this.animatedBg = false
       })
   }
 
@@ -85,9 +97,19 @@ export class ProfileComponent implements OnInit {
 
   public async getUserById(id: string) {
     const response = await this.userService.getUserById(id)
-    const { name, email } = response.data
+    const { name, email,
+      bank, state, image, city,
+      accountNumber, accountName, phoneNumber
+    } = response.data
+
     this.credentials['name'] = name
     this.credentials['email'] = email
+    this.credentials['state'] = state
+    this.credentials['city'] = city
+    this.credentials['bank'] = bank
+    this.credentials['accountNumber'] = accountNumber
+    this.credentials['accountName'] = accountName
+    this.credentials['phoneNumber'] = phoneNumber
   }
 
   private async updateUser(formBody: any) {

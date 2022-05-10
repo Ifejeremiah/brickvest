@@ -1,0 +1,17 @@
+.animated-bg-text {
+  height: 30px;
+  margin: 10px 0;
+}
+
+.img.animated-bg-text {
+  height: 200px;
+  width: 240px;
+  margin-right: 10px;
+}
+
+.title.animated-bg-text,
+.cta.animated-bg-text {
+  height: 20px;
+  width: 100px;
+  margin-bottom: 16px;
+}

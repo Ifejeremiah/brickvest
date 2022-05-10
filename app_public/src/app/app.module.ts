@@ -26,7 +26,7 @@ import { DeleteAccountComponent } from './components/dashboard-items/delete-acco
 import { VerifyPasswordComponent } from './components/dashboard-items/verify-password/verify-password.component';
 import { PaginateComponent } from './components/dashboard-items/paginate/paginate.component';
 import { HtmlLimeBreaksPipe } from './pipes/html-lime-breaks.pipe';
-
+import { PropertyModalComponent } from './components/dashboard-items/property-modal/property-modal.component';
 
 
 @NgModule({
@@ -48,13 +48,14 @@ import { HtmlLimeBreaksPipe } from './pipes/html-lime-breaks.pipe';
     DeleteAccountComponent,
     VerifyPasswordComponent,
     PaginateComponent,
-    HtmlLimeBreaksPipe
+    HtmlLimeBreaksPipe,
+    PropertyModalComponent
   ],
   imports: [
     BrowserModule,
     RoutesModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [AuthGuard],
   bootstrap: [FrameworkComponent]

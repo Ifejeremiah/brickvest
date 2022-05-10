@@ -91,6 +91,15 @@ button {
   background: unset;
 }
 
+.table>thead>tr>th,
+.table>tbody>tr>th,
+.table>tfoot>tr>th,
+.table>thead>tr>td,
+.table>tbody>tr>td,
+.table>tfoot>tr>td {
+  padding: 16px;
+}
+
 .button-01 {
   font-weight: 700;
   padding: 10px 26px;
@@ -250,8 +259,18 @@ button {
 /* Media Queries */
 @media (min-width: 992px) {
   #con-ht-01 {
+    height: 87vh;
+  }
+
+  .con-section .con-content.contents {
+    height: 72vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  #con-ht-01 {
     height: 80vh;
-    padding: 40px 30px;
+    /* padding: 40px 30px; */
   }
 
   .con-section .con-content.contents {

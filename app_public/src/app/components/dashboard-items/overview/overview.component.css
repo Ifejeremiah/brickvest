@@ -38,13 +38,6 @@ td span.label {
 }
 
 
-/* Apartments */
-.first #anime .animated-bg-text {
-  height: 30px;
-  margin: 10px 0;
-}
-
-
 /* Explore */
 .con-row .row.second .con-card {
   padding: 0 20px;
@@ -85,27 +78,26 @@ td span.label {
   background: var(--primary-color);
 }
 
-
-.second #anime .img.animated-bg-text {
-  height: 200px;
-  width: 240px;
-  margin-right: 10px;
-}
-
-.second #anime .title.animated-bg-text,
-.second #anime .cta.animated-bg-text  {
-  height: 20px;
-  width: 100px;
-  margin-bottom: 16px;
-}
-
-
-
-
 @media (min-width: 992px) {
   .con-section {
+    height: 87vh;
+    padding: 40px 50px;
+  }
+
+  .con-header .first,
+  .con-header .second {
+    margin-right: 40px;
+  }
+
+  .con-section .section .con-row {
+    height: 60vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .con-section {
     height: 80vh;
-    padding: 40px 30px;
+    padding: 40px 50px;
   }
 
   .con-header .first,

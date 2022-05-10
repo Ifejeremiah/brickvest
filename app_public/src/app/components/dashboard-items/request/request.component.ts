@@ -5,7 +5,7 @@ import { RequestData, RequestService } from 'src/app/services/request.service';
 @Component({
   selector: 'app-request',
   templateUrl: './request.component.html',
-  styleUrls: ['./request.component.css']
+  styleUrls: ['./request.component.css', './placeholder-anime.css']
 })
 export class RequestComponent implements OnInit {
 
@@ -27,6 +27,8 @@ export class RequestComponent implements OnInit {
   public message: string = '';
 
   public toggle: boolean = false;
+
+  public animatedBg: boolean = true;
 
   private totalLimit: number = 10;
 
@@ -80,12 +82,12 @@ export class RequestComponent implements OnInit {
         this.requests = response.data.results;
         response.data['totalLimit'] = this.totalLimit
         this.data = response.data;
-        console.log(this.data)
+        this.animatedBg = false
       });
   }
 
   public isMobile(): boolean {
-    return this.authService.isMobile(768)
+    return this.authService.isMobile(992)
   }
 
   public getParamsFromChild(value: any): void {

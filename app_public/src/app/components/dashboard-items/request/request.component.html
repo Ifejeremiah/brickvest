@@ -1,7 +1,7 @@
 <!-- Main Container -->
 <div class="row">
   <!-- Left Container -->
-  <div class="col-12 col-lg-5" *ngIf="!toggle || !isMobile()">
+  <div class="col-12 col-md-12 col-lg-5" *ngIf="!toggle || !isMobile()">
     <div id="con-ht-01" class="con-section sections">
       <div class="con-content contents">
 
@@ -11,7 +11,7 @@
               <h4 class="title color-red" id="wgt-02">
                 Your Requests
               </h4>
-              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
+              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)" *ngIf="false"></app-paginate>
             </div>
 
             <div class="con-new">
@@ -20,7 +20,7 @@
               </button>
             </div>
 
-            <div class="con-list">
+            <div class="con-list" *ngIf="!animatedBg">
               <ul>
                 <li *ngFor="let request of requests" (click)="doShowId(request.id); clicked = request; doToggle()"
                   [class.new-response]="request.response" [class.seen]="request.hasViewed && request.response"
@@ -38,6 +38,17 @@
               </ul>
             </div>
 
+            <div id="anime" *ngIf="animatedBg">
+              <div class=" animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+            </div>
+
           </div>
         </div>
 
@@ -46,7 +57,7 @@
   </div>
 
   <!-- Right Container -->
-  <div class="col-12 col-lg-7" *ngIf="(isMobile() && toggle) || !isMobile()">
+  <div class="col-12 col-md-12 col-lg-7" *ngIf="(isMobile() && toggle) || !isMobile()">
     <div id="con-ht-01" class="con-section sections">
       <div class="con-content contents">
 

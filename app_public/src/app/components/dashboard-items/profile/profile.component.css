@@ -12,12 +12,12 @@
 }
 
 .content-header {
-  padding: 20px;
+  padding: 20px 0;
 }
 
 .content-header button {
   font-weight: 700;
-  padding: 10px 30px;
+  padding: 10px 20px;
   border-radius: .5rem;
   color: var(--primary-color);
   background: var(--ash-color-01);
@@ -49,6 +49,16 @@
 
 /* Media Queries */
 @media (min-width:992px) {
+  .main-row {
+    height: 87vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .content-header button {
+    padding: 10px 30px;
+  }
+
   .content-body {
     height: 60vh;
   }
@@ -60,5 +70,11 @@
   .content-body .con-first .header {
     padding: 14px 50px 10px 0;
     text-align: right;
+  }
+}
+
+@media (min-width:1200px) {
+  .main-row {
+    height: unset;
   }
 }

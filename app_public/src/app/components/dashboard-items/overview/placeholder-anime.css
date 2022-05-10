@@ -1,0 +1,17 @@
+.first #anime .animated-bg-text {
+  height: 30px;
+  margin: 10px 0;
+}
+
+.second #anime .img.animated-bg-text {
+  height: 200px;
+  width: 240px;
+  margin-right: 10px;
+}
+
+.second #anime .title.animated-bg-text,
+.second #anime .cta.animated-bg-text  {
+  height: 20px;
+  width: 100px;
+  margin-bottom: 16px;
+}

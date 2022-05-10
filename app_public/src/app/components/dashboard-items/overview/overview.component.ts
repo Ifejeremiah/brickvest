@@ -3,31 +3,36 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-overview',
   templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.css', './modals.css']
+  styleUrls: ['./overview.component.css', './placeholder-anime.css']
 })
 export class OverviewComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
+    this.removeAnime()
   }
 
-  public animatedBg: boolean = false;
+  public animatedBg: boolean = true;
 
   public toggle: boolean = false;
-
-  public message = '';
 
   public firstBtn = 'active';
 
   public secondBtn!: string;
 
-  public propertyCost = 987
+  private initialCount = 989;
 
-  public estimate = this.propertyCost
+  public data = {
+    propertyCost: this.initialCount,
+    estimate: this.initialCount
+  }
 
-  public details = {
-    unitNumber: 1
+  private removeAnime() {
+    setTimeout(() => {
+      this.animatedBg = false
+    }, 2000)
   }
 
   public doShowFirstRow() {
@@ -41,11 +46,4 @@ export class OverviewComponent implements OnInit {
     this.firstBtn = ''
     this.secondBtn = 'active';
   }
-
-  public calculate() {
-    const { unitNumber } = this.details
-    this.estimate = (unitNumber === null || unitNumber === 0) ? this.propertyCost : unitNumber * this.propertyCost
-  }
-
-
 }

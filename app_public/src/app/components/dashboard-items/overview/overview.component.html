@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-12 col-lg-8">
+  <div class="col-12">
 
     <!-- Left Section-->
     <div class="con-section left">
@@ -15,7 +15,6 @@
           </button>
         </div>
 
-
         <!-- Apartments -->
         <div class="con-row">
           <div class="row first" *ngIf="!toggle">
@@ -24,7 +23,6 @@
                 <div class="box-body table-responsive no-padding">
                   <table class="table table-hover">
                     <tbody>
-
                       <tr>
                         <th>No.</th>
                         <th>Location</th>
@@ -35,7 +33,7 @@
                         <th>Rent's due</th>
                       </tr>
 
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>1</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -46,7 +44,7 @@
                         </td>
                         <td>Jan 12</td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>2</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -57,7 +55,7 @@
                         </td>
                         <td>Jan 12</td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>3</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -68,7 +66,7 @@
                         </td>
                         <td>Jan 12</td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>4</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -79,7 +77,7 @@
                         </td>
                         <td>Jan 12</td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>5</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -90,7 +88,7 @@
                         </td>
                         <td>Jan 12</td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>6</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -101,7 +99,7 @@
                         </td>
                         <td>Jan 12</td>
                       </tr>
-                      <tr>
+                      <tr *ngIf="!animatedBg">
                         <td>7</td>
                         <td>Surulere, Lagos</td>
                         <td>August 15</td>
@@ -118,7 +116,7 @@
                 </div>
 
                 <div id="anime" *ngIf="animatedBg">
-                  <div class=" animated-bg animated-bg-text"></div>
+                  <div class="animated-bg animated-bg-text"></div>
                   <div class="animated-bg animated-bg-text"></div>
                   <div class="animated-bg animated-bg-text"></div>
                   <div class="animated-bg animated-bg-text"></div>
@@ -127,7 +125,6 @@
                   <div class="animated-bg animated-bg-text"></div>
                   <div class="animated-bg animated-bg-text"></div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -135,10 +132,9 @@
 
           <!-- Explore -->
           <div class="row second" *ngIf="toggle">
-
-            <div class="con-card">
+            <div class="con-card" *ngIf="!animatedBg">
               <div class="mb-5">
-                <div class="items position-relative mb-lg-3 col-12 col-lg-6">
+                <div class="items position-relative mb-lg-3 col-12 col-md-6 col-lg-4">
                   <div class="info d-flex align-items-center">
                     <div class="img">
                       <img src="assets/images/apartments.png" alt="">
@@ -159,7 +155,7 @@
                   </div>
                 </div>
 
-                <div class="items position-relative mb-lg-3  col-12 col-lg-6">
+                <div class="items position-relative mb-lg-3  col-12 col-md-6 col-lg-4">
                   <div class="info d-flex align-items-center">
                     <div class="img">
                       <img src="assets/images/apartments.png" alt="">
@@ -180,7 +176,7 @@
                   </div>
                 </div>
 
-                <div class="items position-relative mb-lg-3 col-12 col-lg-6">
+                <div class="items position-relative mb-lg-3 col-12 col-md-6 col-lg-4">
                   <div class="info d-flex align-items-center">
                     <div class="img">
                       <img src="assets/images/apartments.png" alt="">
@@ -201,7 +197,7 @@
                   </div>
                 </div>
 
-                <div class="items position-relative mb-lg-3 col-12 col-lg-6">
+                <div class="items position-relative mb-lg-3 col-12 col-md-6 col-lg-4">
                   <div class="info d-flex align-items-center">
                     <div class="img">
                       <img src="assets/images/apartments.png" alt="">
@@ -228,14 +224,10 @@
                   View All
                 </a>
               </div>
-
             </div>
-
-
-
 
             <div id="anime" *ngIf="animatedBg">
-              <div class="items mb-4 col-12 col-lg-6">
+              <div class="items mb-4 col-12 col-lg-4 col-md-6 ">
                 <div class="info d-flex align-items-center">
                   <div class="img animated-bg animated-bg-text">
                   </div>
@@ -249,7 +241,7 @@
                 </div>
               </div>
 
-              <div class="items mb-4 col-12 col-lg-6">
+              <div class="items mb-4 col-12 col-lg-4 col-md-6 ">
                 <div class="info d-flex align-items-center">
                   <div class="img animated-bg animated-bg-text">
                   </div>
@@ -263,7 +255,7 @@
                 </div>
               </div>
 
-              <div class="items mb-4 col-12 col-lg-6">
+              <div class="items mb-4 col-12 col-lg-4 col-md-6 ">
                 <div class="info d-flex align-items-center">
                   <div class="img animated-bg animated-bg-text">
                   </div>
@@ -277,7 +269,35 @@
                 </div>
               </div>
 
-              <div class="items mb-lg-3 col-12 col-lg-6">
+              <div class="items mb-4 col-12 col-lg-4 col-md-6 ">
+                <div class="info d-flex align-items-center">
+                  <div class="img animated-bg animated-bg-text">
+                  </div>
+                  <div class="data d-flex align-items-center flex-column">
+                    <div class="title animated-bg animated-bg-text ">
+                    </div>
+                    <div class="title animated-bg animated-bg-text ">
+                    </div>
+                    <button class="cta animated-bg animated-bg-text "></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="items mb-4 col-12 col-lg-4 col-md-6 ">
+                <div class="info d-flex align-items-center">
+                  <div class="img animated-bg animated-bg-text">
+                  </div>
+                  <div class="data d-flex align-items-center flex-column">
+                    <div class="title animated-bg animated-bg-text ">
+                    </div>
+                    <div class="title animated-bg animated-bg-text ">
+                    </div>
+                    <button class="cta animated-bg animated-bg-text "></button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="items mb-lg-3 col-12 col-lg-4 col-md-6 ">
                 <div class="info d-flex align-items-center">
                   <div class="img animated-bg animated-bg-text">
                   </div>
@@ -292,294 +312,13 @@
               </div>
 
             </div>
-
           </div>
         </div>
       </div>
     </div>
 
-  </div>
-
-
-
-  <div class="col-4 d-none d-lg-block">
-    <!-- Right Section -->
-    <div class="con-section right">
-
-    </div>
   </div>
 </div>
 
 <!-- Modals -->
-<div class="con-modal">
-
-  <!-- SECTION A -->
-  <!-- Initial Property Attribute -->
-  <div class="modal section-a" id="display-property" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <!-- Modal Header -->
-        <div class="modal-header">
-          <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
-          </div>
-        </div>
-
-        <!-- Modal Body -->
-        <div class="modal-body">
-          <div class="row the-modal-body-row snd-body-row">
-            <div class="col-12 con-top">
-              <div class="col-md-6 heading">
-                Jenkings Apartment
-              </div>
-              <div class="col-6 price d-none d-md-block">
-                <span class="amount">{{propertyCost | number}}</span> <br>per Unit
-              </div>
-              <div class="price-mobile wgt-02 color-red ms-3 d-block d-md-none">
-                <span class="amount">{{propertyCost | number}}</span>per Unit
-              </div>
-            </div>
-
-            <div class="con-mini-body">
-              <div class="det">
-                <div class="property-type prop mb-3">
-                  <span>Property Type: </span><span class="value">Single Family Home</span>
-                </div>
-                <div class="size prop mb-3">
-                  <span>Size: </span><span class="value">2,056</span><span class="unit">ft²</span>
-                </div>
-                <div class="lot-size prop mb-3">
-                  <span>Lot Size: </span><span class="value">2,056</span><span class="unit">ft²</span>
-                </div>
-                <div class="year prop mb-3">
-                  <span>Year Built: </span><span class="value">2,056</span><span class="unit">ft²</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Modal Footer -->
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#calculate-units" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Invest</button>
-          <button class="btn btn-primary btn-light" data-bs-target="#about-property" data-bs-toggle="modal"
-            data-bs-dismiss="modal">About Opportunity</button>
-          <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION B -->
-  <!-- About Property -->
-  <div class="modal section-b" id="about-property" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-
-        <div class="modal-header">
-          <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
-          </div>
-        </div>
-
-        <div class="modal-body">
-          <div class="row the-modal-body-row snd-body-row">
-            <div class="col-12 con-top">
-              <div class="col-md-6 heading">
-                Jenkings Apartment
-              </div>
-              <div class="col-6 price d-none d-md-block">
-                <span class="amount">{{propertyCost | number}}</span> <br>per Unit
-              </div>
-              <div class="price-mobile d-block d-md-none">
-                <span class="amount">{{propertyCost | number}}</span>per Unit
-              </div>
-            </div>
-
-            <div class="con-mini-body">
-              <div class="con-headers">
-                About Opportunity
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum unde facilis soluta tenetur, et tempore
-                officia reiciendis laudantium, excepturi qui possimus officiis eaque. Autem exercitationem provident
-                eveniet culpa assumenda cupiditate distinctio, possimus explicabo molestiae rerum ipsum quos quo hic
-                sint nesciunt delectus quisquam? Aspernatur odio saepe totam asperiores, veniam expedita neque dolorem
-                quasi quia, beatae assumenda repudiandae dolore. Numquam, sed?
-              </p>
-            </div>
-
-          </div>
-        </div>
-
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#calculate-units" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Invest</button>
-          <button class="btn btn-primary btn-light" data-bs-target="#display-property" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Back</button>
-          <button type="button" class="btn-close close-button mt-md-0 mt-4 " data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION C -->
-  <!-- Calculate Units -->
-  <div class="modal section-c" id="calculate-units" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-
-        <!-- Header -->
-        <div class="modal-header">
-          <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
-          </div>
-        </div>
-
-        <!-- Body -->
-        <div class="modal-body">
-          <div class="row the-modal-body-row snd-body-row">
-            <div class="col-12 con-top">
-              <div class="col-md-6 heading">
-                Jenkings Apartment
-              </div>
-              <div class="col-6 price d-none d-md-block">
-                <span class="amount">{{propertyCost | number}}</span> <br>per Unit
-              </div>
-              <div class="price-mobile wgt-02 color-red ms-3 d-block d-md-none">
-                <span class="amount">{{propertyCost | number}}</span>per Unit
-              </div>
-            </div>
-            <div class="con-mini-body">
-              <form class="row modal-form">
-                <div class="con-headers">
-                  Invest
-                </div>
-                <div class="d-flex justify-content-center mb-3">
-                  <div class="message text-center" *ngIf="message">{{message}}</div>
-                </div>
-                <div class="input-style">
-                  <div class="con-input">
-                    <label for="floatingInput1">No. of Unit(s)</label>
-                    <input type="number" name="unitNumber" class="form-control" id="floatingInput1"
-                      [(ngModel)]="details.unitNumber" (input)="calculate()">
-                  </div>
-                  <label class="side-left">Units</label>
-                </div>
-
-                <div class="input-style">
-                  <div class="con-input">
-                    <label for="floatingInput2">Total Estimate</label>
-                    <span class="estimate color-red"> {{estimate | number}} </span>
-                  </div>
-                  <label class="side-left">NGN</label>
-                </div>
-
-                <div class="input-style">
-                  <div class="con-select">
-                    <select class="form-select" id="floatingSelect">
-                      <option selected>Flutterwave</option>
-                      <option value="3">Paystack</option>
-                      <option value="1">Paypal</option>
-                      <option value="2">ATM Card</option>
-                    </select>
-                  </div>
-                  <label for="floatingSelect" class="side-left">Payment Options</label>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer -->
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#confirm-transaction" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Invest</button>
-          <button class="btn btn-primary btn-light" data-bs-target="#display-property" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Back</button>
-          <button type="button" class="btn-close close-button mt-md-0 mt-4 " data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION D -->
-  <!-- Confirm Transactions -->
-  <div class="modal section-d" id="confirm-transaction" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
-          </div>
-        </div>
-        <div class="modal-body">
-          <div class="row the-modal-body-row snd-body-row">
-            <div class="col-12 con-top">
-              <div class="col-md-6 heading">
-                Jenkings Apartment
-              </div>
-              <div class="col-6 price d-none d-md-block">
-                <span class="amount">{{propertyCost | number}}</span> <br>per Unit
-              </div>
-              <div class="price-mobile d-block d-md-none">
-                <span class="amount">{{propertyCost | number}}</span>per Unit
-              </div>
-            </div>
-
-            <div class="con-mini-body">
-              <div class="con-headers">
-                Confirm transaction
-              </div>
-              <div>
-                You are about to process payment for <b>{{details.unitNumber}}</b> units(s) at <b>NGN {{propertyCost |
-                  number}} per
-                  unit</b> , for the cost
-                of <b>NGN{{estimate}}</b>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button class="btn btn-primary" data-bs-target="#process-payment" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Proceed</button>
-          <button class="btn btn-primary btn-light" data-bs-target="#calculate-units" data-bs-toggle="modal"
-            data-bs-dismiss="modal">Back</button>
-          <button type="button" class="btn-close close-button mt-md-0 mt-4 " data-bs-dismiss="modal"
-            aria-label="Close"></button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- SECTION E -->
-  <!-- Process Payments -->
-  <div class="modal section-e" id="process-payment" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
-    tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalToggleLabel2">Redirect to Flutterwave</h5>
-        </div>
-        <div class="modal-body">
-          Process Payment
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary mt-md-0 mt-4 " data-bs-dismiss="modal" aria-label="Close">
-            Invest More
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<app-property-modal [data]="data"></app-property-modal>

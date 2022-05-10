@@ -1,7 +1,7 @@
 const { requestService } = require('../services');
 const { Role } = require('../config');
 const { Response, checkUser } = require('../middlewares');
-const { successResponse, errorResponse } = Response;
+const { successResponse } = Response;
 
 module.exports = {
   getAll,
@@ -31,10 +31,7 @@ function getById(req, res, next) {
   const { userid, id } = req.params;
   requestService.getById(id, userid)
     .then(response => {
-      const role = [Role.Facilitator, Role.Admin]
-      if (response.user != userid && !role.includes(req.user.role)) {
-        return errorResponse(res, 'You can not access this resource')
-      }
+      checkUser(req, res, response.id, true);
       return successResponse(res, 'Request fetched successfully', response)
     })
     .catch(next);

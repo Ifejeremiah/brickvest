@@ -5,6 +5,8 @@ const authRoute = require('./auth.route');
 const userRoute = require('./user.route');
 const requestRoute = require('./requests.route');
 const dashboardRoute = require('./dashboard.route');
+const transactionRoute = require('./transaction.route')
+const propertyRoute = require('./property.route')
 
 
 const routes = [
@@ -23,6 +25,14 @@ const routes = [
   {
     path: '/',
     route: dashboardRoute
+  },
+  {
+    path: '/transactions',
+    route: transactionRoute
+  },
+  {
+    path: '/properties',
+    route: propertyRoute
   },
 ];
 

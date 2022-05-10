@@ -63,7 +63,7 @@ async function deleteById(id) {
 async function getRequest(id) {
   if (!db.isValidId(id)) throw 'Invalid ID';
   const user = await db.Request.findOne({ user: id });
-  if (!user) throw 'not found';
+  if (!user) throw 'User not found';
   return user;
 }
 

@@ -15,6 +15,8 @@ module.exports = {
   User: require('../models/user.model'),
   Action: require('../models/activity.model'),
   Request: require('../models/request.model'),
+  Property: require('../models/property.model'),
+  Transaction: require('../models/transactions.model'),
   ObjectId: mongoose.Types.ObjectId,
   isValidId
 };

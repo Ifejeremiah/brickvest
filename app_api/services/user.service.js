@@ -2,7 +2,7 @@ const secret = process.env.JWT_SECRET;
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const { db, build } = require('../config');
+const { db, build, paginate } = require('../config');
 
 module.exports = {
   authenticate,
@@ -36,11 +36,11 @@ async function register({ name, email, password }) {
   };
 }
 
-async function getAll(page) {
-  const query = db.User.aggregate();
-  const customLabels = { totalDocs: 'totalResults', limit: 'perPage', page: 'currentPage' };
-  const options = { page: page ? page : 1, limit: 10, customLabels }
-  const users = await db.User.aggregatePaginate(query, options);
+async function getAll(page, limit) {
+  const users = await paginate(
+    db.User, true,
+    {}, page, limit
+  )
   return build(users, basicDetails);
 }
 
@@ -64,7 +64,6 @@ async function deleteById(id) {
   };
 }
 
-
 // helper functions
 
 async function saveUser({ name, email, password }) {
@@ -76,16 +75,7 @@ async function saveUser({ name, email, password }) {
 }
 
 async function updateUser(id, body) {
-  const { email, password } = body;
   const user = await getUser(id);
-
-  if (email) {
-    const exists = await db.User.findOne({ email });
-    if (exists && user.email !== exists.email) throw 'Email already in use';
-  } else if (password) {
-    body['password'] = bcrypt.hashSync(password, 12)
-  }
-
   Object.assign(user, body);
   await user.save();
   return user;
@@ -112,7 +102,14 @@ function generateJwtToken(user) {
 }
 
 function basicDetails(user) {
-  let { id, name, email, role } = user;
+  let { id, name, email, role,
+    accountNumber, accountName,
+    phoneNumber, bank, state, city } = user;
   if (!id) id = user._id
-  return { id, name, email, role };
+  return {
+    id, name, email, role, accountNumber, accountName, phoneNumber, bank, state, city,
+    accountNumber, accountName, phoneNumber,
+    bank, state, city
+  };
 }
+

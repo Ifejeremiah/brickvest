@@ -1,5 +1,5 @@
 <div class="main-row row">
-  <div class="col-12 col-lg-4">
+  <div class="col-12 col-md-12 col-lg-4">
     <div id="con-ht-01" class="con-section sections">
 
       <div class="box box-primary">
@@ -13,10 +13,22 @@
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Apartments</b> <a class="pull-right">1,322</a>
+              <b>Account Name</b> <a class="pull-right">{{credentials.accountName}}</a>
             </li>
             <li class="list-group-item">
-              <b>ROI Estimate</b> <a class="pull-right">40%</a>
+              <b>Account Number</b> <a class="pull-right">{{credentials.accountNumber}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>Bank</b> <a class="pull-right">{{credentials.bank}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>Phone Number</b> <a class="pull-right">{{credentials.phoneNumber}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>City</b> <a class="pull-right">{{credentials.city}}</a>
+            </li>
+            <li class="list-group-item">
+              <b>State</b> <a class="pull-right">{{credentials.state}}</a>
             </li>
           </ul>
 
@@ -26,7 +38,7 @@
     </div>
   </div>
 
-  <div class="col-12 col-lg-8 mt-3 mt-lg-0">
+  <div class="col-12 col-md-12 col-lg-8 mt-3 mt-xl-0">
     <div id="con-ht-01" class="con-section sections">
       <div class="con-content contents">
 
@@ -34,10 +46,11 @@
           <div class="content-header d-flex align-items justify-content-between flex-column flex-lg-row">
             <div>
               <button [ngClass]="firstBtn" (click)="doShowHistory()">History</button>
-              <button class="ms-4" [ngClass]="secondBtn" (click)="doShowSettings()">Settings</button>
+              <button class="ms-4" [ngClass]="secondBtn" (click)="doShowSettings()">Update Account</button>
             </div>
             <div class="me-lg-5 mt-3 mt-lg-0 d-flex align-items-center" *ngIf="!toggle">
-              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
+              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)" *ngIf="false">
+              </app-paginate>
             </div>
             <div class="me-lg-5 mt-3 mt-lg-0 d-flex align-items-center color-red" id="wgt-02" *ngIf="toggle">
               Update Your Account
@@ -47,12 +60,23 @@
           <div class="content-body">
             <!-- First Section  -->
             <div class="con-first" *ngIf="!toggle">
-              <ul>
+              <ul *ngIf="!animatedBg">
                 <li *ngFor="let action of actions">
                   <div>{{action.body}}</div>
                   <div>{{action.createdAt | date:'medium'}}</div>
                 </li>
               </ul>
+
+              <div id="anime" *ngIf="animatedBg">
+                <div class=" animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+              </div>
             </div>
 
 
@@ -73,20 +97,56 @@
                 </div>
 
                 <div class="form-group">
-                  <label for="inputName" class="col-sm-2 control-label">Name</label>
+                  <label for="inputName" class="col-sm-3 control-label">Account Name</label>
 
-                  <div class="col-sm-10">
-                    <input type="email" name="name" class="form-control" id="inputName" placeholder="Name"
-                      [(ngModel)]="credentials.name" (input)="clearMsg()">
+                  <div class="col-sm-9">
+                    <input type="text" name="accountName" class="form-control" id="inputName" placeholder="Account Name"
+                      [(ngModel)]="credentials.accountName" (input)="clearMsg()">
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                  <label for="inputNumber" class="col-sm-3 control-label">Account Number</label>
 
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Email"
-                      [(ngModel)]="credentials.email" (input)="clearMsg()">
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" id="inputNumber" name="accountNumber"
+                      placeholder="Account Number" [(ngModel)]="credentials.accountNumber" (input)="clearMsg()">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="bank" class="col-sm-3 control-label">Bank</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="bank" name="bank" placeholder="Bank Name"
+                      [(ngModel)]="credentials.bank" (input)="clearMsg()">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="inputPhone" class="col-sm-3 control-label">Phone Number</label>
+
+                  <div class="col-sm-9">
+                    <input type="number" class="form-control" id="inputPhone" name="phoneNumber"
+                      placeholder="Phone Number" [(ngModel)]="credentials.phoneNumber" (input)="clearMsg()">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="city" class="col-sm-3 control-label">City</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="city" name="city" placeholder="City"
+                      [(ngModel)]="credentials.city" (input)="clearMsg()">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="state" class="col-sm-3 control-label">State</label>
+
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="state" name="state" placeholder="State"
+                      [(ngModel)]="credentials.state" (input)="clearMsg()">
                   </div>
                 </div>
 

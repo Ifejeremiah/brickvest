@@ -31,7 +31,7 @@ async function save({ id, body }) {
 
 // helper functions
 async function verifyUser(id) {
-  if (!db.isValidId(id)) throw 'Invalid ID';
+  if (!db.isValidId(id)) throw 'Invalid User ID';
   const action = await db.Action.find({ user: id });
   if (!action) throw 'User not found';
   return action;

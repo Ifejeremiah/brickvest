@@ -26,13 +26,24 @@ const schema = new Schema({
 
   isVerified: { type: Boolean, default: false, },
 
-  googleOauthToken: String,
-
   role: {
     type: String,
     enum: ['facilitator', 'admin', 'user'],
     default: 'user'
   },
+
+  accountNumber: String,
+
+  accountName: String,
+
+  phoneNumber: String,
+
+  bank: String,
+
+  state: String,
+
+  city: String
+
 }, { timestamps: true });
 
 

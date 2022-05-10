@@ -9,7 +9,7 @@ const schema = new Schema({
 
   location: { type: String, required: true },
 
-  yearBuilt: String,
+  yearBuilt: Number,
 
   size: Number,
 
@@ -27,7 +27,7 @@ const schema = new Schema({
     default: 'available'
   },
 
-  ROIEstimate: String,
+  ROIEstimate: Number,
 
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 

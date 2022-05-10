@@ -26,7 +26,8 @@ const routes: Routes = [
     children: [
       {
         path: 'overview',
-        component: OverviewComponent
+        component: OverviewComponent,
+        pathMatch: 'full'
       },
       {
         path: 'co-own',
