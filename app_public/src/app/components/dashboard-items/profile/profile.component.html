@@ -49,7 +49,7 @@
               <button class="ms-4" [ngClass]="secondBtn" (click)="doShowSettings()">Update Account</button>
             </div>
             <div class="me-lg-5 mt-3 mt-lg-0 d-flex align-items-center" *ngIf="!toggle">
-              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)" *ngIf="false">
+              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)">
               </app-paginate>
             </div>
             <div class="me-lg-5 mt-3 mt-lg-0 d-flex align-items-center color-red" id="wgt-02" *ngIf="toggle">
