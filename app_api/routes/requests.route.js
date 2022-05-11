@@ -7,17 +7,20 @@ const { authorize } = require('../middlewares');
 const { Role } = require('../config')
 const { requestsController } = require('../contollers')
 const { getAll, getByUserId, getById,
-  saveById, respondById, deleteById } = requestsController;
+  saveById, respondById,
+  deleteById, deleteByUserId } = requestsController;
 
 router.route('/')
   .get(authorize([Role.Facilitator, Role.Admin]), getAll)
   .post(authorize(), requestSchema, saveById)
 
 router.route('/:id')
-  .get(authorize(), getByUserId)
+  .get(authorize(), getById)
   .patch(authorize([Role.Facilitator, Role.Admin]), responseSchema, respondById)
   .delete(authorize(Role.Facilitator), deleteById)
 
-router.get('/:userid/:id', authorize(), getById)
+router.route('/users/:id')
+  .get(authorize(), getByUserId)
+  .delete(authorize(Role.Facilitator), deleteByUserId)
 
 module.exports = router;

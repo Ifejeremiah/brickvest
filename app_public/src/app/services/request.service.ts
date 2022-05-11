@@ -40,7 +40,7 @@ export class RequestService {
   }
 
   public postRequests(formData: RequestData) {
-    const url = `${this.apiBase}/users/requests`;
+    const url = `${this.apiBase}/requests`;
     return this.http
       .post(url, formData, { headers: this.sendTokenHeader() })
       .toPromise()
@@ -48,8 +48,9 @@ export class RequestService {
       .catch(this.handleError);
   }
 
-  public getRequests(id: string, page: number, limit: number) {
-    const url = `${this.apiBase}/users/requests/${id}`;
+  public getUserRequestById(page: number, limit: number) {
+    const userid = this.authService.getCurrentUserId()
+    const url = `${this.apiBase}/requests/users/${userid}`;
     return this.http
       .get(url, { headers: this.sendTokenHeader(), params: this.setParams(page, limit) })
       .toPromise()
@@ -58,8 +59,7 @@ export class RequestService {
   }
 
   public getRequestById(id: string) {
-    const user = this.authService.getCurrentUserId()
-    const url = `${this.apiBase}/users/requests/${user}/${id}`;
+    const url = `${this.apiBase}/requests/${id}`;
     return this.http
       .get(url, { headers: this.sendTokenHeader() })
       .toPromise()

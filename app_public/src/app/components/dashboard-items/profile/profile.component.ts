@@ -71,6 +71,7 @@ export class ProfileComponent implements OnInit {
         response.data['totalLimit'] = this.totalLimit
         this.data = response.data;
         this.animatedBg = false
+        console.log(this.actions)
       })
   }
 
@@ -82,6 +83,7 @@ export class ProfileComponent implements OnInit {
     this.toggle = false;
     this.firstBtn = 'active';
     this.secondBtn = '';
+    this.getActions(this.getUserId(), 1, this.totalLimit)
   }
 
   public doShowSettings() {

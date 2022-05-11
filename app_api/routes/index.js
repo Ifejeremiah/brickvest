@@ -15,12 +15,12 @@ const routes = [
     route: authRoute
   },
   {
-    path: '/users/requests',
-    route: requestRoute
-  },
-  {
     path: '/users',
     route: userRoute
+  },
+  {
+    path: '/requests',
+    route: requestRoute
   },
   {
     path: '/',

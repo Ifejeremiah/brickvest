@@ -35,6 +35,7 @@
                     {{request.createdAt | date: "MMM dd"}}
                   </div>
                 </li>
+                <li class="wgt-02" *ngIf="noData">{{noData}}</li>
               </ul>
             </div>
 

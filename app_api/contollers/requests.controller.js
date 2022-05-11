@@ -9,31 +9,33 @@ module.exports = {
   getById,
   saveById,
   respondById,
-  deleteById
+  deleteById,
+  deleteByUserId
 }
 
 function getAll(req, res, next) {
   const { page, limit } = req.query;
   requestService.getAll(page, limit)
-    .then(data => successResponse(res, 'Requests fetched', data))
-    .catch(next);
-}
-
-function getByUserId(req, res, next) {
-  const { page, limit } = req.query;
-  checkUser(req, res, req.params.id, true);
-  requestService.getByUserId(req.params.id, page, limit)
-    .then(data => successResponse(res, 'Requests fetched', data))
+    .then(data => successResponse(res, 'All requests fetched', data))
     .catch(next);
 }
 
 function getById(req, res, next) {
-  const { userid, id } = req.params;
-  requestService.getById(id, userid)
-    .then(response => {
-      checkUser(req, res, response.id, true);
-      return successResponse(res, 'Request fetched successfully', response)
+  const { id } = req.params;
+  requestService.getById(id)
+    .then(data => {
+      checkUser(req, res, data.user, true)
+      successResponse(res, 'Request fetched successfully', data)
     })
+    .catch(next);
+}
+
+function getByUserId(req, res, next) {
+  const { page, limit } = req.query
+  const { id } = req.params
+  checkUser(req, res, id, true)
+  requestService.getByUserId(id, page, limit)
+    .then(data => successResponse(res, 'User\'s requests fetched successfully', data))
     .catch(next);
 }
 
@@ -45,7 +47,6 @@ function saveById(req, res, next) {
 }
 
 function respondById(req, res, next) {
-  const { response } = req.body;
   req.body['repliedBy'] = req.user.id;
   req.body['responseTime'] = Date.now()
   const { id } = req.params;
@@ -56,6 +57,12 @@ function respondById(req, res, next) {
 
 function deleteById(req, res, next) {
   requestService.deleteById(req.params.id)
+    .then(() => successResponse(res, 'Request deleted successfully'))
+    .catch(next);
+}
+
+function deleteByUserId(req, res, next) {
+  requestService.deleteByUserId(req.params.id)
     .then(() => successResponse(res, 'Request deleted successfully'))
     .catch(next);
 }

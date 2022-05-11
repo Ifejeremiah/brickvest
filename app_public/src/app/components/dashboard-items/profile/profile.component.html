@@ -65,6 +65,7 @@
                   <div>{{action.body}}</div>
                   <div>{{action.createdAt | date:'medium'}}</div>
                 </li>
+                <li class="wgt-02" *ngIf="actions.length < 1">You have made no actions yet</li>
               </ul>
 
               <div id="anime" *ngIf="animatedBg">
