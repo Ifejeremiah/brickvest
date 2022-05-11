@@ -3,7 +3,7 @@ const { Response } = require('../middlewares')
 
 
 module.exports = function checkUser(req, res, id, forAdmin = false) {
-  const roles = [ Role.Facilitator ];
+  const roles = [Role.Facilitator];
 
   forAdmin ? roles.push(Role.Admin) : null;
 
