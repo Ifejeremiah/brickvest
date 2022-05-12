@@ -1,5 +1,5 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Input, Output, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Input, Renderer2, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-property-modal',
@@ -41,20 +41,21 @@ export class PropertyModalComponent implements OnInit {
         amount: ${this.data.estimate},
         currency: "NGN",
         // payment_options: "card, banktransfer, ussd",
-        redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+        // redirect_url: "https://glaciers.titanic.com/handle-flutterwave-payment",
+        redirect_url: 'http://localhost:4200/co-own',
         // meta: {
         //   consumer_id: 23,
         //   consumer_mac: "92a3-912ba-1192a",
         // },
         customer: {
-          email: "ifejeremiah@gmail.com",
-          phone_number: "08102909304",
+          email: "jerryroboy16@gmail.com",
+          phone_number: "08025925416",
           name: "Ife Jeremiah",
         },
         customizations: {
           title: "Brickvest",
           description: "Payment for an awesome cruise",
-          logo: "https://brickvest.herokuapp.com/favicon.ico",
+          logo: "https://onebrick.herokuapp.com/favicon.ico",
         },
       });
     }
@@ -62,7 +63,7 @@ export class PropertyModalComponent implements OnInit {
     flutterInit.type = `text/javascript`;
     flutterInit.src = `https://checkout.flutterwave.com/v3.js`;
 
-    this.renderer.appendChild(this.document.head, flutterInit);
+    this.renderer.appendChild(this.document.body, flutterInit);
     this.renderer.appendChild(this.document.body, flutterScript);
   }
 }

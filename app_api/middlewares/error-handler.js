@@ -25,5 +25,5 @@ function errorHandler(err, req, res, next) {
 }
 
 function notFoundError(req, res, next) {
-  return errorResponse(res, 'Not found', 404)
+  return errorResponse(res, 'Could not find that resource', 404)
 }

@@ -8,7 +8,7 @@ module.exports = {
   getById,
   getByUserId,
   makeTransaction,
-  updateStatus
+  verifyTransaction
 }
 
 function getAll(req, res, next) {
@@ -38,15 +38,15 @@ function getByUserId(req, res, next) {
 }
 
 function makeTransaction(req, res, next) {
-  const { amount, property} = req.body
+  const { amount, property } = req.body
   transactionService.create({ user: req.user.id, property, amount })
     .then(data => successResponse(res, 'Transaction created', data, 201))
     .catch(next)
 }
 
-function updateStatus(req, res, next) {
-  const { id } = req.params
-  transactionService.updateStatus(id)
+function verifyTransaction(req, res, next) {
+  const { transactionRef, flwTransactionId } = req.body
+  transactionService.updateStatus({ transactionRef, flwTransactionId })
     .then(data => successResponse(res, 'I will get the response soon', data))
     .catch(next)
 }

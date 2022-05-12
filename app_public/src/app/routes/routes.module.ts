@@ -20,7 +20,7 @@ import { DeleteAccountComponent } from '../components/dashboard-items/delete-acc
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'dashboard',
     canActivate: [AuthGuard],
     component: DashboardComponent,
     children: [
@@ -73,7 +73,7 @@ const routes: Routes = [
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: '/'
+    redirectTo: '/dashboard/overview'
   }
 ]
 

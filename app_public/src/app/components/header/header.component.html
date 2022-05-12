@@ -22,9 +22,10 @@
           </a>
 
           <ul class="dropdown-menu">
-            <li routerLink="/requests" *ngIf="notify" (click)="checkOut()">You have a new response from <b>Support
+            <li routerLink="/dashboard/requests" *ngIf="notify" (click)="checkOut()">You have a new response from
+              <b>Support
                 Team</b></li>
-            <li routerLink="/requests" *ngIf="!notify">You have no notifications yet</li>
+            <li *ngIf="!notify">You have no notifications yet</li>
           </ul>
         </li>
 

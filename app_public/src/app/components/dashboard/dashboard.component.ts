@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,12 +9,10 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.reloadAllScripts();
-    this.loadOverviewPage();
+    this.reloadAllScripts()
   }
 
   private reloadAllScripts(): void {
@@ -26,10 +23,4 @@ export class DashboardComponent implements OnInit {
       localStorage.removeItem('abc');
     }
   }
-
-  private loadOverviewPage(): void {
-    this.router.navigate(['', 'overview']);
-  }
-
-
 }

@@ -15,7 +15,7 @@ const schema = new Schema({
     default: 'pending'
   },
 
-  amount: String,
+  amount: Number,
 
   transactionRef: {
     type: String,

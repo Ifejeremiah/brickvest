@@ -71,7 +71,6 @@ export class ProfileComponent implements OnInit {
         response.data['totalLimit'] = this.totalLimit
         this.data = response.data;
         this.animatedBg = false
-        console.log(this.actions)
       })
   }
 

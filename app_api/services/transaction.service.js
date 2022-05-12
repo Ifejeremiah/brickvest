@@ -1,5 +1,7 @@
-const { db, paginate, build, } = require('../config')
+const Flutterwave = require('flutterwave-node-v3');
 const crypto = require('crypto')
+// const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
+const { db, paginate, build, } = require('../config')
 
 module.exports = {
   getAll,
@@ -40,12 +42,33 @@ async function create({ user, amount, property }) {
   return await db.Transaction.create({ user, amount, transactionRef, property })
 }
 
-async function updateStatus(id) {
-  const transaction = await getTransaction(id)
-  const amount = transaction.amount
-  const currency = 'NGN'
-  // verifyTransaction(id, amount, currency)
-  await transaction.save()
+async function updateStatus({ transactionRef, flwTransactionId }) {
+  const transaction = await getTransactionRef(transactionRef)
+
+  // flw.Transaction.verify({ id: flwTransactionId })
+  //   .then((response) => {
+  //     if (
+  //       response.data.status === "successful"
+  //       && response.data.amount >= expectedAmount
+  //       && response.data.tx_ref === transactionRef) {
+  //       async () => { await updateSuccess() }
+  //     } else {
+  //       async () => { await updateFailed() }
+  //       throw 'Flutterwave transaction failed'
+  //     }
+  //   })
+  //   .catch(console.log);
+
+  // async function updateSuccess() {
+  //   transaction.status = 'success'
+  //   await transaction.save()
+  // }
+
+  // async function updateFailed() {
+  //   transaction.status = 'failed'
+  //   await transaction.save()
+  // }
+
   return format(transaction)
 }
 
@@ -54,6 +77,12 @@ async function getTransaction(id) {
   if (!db.isValidId(id)) throw 'Invalid Transaction ID'
   const transaction = await db.Transaction.findById(id)
   if (!transaction) throw 'Transaction not found'
+  return transaction
+}
+
+async function getTransactionRef(tx_ref) {
+  const transaction = await db.Transaction.findOne(tx_ref)
+  if (!transaction) throw 'Transaction reference not found'
   return transaction
 }
 
@@ -70,11 +99,6 @@ async function verifyProperty(id) {
   if (!property) throw 'Property not found'
   return property
 }
-
-// ERRORS STARTED FROM HERE
-// async function verifyTransaction(id, expectedAmount, expectedCurrency) {
-//   flw_verify(id, expectedAmount, expectedCurrency, () => { console.log('Done'), () => { console.log('error') } })
-// }
 
 function format(result) {
   let { _id, user, status, amount, transactionRef, property, createdAt } = result;
