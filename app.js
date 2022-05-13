@@ -26,7 +26,7 @@ app.use(cors(cross.option));
 app.use('/api', require('./app_api/routes'));
 
 // Frontend routes
-app.get(/(\/login)|(\/register)|(\/overview)|(\/co-own)|(\/transactions)(\/requests)|(\/profile)|(\/verify-account)|(\/recover-account)|(\/update-password)|(\/delete-account)|(\/location\/[a-z0-9]{24})/,
+app.get(/(\/login)|(\/register)|(\/overview)|(\/co-own)|(\/verify-transaction)(\/requests)|(\/profile)|(\/verify-account)|(\/recover-account)|(\/update-password)|(\/delete-account)|(\/location\/[a-z0-9]{24})/,
   (req, res) => {
     res.sendFile(path.join(__dirname, 'app_public', 'build', 'index.html'));
   });
