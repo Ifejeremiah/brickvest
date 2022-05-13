@@ -134,87 +134,25 @@
           <div class="row second" *ngIf="toggle">
             <div class="con-card" *ngIf="!animatedBg">
               <div class="mb-5">
-                <div class="items position-relative mb-lg-3 col-12 col-md-6 col-lg-4">
+                <div class="items position-relative mb-lg-3 col-12 col-lg-4 col-md-6"
+                  *ngFor="let property of properties">
                   <div class="info d-flex align-items-center">
                     <div class="img">
-                      <img src="assets/images/apartments.png" alt="">
+                      <img src="{{property.image}}" alt="">
                     </div>
                     <div class="data" id="wgt-02">
                       <div class="title">
-                        Jenkins <br /> Apartment
+                        {{property.name}}
                       </div>
                       <a data-bs-toggle="modal" href="#display-property" role="button">
-                        <button class="cta">
+                        <button class="cta" (click)="getPropertyId(property.id)">
                           See More
                         </button>
                       </a>
                     </div>
                   </div>
-                  <div class="price position-absolute">
-                    N20,000, 000
-                  </div>
-                </div>
-
-                <div class="items position-relative mb-lg-3  col-12 col-md-6 col-lg-4">
-                  <div class="info d-flex align-items-center">
-                    <div class="img">
-                      <img src="assets/images/apartments.png" alt="">
-                    </div>
-                    <div class="data" id="wgt-02">
-                      <div class="title">
-                        Jenkins <br /> Apartment
-                      </div>
-                      <a data-bs-toggle="modal" href="#display-property" role="button">
-                        <button class="cta">
-                          See More
-                        </button>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="price position-absolute">
-                    N20,000, 000
-                  </div>
-                </div>
-
-                <div class="items position-relative mb-lg-3 col-12 col-md-6 col-lg-4">
-                  <div class="info d-flex align-items-center">
-                    <div class="img">
-                      <img src="assets/images/apartments.png" alt="">
-                    </div>
-                    <div class="data" id="wgt-02">
-                      <div class="title">
-                        Jenkins <br /> Apartment
-                      </div>
-                      <a data-bs-toggle="modal" href="#display-property" role="button">
-                        <button class="cta">
-                          See More
-                        </button>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="price position-absolute">
-                    N20,000, 000
-                  </div>
-                </div>
-
-                <div class="items position-relative mb-lg-3 col-12 col-md-6 col-lg-4">
-                  <div class="info d-flex align-items-center">
-                    <div class="img">
-                      <img src="assets/images/apartments.png" alt="">
-                    </div>
-                    <div class="data" id="wgt-02">
-                      <div class="title">
-                        Jenkins <br /> Apartment
-                      </div>
-                      <a data-bs-toggle="modal" href="#display-property" role="button">
-                        <button class="cta">
-                          See More
-                        </button>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="price position-absolute">
-                    N20,000, 000
+                  <div id="wgt-02" class="price position-absolute">
+                    {{property.ROIEstimate}}%
                   </div>
                 </div>
               </div>

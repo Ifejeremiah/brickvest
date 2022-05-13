@@ -1,16 +1,15 @@
 const Flutterwave = require('flutterwave-node-v3');
 const crypto = require('crypto')
-// const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 const { db, paginate, build, } = require('../config')
+const flw = new Flutterwave(process.env.FLW_PUBLIC_KEY, process.env.FLW_SECRET_KEY);
 
 module.exports = {
   getAll,
   getById,
   getByUserId,
   create,
-  updateStatus,
+  verify,
 }
-
 
 async function getAll(page, limit) {
   const transaction = await paginate(
@@ -42,34 +41,34 @@ async function create({ user, amount, property }) {
   return await db.Transaction.create({ user, amount, transactionRef, property })
 }
 
-async function updateStatus({ transactionRef, flwTransactionId }) {
-  const transaction = await getTransactionRef(transactionRef)
+async function verify({ transRef, transId }) {
+  const transaction = await getTransactionByRef(transRef)
+  const response = await flw.Transaction.verify({ id: transId })
 
-  // flw.Transaction.verify({ id: flwTransactionId })
-  //   .then((response) => {
-  //     if (
-  //       response.data.status === "successful"
-  //       && response.data.amount >= expectedAmount
-  //       && response.data.tx_ref === transactionRef) {
-  //       async () => { await updateSuccess() }
-  //     } else {
-  //       async () => { await updateFailed() }
-  //       throw 'Flutterwave transaction failed'
-  //     }
-  //   })
-  //   .catch(console.log);
+  if (!response.data) throw response.message
+  else {
+    if (
+      response.data.status === "successful"
+      && response.data.tx_ref === transaction.transactionRef
+      && response.data.amount >= transaction.amount
+    ) {
+      return await assignSuccess()
+    } else {
+      return await assignFailed()
+    }
+  }
 
-  // async function updateSuccess() {
-  //   transaction.status = 'success'
-  //   await transaction.save()
-  // }
+  async function assignSuccess() {
+    transaction.status = 'success'
+    await transaction.save()
+    return { msg: 'Transaction verification successfull', transaction }
+  }
 
-  // async function updateFailed() {
-  //   transaction.status = 'failed'
-  //   await transaction.save()
-  // }
-
-  return format(transaction)
+  async function assignFailed() {
+    transaction.status = 'failed'
+    await transaction.save()
+    return { msg: 'Transaction verification failed', transaction }
+  }
 }
 
 // helper functions
@@ -80,8 +79,8 @@ async function getTransaction(id) {
   return transaction
 }
 
-async function getTransactionRef(tx_ref) {
-  const transaction = await db.Transaction.findOne(tx_ref)
+async function getTransactionByRef(transactionRef) {
+  const transaction = await db.Transaction.findOne({ transactionRef })
   if (!transaction) throw 'Transaction reference not found'
   return transaction
 }

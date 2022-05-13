@@ -27,6 +27,7 @@ import { VerifyPasswordComponent } from './components/dashboard-items/verify-pas
 import { PaginateComponent } from './components/dashboard-items/paginate/paginate.component';
 import { HtmlLimeBreaksPipe } from './pipes/html-lime-breaks.pipe';
 import { PropertyModalComponent } from './components/dashboard-items/property-modal/property-modal.component';
+import { TransactionsPageComponent } from './components/dashboard-items/transactions-page/transactions-page.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { PropertyModalComponent } from './components/dashboard-items/property-mo
     VerifyPasswordComponent,
     PaginateComponent,
     HtmlLimeBreaksPipe,
-    PropertyModalComponent
+    PropertyModalComponent,
+    TransactionsPageComponent
   ],
   imports: [
     BrowserModule,

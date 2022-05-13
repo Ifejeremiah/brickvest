@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-overview',
@@ -8,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
 export class OverviewComponent implements OnInit {
 
   constructor(
+    private propertyService: PropertyService
   ) { }
 
   ngOnInit(): void {
     this.removeAnime()
+    this.getAllProperties(1, 10)
   }
 
   public animatedBg: boolean = true;
@@ -22,12 +25,9 @@ export class OverviewComponent implements OnInit {
 
   public secondBtn!: string;
 
-  private initialCount = 989;
+  public properties: any;
 
-  public data = {
-    propertyCost: this.initialCount,
-    estimate: this.initialCount
-  }
+  public data: any;
 
   private removeAnime() {
     setTimeout(() => {
@@ -45,5 +45,15 @@ export class OverviewComponent implements OnInit {
     this.toggle = true;
     this.firstBtn = ''
     this.secondBtn = 'active';
+  }
+
+  private async getAllProperties(page: number, limit: number) {
+    const { data } = await this.propertyService.getAllProperties(page, limit)
+    this.properties = data.results
+  }
+
+  public async getPropertyId(id: string) {
+    const { data } = await this.propertyService.getPropertiesById(id)
+    this.data = data
   }
 }

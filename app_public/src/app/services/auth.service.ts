@@ -17,23 +17,19 @@ export class AuthService {
 
   token: string = 'auth-token';
 
-
   public getToken(): string {
     const token = this.storage.getItem(this.token);
     return token !== null ? token : '';
   }
 
-
   public saveToken(token: string): void {
     this.storage.setItem(this.token, token);
   }
-
 
   public login(data: LoginData): Promise<any> {
     return this.dataService.login(data)
       .then((authResponse: AuthResponse) => this.saveToken(authResponse.data.jwtToken));
   }
-
 
   public register(data: RegisterData): Promise<any> {
     return this.dataService.register(data)
@@ -47,7 +43,6 @@ export class AuthService {
     this.storage.removeItem(this.token);
   }
 
-
   public isLoggedIn(): boolean {
     const token: string = this.getToken();
     if (!token) {
@@ -57,7 +52,6 @@ export class AuthService {
       return payload.exp > (Date.now() / 1000);
     }
   }
-
 
   public getCurrentUserId(): string {
     const token: string = this.getToken();

@@ -15,6 +15,7 @@ import { CoOwnComponent } from '../components/dashboard-items/co-own/co-own.comp
 import { ProfileComponent } from '../components/dashboard-items/profile/profile.component';
 import { UpdatePasswordComponent } from '../components/dashboard-items/update-password/update-password.component';
 import { DeleteAccountComponent } from '../components/dashboard-items/delete-account/delete-account.component';
+import { TransactionsPageComponent } from '../components/dashboard-items/transactions-page/transactions-page.component';
 
 
 
@@ -43,7 +44,11 @@ const routes: Routes = [
       },
     ]
   },
-
+  {
+    path: 'verify-transaction',
+    canActivate: [AuthGuard],
+    component: TransactionsPageComponent
+  },
   {
     path: 'login',
     component: LoginComponent

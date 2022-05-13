@@ -35,6 +35,8 @@ export class ProfileComponent implements OnInit {
 
   private totalLimit: number = 10;
 
+  private profileData: any;
+
   public credentials = {
     name: '',
     email: '',
@@ -53,16 +55,39 @@ export class ProfileComponent implements OnInit {
   }
 
   public onSubmit() {
-    this.updateUser(this.credentials)
-      .then(() => {
-        this.message = 'Your account is updated successfully'
-        setTimeout(() => this.clearMsg(), 4000);
-      })
-      .catch(err => {
-        this.message = err.error.message
-        setTimeout(() => this.clearMsg(), 4000)
-      })
+    if (this.doCheck()) {
+      this.sendMessage('Account updated with former data')
+    } else {
+      this.updateUser(this.credentials)
+        .then(() => {
+          this.sendMessage('Your account is updated successfully')
+        })
+        .catch(err => {
+          this.sendMessage(err.error.message)
+        })
+    }
   }
+
+  private doCheck() {
+    const { accountName, accountNumber, bank, city, state } = this.credentials
+    if (
+      this.profileData.accountName === accountName &&
+      this.profileData.accountNumber === accountNumber &&
+      this.profileData.bank === bank &&
+      this.profileData.city === city &&
+      this.profileData.state === state
+    ) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  private sendMessage(msg: string): void {
+    this.message = msg
+    setTimeout(() => this.clearMsg(), 4000)
+  }
+
 
   private getActions(id: string, page: number, limit: number) {
     this.userService.getUserActions(id, page, limit)
@@ -99,9 +124,11 @@ export class ProfileComponent implements OnInit {
   public async getUserById(id: string) {
     const response = await this.userService.getUserById(id)
     const { name, email,
-      bank, state, image, city,
+      bank, state, city,
       accountNumber, accountName, phoneNumber
     } = response.data
+
+    this.profileData = response.data
 
     this.credentials['name'] = name
     this.credentials['email'] = email
@@ -115,5 +142,6 @@ export class ProfileComponent implements OnInit {
 
   private async updateUser(formBody: any) {
     await this.userService.updateUserById(this.getUserId(), formBody)
+    await this.getUserById(this.getUserId())
   }
 }

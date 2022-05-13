@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
   selector: 'app-co-own',
@@ -8,24 +9,32 @@ import { Component, OnInit } from '@angular/core';
 export class CoOwnComponent implements OnInit {
 
   constructor(
+    private propertyService: PropertyService
   ) { }
 
   ngOnInit(): void {
     this.removeAnime()
+    this.getAllProperties(1, 10)
   }
+
+  public properties: any;
 
   public animatedBg: boolean = true;
 
-  private initialCount = 989;
-
-  public data = {
-    propertyCost: this.initialCount,
-    estimate: this.initialCount
-  }
+  public data: any;
 
   private removeAnime() {
-    setTimeout(() => {
-      this.animatedBg = false
-    }, 2000)
+    setTimeout(() => { this.animatedBg = false }, 2000)
   }
+
+  private async getAllProperties(page: number, limit: number) {
+    const { data } = await this.propertyService.getAllProperties(page, limit)
+    this.properties = data.results
+  }
+
+  public async getPropertyId(id: string) {
+    const { data } = await this.propertyService.getPropertiesById(id)
+    this.data = data
+  }
+
 }

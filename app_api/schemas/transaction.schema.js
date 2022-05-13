@@ -9,15 +9,15 @@ module.exports = {
 function maketransactionSchema(req, res, next) {
   const schema = Joi.object({
     amount: Joi.number().required(),
-    property: Joi.string().required()
+    propertyid: Joi.string().required()
   });
   validateRequest(req, next, schema);
 }
 
 function verifyTransactionSchema(req, res, next) {
   const schema = Joi.object({
-    transactionRef: Joi.string().required(),
-    flwTransactionId: Joi.string().required()
+    transReference: Joi.string().required(),
+    flwTransId: Joi.string().required()
   });
   validateRequest(req, next, schema);
 }

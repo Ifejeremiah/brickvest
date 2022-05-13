@@ -13,10 +13,12 @@ const { authorize } = require('../middlewares');
 router.route('/')
   .get(authorize([Role.Facilitator, Role.Admin]), getAll)
   .post(authorize(), transactionSchema.maketransactionSchema, makeTransaction)
-  .patch(authorize(), transactionSchema.verifyTransactionSchema, verifyTransaction)
 
 router.route('/:id')
   .get(authorize([Role.Facilitator, Role.Admin]), getById)
+
+router.route('/verify')
+  .post(authorize(), transactionSchema.verifyTransactionSchema, verifyTransaction)
 
 router.route('/users/:id')
   .get(authorize(), getByUserId)
