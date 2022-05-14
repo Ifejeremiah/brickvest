@@ -50,11 +50,11 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  
+
   private doRegister(): void {
     this.authService.register(this.credentials)
       .then(() => {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/dashboard/overview');
       })
       .catch(err => { this.message = err.error.message });
   }
