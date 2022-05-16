@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TransactionsService } from 'src/app/services/transactions.service';
 
@@ -12,6 +13,7 @@ export class TransactionsPageComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private titleService: Title,
     private transactionService: TransactionsService
   ) { }
 
@@ -23,6 +25,7 @@ export class TransactionsPageComponent implements OnInit {
   public message = 'Verifying transaction in progress...'
 
   ngOnInit(): void {
+    this.titleService.setTitle('Onebrick - Transactions')
     this.getUrlQuery()
   }
 

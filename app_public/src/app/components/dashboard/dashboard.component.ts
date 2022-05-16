@@ -12,15 +12,5 @@ export class DashboardComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.reloadAllScripts()
-  }
-
-  private reloadAllScripts(): void {
-    if (!localStorage.getItem('abc')) {
-      localStorage.setItem('abc', 'def');
-      location.reload();
-    } else {
-      localStorage.removeItem('abc');
-    }
   }
 }

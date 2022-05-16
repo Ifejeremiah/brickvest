@@ -1,5 +1,4 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-framework',
@@ -7,21 +6,32 @@ import { Component, OnInit, Renderer2, Inject } from '@angular/core';
   styleUrls: ['./framework.component.css']
 })
 export class FrameworkComponent implements OnInit {
-
   constructor(
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
   ) { }
 
   ngOnInit(): void {
-    this.attachScripts()
+    this.scripts()
   }
 
-  private attachScripts() {
-    let script = this.renderer.createElement('script');
-    script.type = `text/javascript`;
-    script.src = `assets/javascripts/script.js`;
-    this.renderer.appendChild(this.document.body, script);
+  private scriptElement!: HTMLScriptElement
+
+  private scripts() {
+    const scripts = [
+      {
+        src: 'assets/javascripts/script.js',
+        elem: document.body,
+      },
+      {
+        src: 'https://checkout.flutterwave.com/v3.js',
+        elem: document.body
+      }
+    ]
+
+    scripts.forEach((script) => {
+      this.scriptElement = document.createElement('script')
+      this.scriptElement.src = script.src
+      script.elem.appendChild(this.scriptElement)
+    })
   }
 
 }

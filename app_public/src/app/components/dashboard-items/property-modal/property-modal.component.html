@@ -15,8 +15,8 @@
         </div>
 
         <!-- Modal Body -->
-        <div class="modal-body" *ngIf="data">
-          <div class="row the-modal-body-row snd-body-row">
+        <div class="modal-body">
+          <div class="row the-modal-body-row snd-body-row" *ngIf="data">
             <div class="col-12 con-top">
               <div class="col-md-6 heading">
                 {{data.name}}
@@ -46,12 +46,26 @@
               </div>
             </div>
           </div>
+
+          <div class="row" *ngIf="!data">
+            <div class="d-flex align-items-center flex-column">
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+            </div>
+          </div>
         </div>
+
 
         <!-- Modal Footer -->
         <div class="modal-footer">
           <button class="btn btn-primary" data-bs-target="#calculate-units" data-bs-toggle="modal"
-            data-bs-dismiss="modal" (click)="createAndAppend()">Invest</button>
+            data-bs-dismiss="modal">Invest</button>
           <button class="btn btn-primary btn-light" data-bs-target="#about-property" data-bs-toggle="modal"
             data-bs-dismiss="modal">About Opportunity</button>
           <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
@@ -75,8 +89,8 @@
           </div>
         </div>
 
-        <div class="modal-body" *ngIf="data">
-          <div class="row the-modal-body-row snd-body-row">
+        <div class="modal-body">
+          <div class="row the-modal-body-row snd-body-row" *ngIf="data">
             <div class="col-12 con-top">
               <div class="col-md-6 heading">
                 {{data.name}}
@@ -97,11 +111,24 @@
             </div>
 
           </div>
+
+          <div class="row" *ngIf="!data">
+            <div class="d-flex align-items-center flex-column">
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+            </div>
+          </div>
         </div>
 
         <div class="modal-footer">
           <button class="btn btn-primary" data-bs-target="#calculate-units" data-bs-toggle="modal"
-            data-bs-dismiss="modal" (click)="createAndAppend()">Invest</button>
+            data-bs-dismiss="modal">Invest</button>
           <button class="btn btn-primary btn-light" data-bs-target="#display-property" data-bs-toggle="modal"
             data-bs-dismiss="modal">Back</button>
           <button type="button" class="btn-close close-button mt-md-0 mt-4 " data-bs-dismiss="modal"
@@ -127,8 +154,8 @@
         </div>
 
         <!-- Body -->
-        <div class="modal-body" *ngIf="data">
-          <div class="row the-modal-body-row snd-body-row">
+        <div class="modal-body">
+          <div class="row the-modal-body-row snd-body-row" *ngIf="data">
             <div class="col-12 con-top">
               <div class="col-md-6 heading">
                 {{data.name}}
@@ -165,12 +192,25 @@
               </form>
             </div>
           </div>
+
+          <div class="row" *ngIf="!data">
+            <div class="d-flex align-items-center flex-column">
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+              <div class="animated-bg animated-bg-text ">
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Footer -->
         <div class="modal-footer">
           <button class="btn btn-primary" data-bs-target="#confirm-transaction" data-bs-toggle="modal"
-            data-bs-dismiss="modal" (click)="createAndAppend(); makeTransaction()">Invest</button>
+            data-bs-dismiss="modal" (click)="makeTransaction()">Invest</button>
           <button class="btn btn-primary btn-light" data-bs-target="#display-property" data-bs-toggle="modal"
             data-bs-dismiss="modal">Back</button>
           <button type="button" class="btn-close close-button mt-md-0 mt-4 " data-bs-dismiss="modal"
@@ -191,9 +231,10 @@
             <img src="assets/images/co-earn-modal.png" alt="property header">
           </div>
         </div>
-        <div class="modal-body" *ngIf="data">
+
+        <div class="modal-body" *ngIf="isAttached">
           <div class="row the-modal-body-row snd-body-row">
-            <div class="col-12 con-top">
+            <div class=" col-12 con-top">
               <div class="col-md-6 heading">
                 {{data.name}}
               </div>
@@ -218,13 +259,27 @@
             </div>
           </div>
         </div>
-        <div class="modal-footer">
+
+        <div class="modal-footer" *ngIf="isAttached">
           <button class="btn btn-primary" data-bs-toggle="modal" data-bs-dismiss="modal"
             onclick="makePayment()">Proceed</button>
           <button class="btn btn-primary btn-light" data-bs-target="#calculate-units" data-bs-toggle="modal"
             data-bs-dismiss="modal">Back</button>
           <button type="button" class="btn-close close-button mt-md-0 mt-4 " data-bs-dismiss="modal"
             aria-label="Close"></button>
+        </div>
+
+        <div class="row" *ngIf="!isAttached">
+          <div class="d-flex align-items-center flex-column p-5">
+            <div class="animated-bg animated-bg-text ">
+            </div>
+            <div class="animated-bg animated-bg-text ">
+            </div>
+            <div class="animated-bg animated-bg-text ">
+            </div>
+            <div class="animated-bg animated-bg-text ">
+            </div>
+          </div>
         </div>
       </div>
     </div>

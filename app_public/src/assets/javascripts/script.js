@@ -1,15 +1,13 @@
 const sidebarElm = document.querySelectorAll('.main-sidebar .sidebar li a')
-const yearElm = document.querySelector('.main-footer #yearstamp')
 const bodyElm = document.querySelector('body')
 
-attachYear()
-
-function isMobile(width) {
-  return window.matchMedia(`(max-width:${width}px)`).matches
-}
 
 if (isMobile(992)) {
   sidebarClose()
+}
+
+function isMobile(width) {
+  return window.matchMedia(`(max-width:${width}px)`).matches
 }
 
 function sidebarClose() {
@@ -20,8 +18,3 @@ function sidebarClose() {
   })
 }
 
-function attachYear() {
-  if (yearElm) {
-    yearElm.textContent = new Date().getFullYear()
-  }
-}

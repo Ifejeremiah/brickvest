@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -9,10 +10,12 @@ import { PropertyService } from 'src/app/services/property.service';
 export class OverviewComponent implements OnInit {
 
   constructor(
-    private propertyService: PropertyService
+    private propertyService: PropertyService,
+    private titleService: Title,
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Onebrick - Overview')
     this.removeAnime()
     this.getAllProperties(1, 10)
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { AuthService } from 'src/app/services/auth.service';
 import { RequestData, RequestService } from 'src/app/services/request.service';
 
@@ -12,9 +13,11 @@ export class RequestComponent implements OnInit {
   constructor(
     private requestService: RequestService,
     private authService: AuthService,
+    private titleService:Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle('Onebrick - Requests')
     this.getCurrentUserRequests(1, this.totalLimit);
   }
 

@@ -1,19 +1,18 @@
-import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, Input, Renderer2, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { text } from 'express';
 import { AuthService } from 'src/app/services/auth.service';
 import { TransactionsService } from 'src/app/services/transactions.service';
 import { UserService } from 'src/app/services/user.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-property-modal',
   templateUrl: './property-modal.component.html',
-  styleUrls: ['./property-modal.component.css']
+  styleUrls: ['./property-modal.component.css', './placeholder-anime.css']
 })
 export class PropertyModalComponent implements OnInit {
 
   constructor(
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
     private transactionService: TransactionsService,
     private userService: UserService,
     private authService: AuthService
@@ -22,7 +21,6 @@ export class PropertyModalComponent implements OnInit {
   @Input() data: any;
 
   ngOnInit(): void {
-    this.createAndAppend()
   }
 
   public totalCost!: number;
@@ -31,7 +29,9 @@ export class PropertyModalComponent implements OnInit {
 
   private userEmail!: string;
 
-  private publicKey = 'FLWPUBK_TEST-af7f7973d38fff1f1b41bdd708da3254-X'
+  private scriptElement!: HTMLScriptElement;
+
+  public isAttached: boolean = false;
 
   public details = {
     unitNumber: 1
@@ -44,14 +44,12 @@ export class PropertyModalComponent implements OnInit {
   }
 
   public async makeTransaction() {
-    const body = {
-      amount: this.totalCost || this.data.costPerUnit,
-      propertyid: this.data.id
-    }
+    const body = { amount: this.totalCost || this.data.costPerUnit, propertyid: this.data.id }
     const { data } = await this.transactionService.makeTransaction(body)
     this.transactionRef = data.transactionRef
     await this.getUserEmail()
-    this.createAndAppend()
+    this.scripts()
+    this.isAttached = true
   }
 
   private async getUserEmail() {
@@ -60,30 +58,36 @@ export class PropertyModalComponent implements OnInit {
     this.userEmail = data.email
   }
 
-  public createAndAppend() {
-    let flutterInit = this.renderer.createElement('script');
-    let flutterScript = this.renderer.createElement('script');
 
-    flutterScript.type = `text/javascript`;
-    flutterScript.text = `
-    function makePayment() {
-      FlutterwaveCheckout({
-        public_key: "${this.publicKey}",
-        tx_ref: "${this.transactionRef}",
-        amount: "${this.totalCost || this.data.costPerUnit}",
-        customer: { email: "${this.userEmail}" },
-        currency: "NGN",
-        redirect_url: 'http://localhost:4200/verify-transaction',
-        customizations: {
-          title: "Brickvest",
-          description: "Payment for a real estate investment",
-        },
-      });
-    }`;
-    flutterInit.type = `text/javascript`;
-    flutterInit.src = `https://checkout.flutterwave.com/v3.js`;
+  private scripts() {
+    const scripts = [
+      {
+        text: `
+        function makePayment() {
+          FlutterwaveCheckout({
+            public_key: "${environment.flwPublicKey}",
+            tx_ref: "${this.transactionRef}",
+            amount: "${this.totalCost || this.data.costPerUnit}",
+            customer: { email: "${this.userEmail}" },
+            currency: "NGN",
+            redirect_url: "${environment.flwRedirectUri}",
+            customizations: {
+              title: "Brickvest",
+              description: "Payment for a real estate investment",
+            },
+          });
+        }
+        `,
+        type: 'text/javascript',
+        elem: document.body,
+      }
+    ]
 
-    this.renderer.appendChild(this.document.body, flutterInit);
-    this.renderer.appendChild(this.document.body, flutterScript);
+    scripts.forEach((script) => {
+      this.scriptElement = document.createElement('script')
+      this.scriptElement.type = script.type
+      this.scriptElement.text = script.text
+      script.elem.appendChild(this.scriptElement)
+    })
   }
 }
