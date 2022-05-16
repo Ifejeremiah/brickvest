@@ -7,7 +7,7 @@
     <!-- Left -->
     <div class="con-left d-none d-lg-block">
       <div class="left">
-        <img src="../../../assets/images/login-backgorund.png" alt="">
+        <img src="assets/images/login-backgorund.png" alt="">
 
       </div>
     </div>
@@ -45,7 +45,11 @@
               (input)="clearMsg()">
           </div>
 
-          <button id="wgt-02" type="submit">Login</button>
+          <button id="wgt-02" type="submit" class="buttonload">
+            <span *ngIf="!animate">Login</span>
+            <i *ngIf="animate" i class="fa fa-circle-o-notch fa-spin"></i>
+          </button>
+
 
         </form>
 

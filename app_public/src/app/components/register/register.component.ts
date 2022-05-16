@@ -22,6 +22,8 @@ export class RegisterComponent implements OnInit {
     this.titleService.setTitle('Onebrick - Register')
   }
 
+  public animate: boolean = false;
+
   public credentials = {
     name: '',
     email: '',
@@ -49,6 +51,7 @@ export class RegisterComponent implements OnInit {
     } else if (password !== password2) {
       this.message = 'Passwords do not match';
     } else {
+      this.animate = true
       this.doRegister();
     }
   }
@@ -59,7 +62,10 @@ export class RegisterComponent implements OnInit {
       .then(() => {
         this.router.navigateByUrl('/dashboard/overview');
       })
-      .catch(err => { this.message = err.error.message });
+      .catch(err => {
+        this.message = err.error.message
+        this.animate = false
+      });
   }
 
 }

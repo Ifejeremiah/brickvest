@@ -13,7 +13,7 @@ export class RequestComponent implements OnInit {
   constructor(
     private requestService: RequestService,
     private authService: AuthService,
-    private titleService:Title
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +22,8 @@ export class RequestComponent implements OnInit {
   }
 
   public requests: any;
+
+  public view: boolean = false;
 
   public userRequest: any;
 
@@ -111,7 +113,11 @@ export class RequestComponent implements OnInit {
   }
 
   public doShowId(id: string): void {
+    this.view = true
     this.requestService.getRequestById(id)
-      .then(response => { this.userRequest = response.data });
+      .then(response => {
+        this.userRequest = response.data
+        this.view = false
+      });
   }
 }

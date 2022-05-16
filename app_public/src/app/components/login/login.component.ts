@@ -13,9 +13,9 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private titleService: Title,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
+
+  public animate: boolean = false;
 
   public message!: string;
 
@@ -43,6 +45,7 @@ export class LoginComponent implements OnInit {
     if (!email || !password) {
       this.message = 'Please fill in all fields';
     } else {
+      this.animate = true
       this.doLogin();
     }
   }
@@ -52,7 +55,10 @@ export class LoginComponent implements OnInit {
       .then(() => {
         this.router.navigateByUrl('/dashboard/overview');
       })
-      .catch(err => { this.message = err.error.message });
+      .catch(err => {
+        this.message = err.error.message
+        this.animate = false
+      });
   }
 
 }
