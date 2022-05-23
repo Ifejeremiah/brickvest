@@ -1,0 +1,134 @@
+<div class="col-12">
+  <div id="con-ht-01" class="con-section sections">
+    <div class="con-table" *ngIf="isFacilitator">
+
+      <div class="con-header d-flex flex-column flex-lg-row align-items-lg-center justify-content-between">
+        <h3 class="color-red wgt-02 mb-4 mb-lg-0">Transactions</h3>
+        <div class="d-flex align-items-center justify-content-between border px-3">
+          <div class="me-5">
+            <select [(ngModel)]="defaultOption" (change)="doSort()" class="drop-down wgt-02">
+              <option [ngValue]="options.all">All</option>
+              <option [ngValue]="options.pending">Pending</option>
+              <option [ngValue]="options.success">Success</option>
+              <option [ngValue]="options.failed">Failed</option>
+            </select>
+          </div>
+          <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
+        </div>
+      </div>
+
+      <div class="con-row">
+        <div class="row first">
+          <div class="col-12 px-3">
+            <div class="box">
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tbody *ngIf="transactions">
+                    <tr>
+                      <th>No.</th>
+                      <th>Property Name</th>
+                      <th>Amount (NGN)</th>
+                      <th>Status</th>
+                      <th>User's Name</th>
+                      <th>Date</th>
+                    </tr>
+
+                    <tr *ngFor="let transaction of transactions; let i = index" data-bs-toggle="modal"
+                      data-bs-target="#transaction-details" (click)="getTransactionId(transaction.id)">
+                      <td>{{i + 1}}</td>
+                      <td>{{transaction.property.name}}</td>
+                      <td>{{transaction.amount | number}}</td>
+                      <td>
+                        <span class="label" [class.label-danger]="transaction.status =='failed'"
+                          [class.label-success]="transaction.status =='success'"
+                          [class.label-primary]="transaction.status =='pending'">{{transaction.status}}</span>
+                      </td>
+                      <td>{{transaction.user.name}}</td>
+                      <td>{{transaction.createdAt | date:'medium'}}</td>
+                      <td class="wgt-02 color-red">View</td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+
+              <div id="anime" *ngIf="!transactions" class="for-table">
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+                <div class="animated-bg animated-bg-text"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="con-modal">
+  <div class="modal" id="transaction-details" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title color-red wgt-02 mb-4 mb-lg-0" id="staticBackdropLabel">
+            Transactions detail
+          </h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body px-3">
+          <div id="anime" *ngIf="!transaction" class="for-modal">
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+          </div>
+
+          <div *ngIf="transaction">
+            <ul class="list-group list-group-unbordered py-4 px-2">
+              <li class="list-group-item">
+                <b>Property Name</b>
+                <a class="pull-right">{{transaction.property.name | titlecase}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Amount Paid</b>
+                <a class="pull-right wgt-02 color-red">{{transaction.amount | number}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Purchased by</b>
+                <a class="pull-right">{{transaction.user.name | titlecase}}</a>
+              </li>
+              <li class="list-group-item wgt-02">
+                <b>Purchaser's Email</b>
+                <a class="pull-right">{{transaction.user.email | titlecase}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Status of Transaction</b>
+                <a class="pull-right">
+                  <span class="label" [class.label-danger]="transaction.status =='failed'"
+                    [class.label-success]="transaction.status =='success'"
+                    [class.label-primary]="transaction.status =='pending'">{{transaction.status}}</span>
+                </a>
+              </li>
+              <li class="list-group-item">
+                <b>Transaction Refrence</b>
+                <a class="pull-right wgt-03">{{transaction.transactionRef}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Date of Transaction</b>
+                <a class="pull-right">{{transaction.createdAt | date:'medium'}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

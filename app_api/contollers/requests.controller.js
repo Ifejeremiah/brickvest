@@ -23,9 +23,12 @@ function getAll(req, res, next) {
 
 function getById(req, res, next) {
   const { id } = req.params;
-  requestService.getById(id)
+  const roles = [Role.Facilitator, Role.Admin]
+  
+  let isAdmin = false
+  if (roles.includes(req.user.role)) isAdmin = true
+  requestService.getById(id, isAdmin)
     .then(data => {
-      if (isMatch(req, data.user)) return errorResponse(res, 'You can not access this resource', 400)
       return successResponse(res, 'Request fetched successfully', data)
     })
     .catch(next);

@@ -28,6 +28,9 @@ import { PaginateComponent } from './components/dashboard-items/paginate/paginat
 import { HtmlLimeBreaksPipe } from './pipes/html-lime-breaks.pipe';
 import { PropertyModalComponent } from './components/dashboard-items/property-modal/property-modal.component';
 import { TransactionsPageComponent } from './components/dashboard-items/transactions-page/transactions-page.component';
+import { UsersComponent } from './components/dashboard-items/users/users.component';
+import { TransactionsComponent } from './components/dashboard-items/transactions/transactions.component';
+import { RequestResponseComponent } from './components/dashboard-items/request-response/request-response.component';
 
 
 @NgModule({
@@ -51,7 +54,10 @@ import { TransactionsPageComponent } from './components/dashboard-items/transact
     PaginateComponent,
     HtmlLimeBreaksPipe,
     PropertyModalComponent,
-    TransactionsPageComponent
+    TransactionsPageComponent,
+    UsersComponent,
+    TransactionsComponent,
+    RequestResponseComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,9 @@ const schema = new Schema({
 
   responseTime: { type: Date },
 
-  hasViewed: { type: Boolean, default: false }
+  userViewed: { type: Boolean, default: false },
+
+  adminViewed: { type: Boolean, default: false }
 
 }, { timestamps: true });
 

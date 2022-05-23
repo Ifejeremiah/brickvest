@@ -9,21 +9,21 @@ module.exports = {
 function updateUserSchema(req, res, next) {
   const schema = Joi.object({
     accountNumber: Joi.number(),
-    accountName: Joi.string(),
+    accountName: Joi.string().trim(),
     phoneNumber: Joi.number(),
-    bank: Joi.string(),
-    state: Joi.string(),
-    city: Joi.string(),
-    image: Joi.string()
+    bank: Joi.string().trim(),
+    state: Joi.string().trim(),
+    city: Joi.string().trim(),
+    image: Joi.string().trim()
   });
   validateRequest(req, next, schema);
 }
 
 function updatePassword(req, res, next) {
   const schema = Joi.object({
-    currentPassword: Joi.string().required(),
-    newPassword: Joi.string().custom(password).required(),
-    confirmPassword: Joi.string().valid(Joi.ref('newPassword')).required()
+    currentPassword: Joi.string().trim().required(),
+    newPassword: Joi.string().trim().custom(password).required(),
+    confirmPassword: Joi.string().trim().valid(Joi.ref('newPassword')).required()
   });
   validateRequest(req, next, schema);
 }

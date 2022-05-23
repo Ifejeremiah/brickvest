@@ -1,0 +1,131 @@
+<!-- Main Container -->
+<div class="row" *ngIf="canView">
+  <!-- Left Container -->
+  <div class="col-12 col-md-12 col-lg-5 con-left" *ngIf="!toggle || !isMobile()">
+    <div id="con-ht-01" class="con-section sections">
+      <div class="con-content contents">
+        <div class="con-left">
+          <div class="con-requests">
+            <div class="con-header px-3 py-3 border rounded d-flex justify-content-between align-items-center">
+              <h4 class="title color-red" id="wgt-02">
+                All Requests
+              </h4>
+
+              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
+            </div>
+
+            <div class="con-list" *ngIf="!false">
+              <ul>
+                <li *ngFor="let request of requests" (click)="doShowId(request.id); clicked = request; doToggle()"
+                  [class.new-response]="request.body" [class.seen]="request.adminViewed && request.body"
+                  [class.active]="clicked === request">
+                  <div>
+                    {{request.title|slice:0:10 }}{{ request.title.length > 10 ? '...' : '' }}
+                  </div>
+                  <div class="data">
+                    {{request.subject|slice:0:20 }}{{ request.subject.length > 20 ? '...' : '' }}
+                  </div>
+                  <div>
+                    {{request.createdAt | date: "MMM dd"}}
+                  </div>
+                </li>
+                <li class="wgt-02 pt-5 px-3" *ngIf="noData">{{noData}}</li>
+              </ul>
+            </div>
+
+            <div id="anime" *ngIf="animatedBg && false">
+              <div class=" animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+              <div class="animated-bg animated-bg-text"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Container -->
+  <div class="col-12 col-md-12 col-lg-7 con-right" *ngIf="(isMobile() && toggle) || !isMobile()">
+
+
+    <div id="con-ht-01" class="con-section sections">
+      <div class="con-content contents position-relative">
+
+        <div class="image-default" *ngIf="!request && !view">
+          <div class="con-img">
+            <img src="assets/images/puppy-transparent-background.gif" alt="Getting messages...">
+          </div>
+          <div class="text">Get user's requests on the go...</div>
+        </div>
+
+        <div id="anime" *ngIf="view">
+          <div class="d-flex justify-content-center">
+            <div class="animated-bg animated-bg-text first"></div>
+          </div>
+          <div class="animated-bg animated-bg-text second"></div>
+          <div class="d-flex justify-content-end">
+            <div class="animated-bg animated-bg-text third"></div>
+          </div>
+        </div>
+
+        <div class="con-right" *ngIf="request && !view">
+          <div class="con-title d-flex align-items-center justify-content-between">
+            <div>
+              <i class="fa-solid fa-angle-left" *ngIf="isMobile()" (click)="doToggle()"></i>
+            </div>
+            <div>
+              <div class="color-red">
+                {{request.title}}
+              </div>
+              <div class="identity wgt-03 d-flex align-items-center justify-content-between flex-lg-column"
+                *ngIf="request.user">
+                <div>
+                  {{request.user.name | titlecase}} :&nbsp;&nbsp;
+                </div>
+                <div>
+                  {{request.user.email}}
+                </div>
+              </div>
+            </div>
+            <div></div>
+          </div>
+
+          <div class="con-request">
+            <div class="header">{{request.subject}}</div>
+            <div class="con-timestamp">{{request.createdAt | date:'MMMM d, y, h:mm a'}}</div>
+            <div class="body" [innerHTML]="request.body | htmlLimeBreaks"></div>
+          </div>
+
+          <div class="d-flex align-items-center justify-content-end">
+            <div class="con-response">
+              <div class="header" *ngIf="request.response">{{request.subject}}</div>
+              <div class="con-timestamp">{{request.responseTime | date:'MMMM d, y, h:mm a'}}</div>
+              <div class="body" *ngIf="request.response" [innerHTML]="request.response | htmlLimeBreaks"></div>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="request && !view && !request.response">
+          <textarea id="message-text" rows="6" name="body" class="form-control position-absolute rounded"
+            style="bottom:0;" [(ngModel)]="body.response">
+            Reply:
+          </textarea>
+          <button class="position-absolute rounded btn btn-primary wgt-02"
+            style="bottom:0; right:0; padding: 12px 24px;" (click)="sendResponse()">
+            Send
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

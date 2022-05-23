@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './auth.service';
 
@@ -30,6 +30,14 @@ export class TransactionsService {
     return Promise.reject(error);
   }
 
+  private setParams(page: number, limit: number, status: string = '') {
+    let params = new HttpParams();
+    params = params.append('page', page)
+    params = params.append('limit', limit)
+    params = params.append('status', status)
+    return params
+  }
+
   private sendTokenHeader(): HttpHeaders {
     const token = this.authService.getToken();
     return new HttpHeaders({ 'Authorization': `Bearer ${token}` })
@@ -37,6 +45,29 @@ export class TransactionsService {
 
   private getCurrentUser() {
     return this.authService.getCurrentUserId()
+  }
+
+  public getAllTransactions(page: number, limit: number, status: string) {
+    const url = `${this.apiBase}/transactions`;
+    const options = {
+      headers: this.sendTokenHeader(),
+      params: this.setParams(page, limit, status)
+    }
+
+    return this.http
+      .get(url, options)
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
+
+  public getTransactionsById(id: string) {
+    const url = `${this.apiBase}/transactions/${id}`;
+    return this.http
+      .get(url, { headers: this.sendTokenHeader() })
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
   }
 
   public getTransactionsByUserID() {

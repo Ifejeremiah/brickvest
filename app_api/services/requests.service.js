@@ -18,12 +18,17 @@ async function getAll(page, limit) {
   return build(requests, format);
 }
 
-async function getById(id) {
+async function getById(id, isAdmin) {
+  console.log('Here is the result:', isAdmin)
   const request = await getRequest(id)
-  const seen = { hasViewed: true }
-  Object.assign(request, seen)
-  await request.save()
-  return request;
+  if (isAdmin) {
+    Object.assign(request, { adminViewed: true })
+    await request.save()
+  } else {
+    Object.assign(request, { userViewed: true })
+    await request.save()
+  }
+  return format(request);
 }
 
 async function getByUserId(id, page, limit) {
@@ -64,7 +69,7 @@ async function deleteById(id) {
 
 async function getRequest(id) {
   if (!db.isValidId(id)) throw 'Invalid request id';
-  const request = await db.Request.findById(id);
+  const request = await db.Request.findById(id).populate('user');
   if (!request) throw 'Request not found';
   return request;
 }
@@ -77,6 +82,6 @@ async function getUserRequest(id) {
 }
 
 function format(request) {
-  let { _id, user, title, subject, body, hasViewed, createdAt, response } = request;
-  return { id: _id, user, title, subject, body, response, hasViewed, createdAt };
+  let { _id, user, title, subject, body, createdAt, response, repliedBy, responseTime, adminViewed, userViewed, } = request;
+  return { id: _id, user, title, subject, body, response, createdAt, responseTime, repliedBy, adminViewed, userViewed, };
 }

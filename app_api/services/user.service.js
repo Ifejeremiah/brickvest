@@ -36,12 +36,12 @@ async function register({ name, email, password }) {
   };
 }
 
-async function getAll(page, limit) {
+async function getAll(page, limit, match) {
   const users = await paginate(
-    db.User, true,
-    {}, page, limit
+    db.User, false,
+    match ? match : {}, page, limit,
   )
-  return build(users, basicDetails);
+  return await build(users, basicDetails);
 }
 
 async function getById(id) {
@@ -90,26 +90,26 @@ async function updatePassword(id, current, update) {
 }
 
 async function getUser(id) {
-  if (!db.isValidId(id)) throw 'User not found';
+  if (!db.isValidId(id)) throw 'Invalid user ID';
   const user = await db.User.findById(id);
   if (!user) throw 'User not found';
   return user;
 }
 
 function generateJwtToken(user) {
-  // create a jwt token containing the user id that expires in 60 minutes
-  return jwt.sign({ id: user.id }, secret, { expiresIn: '60mins' });
+  return jwt.sign({ id: user.id, role: user.role }, secret, { expiresIn: '7days' });
 }
 
 function basicDetails(user) {
   let { id, name, email, role,
     accountNumber, accountName,
-    phoneNumber, bank, state, city } = user;
+    phoneNumber, bank, state, city, createdAt } = user;
   if (!id) id = user._id
   return {
-    id, name, email, role, accountNumber, accountName, phoneNumber, bank, state, city,
+    id, name, email, role, accountNumber, accountName,
+    phoneNumber, bank, state, city,
     accountNumber, accountName, phoneNumber,
-    bank, state, city
+    bank, state, city, createdAt
   };
 }
 

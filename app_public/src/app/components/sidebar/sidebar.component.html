@@ -10,14 +10,42 @@
         </a>
       </li>
 
-      <li>
+      <li *ngIf="isFacilitator || isAdmin">
+        <a routerLinkActive='active' routerLink="/dashboard/properties">
+          <i class="fa-solid fa-door-closed sidebar-icon"></i>
+          <span>Properties</span>
+        </a>
+      </li>
+
+      <li *ngIf="isFacilitator">
+        <a routerLinkActive='active' routerLink="/dashboard/transactions">
+          <i class="fa-solid fa-bag-shopping sidebar-icon"></i>
+          <span>Transactions</span>
+        </a>
+      </li>
+
+      <li *ngIf="isFacilitator">
+        <a routerLinkActive='active' routerLink="/dashboard/users">
+          <i class="fa-solid fa-users sidebar-icon"></i>
+          <span>Users</span>
+        </a>
+      </li>
+
+      <li *ngIf="isFacilitator || isAdmin">
+        <a routerLinkActive='active' routerLink="/dashboard/user/requests">
+          <i class="far fa-file-alt sidebar-icon"></i>
+          <span>Requests</span>
+        </a>
+      </li>
+
+      <li *ngIf="!isFacilitator && !isAdmin">
         <a routerLinkActive='active' routerLink="/dashboard/co-own">
           <i class="fa-solid fa-people-arrows-left-right sidebar-icon"></i>
           <span>Co Own</span>
         </a>
       </li>
 
-      <li>
+      <li *ngIf="!isFacilitator && !isAdmin">
         <a routerLinkActive='active' routerLink="/dashboard/requests">
           <i class="far fa-file-alt sidebar-icon"></i>
           <span>Request</span>

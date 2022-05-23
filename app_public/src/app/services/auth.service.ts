@@ -15,7 +15,7 @@ export class AuthService {
     private dataService: DataService
   ) { }
 
-  token: string = 'auth-token';
+  private token: string = 'auth-token';
 
   public getToken(): string {
     const token = this.storage.getItem(this.token);
@@ -61,6 +61,32 @@ export class AuthService {
       result = id;
     }
     return result;
+  }
+
+  public getUserRole(): string {
+    const token: string = this.getToken();
+    let result;
+    if (token) {
+      const { role } = JSON.parse(atob(token.split('.')[1]));
+      result = role;
+    }
+    return result;
+  }
+
+  public isFacilitator(): boolean {
+    if (this.getUserRole() === 'facilitator') {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  public isAdmin(): boolean {
+    if (this.getUserRole() === 'admin') {
+      return true
+    } else {
+      return false
+    }
   }
 
   public isMobile(width: Number): boolean {

@@ -24,7 +24,8 @@
           <ul class="dropdown-menu">
             <li routerLink="/dashboard/requests" *ngIf="notify" (click)="checkOut()">You have a new response from
               <b>Support
-                Team</b></li>
+                Team</b>
+            </li>
             <li *ngIf="!notify">You have no notifications yet</li>
           </ul>
         </li>
@@ -41,7 +42,7 @@
                 Update Password
               </button>
             </li>
-            <li>
+            <li *ngIf="!isFacilitator">
               <button class="btn btn-danger" data-bs-toggle="modal" href="#delete-account">
                 Delete account
               </button>

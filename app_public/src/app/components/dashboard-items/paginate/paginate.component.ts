@@ -1,5 +1,17 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+export class Data {
+  totalResults!: number;
+  perPage!: number;
+  currentPage!: number;
+  totalPages!: number;
+  pagingCounter!: number;
+  hasPrevPage!: boolean;
+  hasNextPage!: boolean
+  prevPage!: null | number;
+  nextPage!: null | number;
+  totalLimit!: number;
+}
 
 @Component({
   selector: 'app-paginate',
@@ -15,7 +27,7 @@ export class PaginateComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  @Input() public allData: any;
+  @Input() public allData!: Data;
 
   @Output() returnDataEvent = new EventEmitter<any>();
 

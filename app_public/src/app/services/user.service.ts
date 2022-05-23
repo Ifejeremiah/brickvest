@@ -25,17 +25,21 @@ export class UserService {
     return new HttpHeaders({ 'Authorization': `Bearer ${token}` })
   }
 
-  public setParams(page: number, limit: number) {
+  private setParams(page: number, limit: number, role: string = '') {
     let params = new HttpParams();
     params = params.append('page', page);
     params = params.append('limit', limit);
+    params = params.append('role', role);
     return params;
   }
 
-  public getUserActions(id: string, page: number, limit: number) {
-    const url = `${this.apiBase}/users/actions/${id}`;
+  public getUsers(page: number, limit: number, role: string) {
+    const url = `${this.apiBase}/users`;
     return this.http
-      .get(url, { headers: this.sendTokenHeader(), params: this.setParams(page, limit) })
+      .get(url, {
+        headers: this.sendTokenHeader(),
+        params: this.setParams(page, limit, role)
+      })
       .toPromise()
       .then(response => response)
       .catch(this.handleError);
@@ -90,8 +94,30 @@ export class UserService {
       .toPromise()
       .then(response => response)
       .catch(this.handleError);
-
   }
 
+  public updateRoleById(id: string, body = {}) {
+    const url = `${this.apiBase}/users/${id}/roles`;
+    const options = { headers: this.sendTokenHeader() }
 
+    return this.http
+      .patch(url, body, options)
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
+
+  public getUserActions(id: string, page: number, limit: number) {
+    const url = `${this.apiBase}/users/actions/${id}`;
+    const options = {
+      headers: this.sendTokenHeader(),
+      params: this.setParams(page, limit)
+    }
+
+    return this.http
+      .get(url, options)
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
 }

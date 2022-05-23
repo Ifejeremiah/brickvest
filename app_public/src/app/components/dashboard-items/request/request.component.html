@@ -8,9 +8,7 @@
         <div class="con-left">
           <div class="con-requests">
             <div class="con-header px-3 py-3 border rounded d-flex justify-content-between align-items-center">
-              <h4 class="title color-red" id="wgt-02">
-                Your Requests
-              </h4>
+              <h4 class="title color-red" id="wgt-02">Your Requests</h4>
               <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
             </div>
 
@@ -23,7 +21,7 @@
             <div class="con-list" *ngIf="!animatedBg">
               <ul>
                 <li *ngFor="let request of requests" (click)="doShowId(request.id); clicked = request; doToggle()"
-                  [class.new-response]="request.response" [class.seen]="request.hasViewed && request.response"
+                  [class.new-response]="request.response && request.responseTime" [class.seen]="request.userViewed && request.response"
                   [class.active]="clicked === request">
                   <div>
                     {{request.title|slice:0:10 }}{{ request.title.length > 10 ? '...' : '' }}

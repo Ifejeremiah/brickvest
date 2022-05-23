@@ -16,7 +16,9 @@ import { ProfileComponent } from '../components/dashboard-items/profile/profile.
 import { UpdatePasswordComponent } from '../components/dashboard-items/update-password/update-password.component';
 import { DeleteAccountComponent } from '../components/dashboard-items/delete-account/delete-account.component';
 import { TransactionsPageComponent } from '../components/dashboard-items/transactions-page/transactions-page.component';
-
+import { UsersComponent } from '../components/dashboard-items/users/users.component';
+import { TransactionsComponent } from '../components/dashboard-items/transactions/transactions.component';
+import { RequestResponseComponent } from '../components/dashboard-items/request-response/request-response.component'
 
 
 const routes: Routes = [
@@ -39,8 +41,20 @@ const routes: Routes = [
         component: RequestComponent
       },
       {
+        path: 'user/requests',
+        component: RequestResponseComponent
+      },
+      {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'users',
+        component: UsersComponent
+      },
+      {
+        path: 'transactions',
+        component: TransactionsComponent
       },
     ]
   },

@@ -1,0 +1,25 @@
+/* Right Container */
+.image-default {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90%;
+  flex-direction: column;
+}
+
+.image-default .con-img {
+  width: 200px;
+}
+
+.image-default .text {
+  width: 230px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: rgb(155, 155, 155);
+}
+
+.con-title .identity {
+  font-size: .8rem;
+  color: rgb(138, 138, 138);
+}

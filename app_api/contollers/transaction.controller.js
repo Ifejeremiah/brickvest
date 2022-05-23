@@ -1,4 +1,4 @@
-const { transactionService } = require('../services');
+const { transactionService, activityService } = require('../services');
 const { Role } = require('../config');
 const { Response, checkUser } = require('../middlewares');
 const { successResponse } = Response;
@@ -12,8 +12,8 @@ module.exports = {
 }
 
 function getAll(req, res, next) {
-  const { page, limit } = req.query
-  transactionService.getAll(page, limit)
+  const { page, limit, status } = req.query
+  transactionService.getAll(page, limit, status ? { status } : '')
     .then(data => { return successResponse(res, 'Transactions fetched', data) })
     .catch(next)
 }
@@ -47,7 +47,8 @@ function makeTransaction(req, res, next) {
 function verifyTransaction(req, res, next) {
   const { transReference, flwTransId } = req.body
   transactionService.verify({ transRef: transReference, transId: flwTransId })
-    .then(data => {
+    .then(async (data) => {
+      await activityService.save({ id: req.user.id, body: `You've successfully made a transaction` })
       return successResponse(res, data.msg, data.transaction)
     })
     .catch(next)

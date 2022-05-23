@@ -34,8 +34,8 @@ function register(req, res, next) {
 }
 
 function getAll(req, res, next) {
-  const { page, limit } = req.query
-  userService.getAll(page, limit)
+  const { page, limit, role } = req.query
+  userService.getAll(page, limit, role ? { role } : '')
     .then(users => {
       return successResponse(res, 'Users gotten successfully', users)
     })
@@ -60,14 +60,23 @@ function updateById(req, res, next) {
     .catch(next);
 }
 
+function updateRole(req, res, next) {
+  const { id } = req.params
+  userService.updateById(id, req.body)
+    .then(async (response) => {
+      await activityService.save({ id, body: `Role updated to ${req.body.role}` })
+      return successResponse(res, 'User role updated successfully', response, 200);
+    })
+    .catch(next);
+}
+
 function updatePassword(req, res, next) {
   const { id } = req.params
   const { currentPassword, newPassword } = req.body
   checkUser(req, res, id);
   userService.updatePassword(id, currentPassword, newPassword)
-    .then((response) => {
-      console.log(response)
-      activityService.save({ id, body: 'Password changed' })
+    .then(async (response) => {
+      await activityService.save({ id, body: 'Password changed' })
       return successResponse(res, 'Password updated successfully', response, 200);
     })
     .catch(next)
@@ -78,16 +87,6 @@ function deleteById(req, res, next) {
   userService.deleteById(req.params.id)
     .then((response) => {
       return successResponse(res, 'User deleted successfully', response, 200);
-    })
-    .catch(next);
-}
-
-function updateRole(req, res, next) {
-  const { role } = req.body, { id } = req.params
-  userService.updateById({ id, role })
-    .then((response) => {
-      activityService.save({ id, body: `Role updated to ${role}` })
-      return successResponse(res, 'User role updated successfully', response, 200);
     })
     .catch(next);
 }

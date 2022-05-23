@@ -17,6 +17,7 @@ export class HeaderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkRole()
   }
 
   public doLogout(): void {
@@ -25,6 +26,8 @@ export class HeaderComponent implements OnInit {
   }
 
   public notify: boolean = true;
+
+  public isFacilitator: boolean = false;
 
   public body = {
     currentPassword: '',
@@ -70,6 +73,10 @@ export class HeaderComponent implements OnInit {
 
   public checkOut() {
     this.notify = false;
+  }
+
+  private checkRole() {
+    this.isFacilitator = this.authService.isFacilitator()
   }
 
 }

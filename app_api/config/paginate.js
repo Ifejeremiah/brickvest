@@ -1,6 +1,16 @@
 module.exports = paginate
 
-async function paginate(Model, mostRecentFirst, match = {}, page = 1, limit = 10) {
+/**
+ * Handles pagination
+ * @param Model
+ * @param mostRecentFirst
+ * @param match
+ * @param page
+ * @param limit
+ * @param sortBy
+ * @returns `Promise<Query[]>`
+ */
+async function paginate(Model, mostRecentFirst, match = {}, page = 1, limit = 10, sortBy = '') {
   if (!Model) throw 'Model to use is required';
 
   const query = Model.aggregate([{ $match: match }])
@@ -14,7 +24,7 @@ async function paginate(Model, mostRecentFirst, match = {}, page = 1, limit = 10
   const options = {
     page,
     limit,
-    sort: mostRecentFirst ? '-createdAt' : '',
+    sort: mostRecentFirst ? '-createdAt' : sortBy,
     customLabels
   }
 

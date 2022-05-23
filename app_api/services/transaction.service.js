@@ -11,10 +11,59 @@ module.exports = {
   verify,
 }
 
-async function getAll(page, limit) {
-  const transaction = await paginate(
+async function paginateTransactions(Model, mostRecentFirst, match = {}, page = 1, limit = 10, sortBy = '') {
+  const query = Model.aggregate([
+    { $match: match },
+    {
+      $lookup: {
+        from: 'users',
+        localField: 'user',
+        foreignField: '_id',
+        as: 'user'
+      },
+    },
+    { $unwind: "$user" },
+    {
+      $lookup: {
+        from: "properties",
+        localField: "property",
+        foreignField: "_id",
+        as: "property"
+      }
+    },
+    { $unwind: "$property" },
+    {
+      $project: {
+        "user.__v": 0,
+        "property.__v": 0,
+        "user.passwordHash": 0,
+        "user.isVerified": 0,
+        "user.updatedAt": 0,
+        "property.updatedAt": 0,
+      }
+    }
+  ])
+
+  const customLabels = {
+    totalDocs: 'totalResults',
+    limit: 'perPage',
+    page: 'currentPage',
+  };
+
+  const options = {
+    page,
+    limit,
+    sort: mostRecentFirst ? '-createdAt' : sortBy,
+    customLabels
+  }
+
+  return await Model.aggregatePaginate(query, options)
+}
+
+async function getAll(page, limit, status) {
+  const transaction = await paginateTransactions(
     db.Transaction, true,
-    {}, page, limit
+    status ? status : {}, page, limit
   )
   return build(transaction, format)
 }
@@ -26,7 +75,7 @@ async function getById(id) {
 
 async function getByUserId(id, page, limit) {
   await getUser(id)
-  const transaction = await paginate(
+  const transaction = await paginateTransactions(
     db.Transaction, true,
     { user: db.ObjectId(id) },
     page, limit
@@ -74,7 +123,7 @@ async function verify({ transRef, transId }) {
 // helper functions
 async function getTransaction(id) {
   if (!db.isValidId(id)) throw 'Invalid Transaction ID'
-  const transaction = await db.Transaction.findById(id)
+  const transaction = await db.Transaction.findById(id).populate(['user', 'property'])
   if (!transaction) throw 'Transaction not found'
   return transaction
 }

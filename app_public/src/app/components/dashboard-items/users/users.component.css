@@ -1,0 +1,56 @@
+/* Tables */
+.con-table .con-header {
+  padding: 10px 0px 20px 0px;
+}
+
+.con-table .con-header .drop-down {
+  background: rgb(238, 237, 237);
+  padding: 10px 20px;
+  border-radius: .4rem;
+}
+
+.con-table .con-header .drop-down option {
+  background: #fff;
+}
+
+.con-table .con-row .box-body {
+  height: 62vh;
+}
+
+
+/* Modals */
+.con-modal .modal-footer button {
+  color: #fff;
+  padding: 12px 24px;
+  font-weight: 700;
+  border-radius: .4rem;
+}
+
+.con-modal .modal-footer button.primary {
+  background: #541cdd;
+}
+
+.con-modal .modal-footer button.danger {
+  background: var(--primary-color);
+}
+
+.con-modal #update-user select {
+  padding: 12px 24px;
+  margin: 0 10px;
+  background: #ebe6f7;
+}
+
+.con-modal #update-user select option {
+  background: #fff;
+}
+
+/* Media Queries */
+@media (min-width:992px) {
+  .con-table .con-header {
+    padding: 10px 30px 30px 30px;
+  }
+
+  .con-table .con-header .border {
+    border: 0 !important;
+  }
+}

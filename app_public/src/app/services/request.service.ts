@@ -66,4 +66,22 @@ export class RequestService {
       .then(response => response)
       .catch(this.handleError);
   }
+
+  public getAllRequests(page: number, limit: number) {
+    const url = `${this.apiBase}/requests`;
+    return this.http
+      .get(url, { headers: this.sendTokenHeader(), params: this.setParams(page, limit) })
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
+
+  public makeResponse(id: string, body: string) {
+    const url = `${this.apiBase}/requests/${id}`;
+    return this.http
+      .patch(url, { response: body }, { headers: this.sendTokenHeader() })
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
 }
