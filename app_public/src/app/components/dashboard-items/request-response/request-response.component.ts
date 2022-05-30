@@ -18,7 +18,6 @@ export class RequestResponseComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Onebrick - User Requests')
-    this.checkRoles()
     this.getAll(1, this.totalLimit)
   }
 
@@ -27,8 +26,6 @@ export class RequestResponseComponent implements OnInit {
   public toggle: boolean = false;
 
   public view = false
-
-  public canView: boolean = false;
 
   public animatedBg: boolean = true;
 
@@ -55,12 +52,6 @@ export class RequestResponseComponent implements OnInit {
   public doToggle(): void {
     if (this.toggle) this.toggle = false
     else this.toggle = true
-  }
-
-  private checkRoles(): void {
-    if (this.authService.isFacilitator() || this.authService.isAdmin()) {
-      this.canView = true
-    }
   }
 
   public doShowId(id: string): void {

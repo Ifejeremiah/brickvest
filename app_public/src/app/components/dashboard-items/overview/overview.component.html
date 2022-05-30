@@ -4,7 +4,7 @@
     <!-- Left Section-->
     <div class="con-section left">
 
-      <div class="section">
+      <div class="section" *ngIf="checkUser()">
 
         <div class="con-header d-flex align-items-center">
           <button class="first" [ngClass]="firstBtn" (click)="doShowFirstRow()">
@@ -131,18 +131,17 @@
 
 
           <!-- Explore -->
-          <div class="row second" *ngIf="toggle">
-            <div class="con-card" *ngIf="!animatedBg">
-              <div class="mb-5">
-                <div class="items position-relative mb-lg-3 col-12 col-lg-4 col-md-6"
-                  *ngFor="let property of properties">
-                  <div class="info d-flex align-items-center">
+          <div class="row second explore" *ngIf="toggle">
+            <div>
+              <div class="con-card" *ngIf="!animatedBg">
+                <div class="cards position-relative mb-4" *ngFor="let property of properties">
+                  <div *ngIf="!property.isPrivate" class="col-lg-4 col-md-6">
                     <div class="img">
-                      <img src="{{property.image}}" alt="">
+                      <img src="assets/images/{{property.image}}" alt="">
                     </div>
                     <div class="data" id="wgt-02">
-                      <div class="title">
-                        {{property.name}}
+                      <div class="title py-2">
+                        {{property.name | titlecase}}
                       </div>
                       <a data-bs-toggle="modal" href="#display-property" role="button">
                         <button class="cta" (click)="getPropertyId(property.id)">
@@ -150,19 +149,19 @@
                         </button>
                       </a>
                     </div>
-                  </div>
-                  <div id="wgt-02" class="price position-absolute">
-                    {{property.ROIEstimate}}%
+                    <div id="wgt-02" class="price position-absolute px-3 py-2">
+                      {{property.ROIEstimate}}%
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="col-12">
-                <a routerLink="/dashboard/co-own" class="button col-12" id="wgt-02">
-                  View All
-                </a>
-              </div>
             </div>
+            <a routerLink="/dashboard/co-own" *ngIf="!animatedBg">
+              <button class="cta m-4 px-5 py-2 rounded pull-right" id="wgt-02">
+                View All
+              </button>
+            </a>
 
             <div id="anime" *ngIf="animatedBg">
               <div class="items mb-4 col-12 col-lg-4 col-md-6 ">
@@ -174,7 +173,7 @@
                     </div>
                     <div class="title animated-bg animated-bg-text ">
                     </div>
-                    <button class="cta animated-bg animated-bg-text "></button>
+                    <button class="animated-bg animated-bg-text "></button>
                   </div>
                 </div>
               </div>
@@ -188,7 +187,7 @@
                     </div>
                     <div class="title animated-bg animated-bg-text ">
                     </div>
-                    <button class="cta animated-bg animated-bg-text "></button>
+                    <button class="animated-bg animated-bg-text "></button>
                   </div>
                 </div>
               </div>
@@ -202,7 +201,7 @@
                     </div>
                     <div class="title animated-bg animated-bg-text ">
                     </div>
-                    <button class="cta animated-bg animated-bg-text "></button>
+                    <button class="animated-bg animated-bg-text "></button>
                   </div>
                 </div>
               </div>
@@ -216,7 +215,7 @@
                     </div>
                     <div class="title animated-bg animated-bg-text ">
                     </div>
-                    <button class="cta animated-bg animated-bg-text "></button>
+                    <button class="animated-bg animated-bg-text "></button>
                   </div>
                 </div>
               </div>
@@ -230,7 +229,7 @@
                     </div>
                     <div class="title animated-bg animated-bg-text ">
                     </div>
-                    <button class="cta animated-bg animated-bg-text "></button>
+                    <button class="animated-bg animated-bg-text "></button>
                   </div>
                 </div>
               </div>
@@ -244,7 +243,7 @@
                     </div>
                     <div class="title animated-bg animated-bg-text ">
                     </div>
-                    <button class="cta animated-bg animated-bg-text "></button>
+                    <button class="animated-bg animated-bg-text "></button>
                   </div>
                 </div>
               </div>

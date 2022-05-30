@@ -3,6 +3,7 @@
 
     <ul class="sidebar-menu tree" data-widget="tree">
 
+      <!-- OVERVIEW -->
       <li>
         <a routerLinkActive='active' routerLink="/dashboard/overview">
           <i class="fas fa-spa sidebar-icon"></i>
@@ -10,67 +11,61 @@
         </a>
       </li>
 
-      <li *ngIf="isFacilitator || isAdmin">
+      <!-- PROPERTIES -->
+      <li *ngIf="checkAdmin()">
         <a routerLinkActive='active' routerLink="/dashboard/properties">
           <i class="fa-solid fa-door-closed sidebar-icon"></i>
           <span>Properties</span>
         </a>
       </li>
 
-      <li *ngIf="isFacilitator">
+      <!-- TRANSACTIONS -->
+      <li *ngIf="checkSuper()">
         <a routerLinkActive='active' routerLink="/dashboard/transactions">
           <i class="fa-solid fa-bag-shopping sidebar-icon"></i>
           <span>Transactions</span>
         </a>
       </li>
 
-      <li *ngIf="isFacilitator">
+      <!-- ALL USERS -->
+      <li *ngIf="checkSuper()">
         <a routerLinkActive='active' routerLink="/dashboard/users">
           <i class="fa-solid fa-users sidebar-icon"></i>
           <span>Users</span>
         </a>
       </li>
 
-      <li *ngIf="isFacilitator || isAdmin">
+      <!-- RESPOND TO USER REQUESTS -->
+      <li *ngIf="checkAdmin()">
         <a routerLinkActive='active' routerLink="/dashboard/user/requests">
           <i class="far fa-file-alt sidebar-icon"></i>
           <span>Requests</span>
         </a>
       </li>
 
-      <li *ngIf="!isFacilitator && !isAdmin">
+      <!-- CO-OWN -->
+      <li *ngIf="checkUser()">
         <a routerLinkActive='active' routerLink="/dashboard/co-own">
           <i class="fa-solid fa-people-arrows-left-right sidebar-icon"></i>
           <span>Co Own</span>
         </a>
       </li>
 
-      <li *ngIf="!isFacilitator && !isAdmin">
+      <!-- MAKE A REQUEST -->
+      <li *ngIf="checkUser()">
         <a routerLinkActive='active' routerLink="/dashboard/requests">
           <i class="far fa-file-alt sidebar-icon"></i>
           <span>Request</span>
         </a>
       </li>
 
+      <!-- PROFILE -->
       <li>
         <a routerLinkActive='active' routerLink="/dashboard/profile">
           <i class="far fa-user-circle sidebar-icon"></i>
           <span>My Profile</span>
         </a>
       </li>
-
-      <!-- <li class="treeview">
-        <a><i class="far fa-play-circle sidebar-icon"></i>
-          <span>Media</span>
-          <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-          </span>
-        </a>
-        <ul class="treeview-menu">
-          <li><a>Photos</a></li>
-          <li><a>Videos</a></li>
-        </ul>
-      </li> -->
     </ul>
 
   </section>

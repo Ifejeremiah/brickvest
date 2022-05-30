@@ -5,12 +5,12 @@
   <!-- Initial Property Attribute -->
   <div class="modal section-a" id="display-property" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
         <!-- Modal Header -->
-        <div class="modal-header">
+        <div class="modal-header" *ngIf="data">
           <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header">
           </div>
         </div>
 
@@ -80,12 +80,12 @@
   <!-- About Property -->
   <div class="modal section-b" id="about-property" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
 
-        <div class="modal-header">
+        <div class="modal-header" *ngIf="data">
           <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header">
           </div>
         </div>
 
@@ -143,13 +143,13 @@
   <!-- Calculate Units -->
   <div class="modal section-c" id="calculate-units" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
 
         <!-- Header -->
-        <div class="modal-header">
+        <div class="modal-header" *ngIf="data">
           <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header">
           </div>
         </div>
 
@@ -224,11 +224,11 @@
   <!-- Confirm Transactions -->
   <div class="modal section-d" id="confirm-transaction" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
     tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" *ngIf="isAttached">
           <div class="image">
-            <img src="assets/images/co-earn-modal.png" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header">
           </div>
         </div>
 

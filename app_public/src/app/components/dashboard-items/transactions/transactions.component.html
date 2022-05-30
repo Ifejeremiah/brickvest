@@ -1,9 +1,10 @@
 <div class="col-12">
   <div id="con-ht-01" class="con-section sections">
-    <div class="con-table" *ngIf="isFacilitator">
+    <div class="con-table">
 
       <div class="con-header d-flex flex-column flex-lg-row align-items-lg-center justify-content-between">
         <h3 class="color-red wgt-02 mb-4 mb-lg-0">Transactions</h3>
+
         <div class="d-flex align-items-center justify-content-between border px-3">
           <div class="me-5">
             <select [(ngModel)]="defaultOption" (change)="doSort()" class="drop-down wgt-02">
@@ -41,7 +42,9 @@
                       <td>
                         <span class="label" [class.label-danger]="transaction.status =='failed'"
                           [class.label-success]="transaction.status =='success'"
-                          [class.label-primary]="transaction.status =='pending'">{{transaction.status}}</span>
+                          [class.label-primary]="transaction.status =='pending'">
+                          {{transaction.status}}
+                        </span>
                       </td>
                       <td>{{transaction.user.name}}</td>
                       <td>{{transaction.createdAt | date:'medium'}}</td>
@@ -73,7 +76,7 @@
 
 <!-- Modal -->
 <div class="con-modal">
-  <div class="modal" id="transaction-details" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  <div class="modal" id="transaction-details" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">

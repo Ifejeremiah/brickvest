@@ -18,16 +18,7 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Onebrick - Transactions')
-    this.checkRoles()
     this.getTransactions(1, 10)
-  }
-
-  public isFacilitator: boolean = false;
-
-  private checkRoles(): void {
-    if (this.authService.isFacilitator()) {
-      this.isFacilitator = true
-    }
   }
 
   private totalLimit: number = 10;

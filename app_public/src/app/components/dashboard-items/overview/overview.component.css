@@ -39,43 +39,35 @@ td span.label {
 
 
 /* Explore */
-.con-row .row.second .con-card {
-  padding: 0 20px;
+.explore .con-card {
+  filter: brightness(90%);
 }
 
-.con-row .row.second .con-card .items .price {
-  top: 12px;
-  left: 30px;
-  padding: 8px 10px;
+.con-card .cards {
+  margin-bottom: 40px;
+}
+
+.con-card .cards img {
+  height: 300px;
+  border-radius: .6rem;
+}
+
+.con-card .cards .price {
+  top: 30px;
+  right: 30px;
   background: #fff;
   color: var(--primary-color);
 }
 
-.row.second .con-card .info .img {
-  width: 200px;
-  height: 200px;
-}
-
-.row.second .con-card .info .data {
-  margin-left: 10px;
+.con-card .data {
   font-size: 1.4rem;
 }
 
-.row.second .con-card .info .data .cta {
+.cta {
   color: #fff;
   font-size: 1rem;
   background: var(--primary-color);
   padding: 6px 18px;
-}
-
-.row.second .con-card .info .img img {
-  border-radius: 1rem;
-}
-
-.row.second .con-card a.button {
-  padding: 12px 60px;
-  color: #fff;
-  background: var(--primary-color);
 }
 
 @media (min-width: 992px) {

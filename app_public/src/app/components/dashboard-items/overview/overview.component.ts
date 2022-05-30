@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
 import { PropertyService } from 'src/app/services/property.service';
 
 @Component({
@@ -12,6 +13,7 @@ export class OverviewComponent implements OnInit {
   constructor(
     private propertyService: PropertyService,
     private titleService: Title,
+    private authService: AuthService,
   ) { }
 
   ngOnInit(): void {
@@ -19,6 +21,8 @@ export class OverviewComponent implements OnInit {
     this.removeAnime()
     this.getAllProperties(1, 10)
   }
+
+  private role: string = this.authService.getUserRole()
 
   public animatedBg: boolean = true;
 
@@ -58,5 +62,31 @@ export class OverviewComponent implements OnInit {
   public async getPropertyId(id: string) {
     const { data } = await this.propertyService.getPropertiesById(id)
     this.data = data
+  }
+
+  public checkSuper(): boolean {
+    if (this.role !== 'facilitator') {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  public checkAdmin(): boolean {
+    const roles = ['facilitator', 'admin']
+    if (!roles.includes(this.role)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  public checkUser(): boolean {
+    const roles = ['facilitator', 'admin']
+    if (roles.includes(this.role)) {
+      return false
+    } else {
+      return true
+    }
   }
 }

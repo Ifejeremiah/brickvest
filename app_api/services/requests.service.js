@@ -19,7 +19,6 @@ async function getAll(page, limit) {
 }
 
 async function getById(id, isAdmin) {
-  console.log('Here is the result:', isAdmin)
   const request = await getRequest(id)
   if (isAdmin) {
     Object.assign(request, { adminViewed: true })
@@ -47,7 +46,7 @@ async function save({ id, title, subject, body }) {
 
 async function updateById(id, response) {
   const request = await getRequest(id)
-  response['hasViewed'] = false
+  response.userViewed = false
   Object.assign(request, response);
   await request.save();
   return request;

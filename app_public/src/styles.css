@@ -91,6 +91,10 @@ button {
   background: unset;
 }
 
+p {
+  margin-bottom: .6rem;
+}
+
 .table>thead>tr>th,
 .table>tbody>tr>th,
 .table>tfoot>tr>th,

@@ -1,3 +1,28 @@
 .con-section .con-content {
-  height: 70vh;
+  height: 64vh;
 }
+
+.con-card .cards img {
+  border-radius: .6rem;
+  filter: brightness(90%);
+  height: 330px;
+  width: 100%;
+}
+
+.cards .title {
+  font-size: 1.4rem;
+}
+
+.cards .price {
+  top: 30px;
+  right: 40px;
+  background: #fff;
+}
+
+.cta {
+  color: #fff;
+  font-size: 1rem;
+  background: var(--primary-color);
+  padding: 6px 18px;
+}
+

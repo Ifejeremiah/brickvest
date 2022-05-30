@@ -1,0 +1,592 @@
+<div class="row">
+  <div class="col-12">
+    <div id="con-ht-01" class="con-section sections">
+      <!-- Header -->
+      <div class="con-header d-flex flex-column flex-lg-row align-items-lg-center justify-content-between">
+        <h3 class="color-red wgt-02 mb-lg-0">Properties</h3>
+        <div class="d-flex align-items-center justify-content-between px-3 pb-2 pb-lg-0">
+          <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
+          <button data-bs-toggle="modal" href="#create-property"
+            class="ps-2 py-2 pe-2 d-flex align-items-center justify-content-center color-red wgt-02 border rounded"
+            *ngIf="checkSuper()">
+            <i class="fa-solid fa-plus pe-4"></i> New
+          </button>
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div class="con-content contents">
+
+        <div class="con-card" *ngIf="!animatedBg">
+
+          <div class="cards position-relative mb-lg-3" *ngFor="let property of properties">
+            <div class="info">
+
+              <div class="img">
+                <img src="assets/images/{{property.image}}" alt="">
+              </div>
+
+              <div class="data px-4" id="wgt-02">
+                <div class="title">
+                  {{property.name}}
+                </div>
+
+                <div class="d-flex align-items-center">
+                  <div class="label label-primary p-2" *ngIf="!property.isPrivate">
+                    public
+                  </div>
+                  <div class="label label-success p-2" *ngIf="property.isPrivate">
+                    private
+                  </div>
+
+                  <a data-bs-toggle="modal" href="#property-detail" role="button">
+                    <button class="cta rounded ms-4" (click)="getPropertyId(property.id)">
+                      View
+                    </button>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <div id="wgt-02" class="estimate position-absolute px-3 py-2">
+              {{property.ROIEstimate}}%
+            </div>
+          </div>
+        </div>
+
+        <div id="anime" *ngIf="animatedBg">
+          <div class="items mb-4 col-12 col-lg-4 col-md-6">
+            <div class="info d-flex align-items-center">
+              <div class="img animated-bg animated-bg-text">
+              </div>
+              <div class="data d-flex align-items-center flex-column">
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <button class="cta animated-bg animated-bg-text "></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="items mb-4 col-12 col-lg-4 col-md-6">
+            <div class="info d-flex align-items-center">
+              <div class="img animated-bg animated-bg-text">
+              </div>
+              <div class="data d-flex align-items-center flex-column">
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <button class="cta animated-bg animated-bg-text "></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="items mb-4 col-12 col-lg-4 col-md-6">
+            <div class="info d-flex align-items-center">
+              <div class="img animated-bg animated-bg-text">
+              </div>
+              <div class="data d-flex align-items-center flex-column">
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <button class="cta animated-bg animated-bg-text "></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="items mb-4 col-12 col-lg-4 col-md-6">
+            <div class="info d-flex align-items-center">
+              <div class="img animated-bg animated-bg-text">
+              </div>
+              <div class="data d-flex align-items-center flex-column">
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <button class="cta animated-bg animated-bg-text "></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="items mb-4 col-12 col-lg-4 col-md-6">
+            <div class="info d-flex align-items-center">
+              <div class="img animated-bg animated-bg-text">
+              </div>
+              <div class="data d-flex align-items-center flex-column">
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <button class="cta animated-bg animated-bg-text "></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="items mb-lg-3 col-12 col-lg-4 col-md-6">
+            <div class="info d-flex align-items-center">
+              <div class="img animated-bg animated-bg-text">
+              </div>
+              <div class="data d-flex align-items-center flex-column">
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <div class="title animated-bg animated-bg-text ">
+                </div>
+                <button class="cta animated-bg animated-bg-text "></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODALS -->
+<div class="con-modals">
+
+  <!-- Property Details -->
+  <div class="modal section-a" id="property-detail" aria-hidden="true" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content" *ngIf="propertyData">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="image">
+            <img [src]="propertyImage" alt="" *ngIf="propertyImage">
+          </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <div class="row the-modal-body-row snd-body-row">
+            <div class="form-group d-flex justify-content-center">
+              <div class="text-center control-label message" *ngIf="message">{{message}}</div>
+            </div>
+
+            <ul class="list-group list-group-unbordered px-4">
+              <li class="list-group-item">
+                <b>Name</b> <a class="pull-right">{{propertyData.name | titlecase}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Description</b> <a class="pull-right" [innerHTML]="propertyData.description | htmlLimeBreaks"></a>
+              </li>
+              <li class="list-group-item">
+                <b>Location</b> <a class="pull-right">{{propertyData.location | titlecase}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Year Built</b> <a class="pull-right">{{propertyData.yearBuilt}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Size</b> <a class="pull-right">{{propertyData.size | number}}ft²</a>
+              </li>
+              <li class="list-group-item">
+                <b>Total Units</b> <a class="pull-right">{{propertyData.totalUnits | number}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Units Available</b> <a class="pull-right">{{propertyData.unitsAvailable | number}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Cost per Unit</b> <a class="pull-right">NGN {{propertyData.costPerUnit | number}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Status</b> <a class="pull-right">
+                  <span class="label p-1" [class.label-success]="propertyData.status =='available'"
+                    [class.label-primary]="propertyData.status =='soldOut'">
+                    {{propertyData.status}}
+                  </span>
+                </a>
+              </li>
+              <li class="list-group-item">
+                <b>ROI Estimate</b> <a class="pull-right">{{propertyData.ROIEstimate}}%</a>
+              </li>
+              <li class="list-group-item">
+                <b>Created By</b>
+                <a class="pull-right wgt-02" *ngIf="!sameCreateUser()">{{propertyData.createdBy.email | titlecase}}</a>
+                <a class="pull-right wgt-02" *ngIf="sameCreateUser()">This is you</a>
+              </li>
+              <li class="list-group-item">
+                <b>Updated By</b>
+                <a class="pull-right wgt-02"
+                  *ngIf="propertyData.updatedBy && !sameUpdateUser()">{{propertyData.updatedBy.email | titlecase}}</a>
+                <a class="pull-right wgt-02" *ngIf="propertyData.updatedBy && sameUpdateUser()">This is you</a>
+                <a class="pull-right wgt-02" *ngIf="!propertyData.updatedBy">No one yet</a>
+              </li>
+              <li class="list-group-item">
+                <b>Created On</b> <a class="pull-right">{{propertyData.createdAt | date:'medium'}}</a>
+              </li>
+              <li class="list-group-item">
+                <b>Last Updated</b> <a class="pull-right">{{propertyData.updatedAt | date:'medium'}}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-primary wgt-02" data-bs-target="#property-public" data-bs-toggle="modal"
+            data-bs-dismiss="modal" *ngIf="propertyData.isPrivate && checkSuper()">Go Public</button>
+          <button class="btn btn-success wgt-02" data-bs-target="#property-private" data-bs-toggle="modal"
+            data-bs-dismiss="modal" *ngIf="!propertyData.isPrivate && checkSuper()">Make Private</button>
+
+          <button class="btn btn-secondary wgt-02 px-4" data-bs-target="#update-property" data-bs-toggle="modal"
+            data-bs-dismiss="modal">Edit</button>
+
+          <button class="btn btn-primary btn-light wgt-02 btn-danger" data-bs-target="#delete-property"
+            data-bs-toggle="modal" data-bs-dismiss="modal" *ngIf="checkSuper()">Delete</button>
+
+          <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!propertyData">
+        <div class="d-flex align-items-center flex-column">
+          <div class="animated-bg animated-bg-text ">
+          </div>
+          <div class="animated-bg animated-bg-text ">
+          </div>
+          <div class="animated-bg animated-bg-text ">
+          </div>
+          <div class="animated-bg animated-bg-text ">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Status Prompt -->
+  <div class="status-modal">
+    <div class="modal section-a" id="property-public" aria-hidden="true" data-bs-backdrop="static" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="propertyData">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <div class="image">
+              <img [src]="propertyImage" alt="" *ngIf="propertyImage">
+            </div>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            <div>
+              Make
+              <span class="color-red wgt-02">
+                {{propertyData.name | titlecase}}
+              </span>
+              properties go public?
+            </div>
+          </div>
+
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-bs-target="#property-detail" data-bs-toggle="modal"
+              data-bs-dismiss="modal" (click)="makePublic()">Yes</button>
+            <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+              data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal section-a" id="property-private" aria-hidden="true" data-bs-backdrop="static" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" *ngIf="propertyData">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <div class="image">
+              <img [src]="propertyImage" alt="" *ngIf="propertyImage">
+            </div>
+          </div>
+
+          <!-- Modal Body -->
+          <div class="modal-body">
+            Make
+            <span class="color-red wgt-02">
+              {{propertyData.name | titlecase}}
+            </span>
+            properties private?
+          </div>
+
+
+          <!-- Modal Footer -->
+          <div class="modal-footer">
+            <button class="btn btn-danger" data-bs-target="#property-detail" data-bs-toggle="modal"
+              data-bs-dismiss="modal" (click)="makePrivate()">Yes</button>
+            <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+              data-bs-dismiss="modal">No</button>
+            <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
+              aria-label="Close"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Deletion Prompt -->
+  <div class="modal section-a" id="delete-property" aria-hidden="true" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content" *ngIf="propertyData">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="image">
+            <img [src]="propertyImage" alt="" *ngIf="propertyImage">
+          </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          Delete
+          <span class="color-red wgt-02">
+            {{propertyData.name | titlecase}}
+          </span>
+          properties and all of it's data?
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-dismiss="modal"
+            (click)="deleteProperty()">Yes</button>
+          <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+            data-bs-dismiss="modal">No</button>
+          <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Edit  -->
+  <div class="modal section-a" id="update-property" aria-hidden="true" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content" *ngIf="updateBody">
+
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="image">
+            <img [src]="propertyImage" alt="">
+          </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group">
+              <label for="input-001" class="col-sm-3 control-label">Display Picture</label>
+              <div class="col-sm-9">
+                <input type="file" class="form-control" id="input-01"
+                  (change)="selectUpdateFile($event); updateImage($event)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-02" class="col-sm-3 control-label">Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="name" class="form-control" id="input-02" [(ngModel)]="updateBody.name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-03" class="col-sm-3 control-label">Description</label>
+              <div class="col-sm-9">
+                <textarea name="description" class="form-control" id="input-03"
+                  [(ngModel)]="updateBody.description"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-04" class="col-sm-3 control-label">Location</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="input-04" name="location" [(ngModel)]="updateBody.location">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-05" class="col-sm-3 control-label">Size</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-05" name="size" [(ngModel)]="updateBody.size">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-06" class="col-sm-3 control-label">Year Built</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-06" name="year-built"
+                  [(ngModel)]="updateBody.yearBuilt">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-07" class="col-sm-3 control-label">Total Units</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-07" name="total-units"
+                  [(ngModel)]="updateBody.totalUnits">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-08" class="col-sm-3 control-label">Units Available</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-08" name="units-available"
+                  [(ngModel)]="updateBody.unitsAvailable">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-09" class="col-sm-3 control-label">Cost per Unit</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-09" name="cost-per-unit"
+                  [(ngModel)]="updateBody.costPerUnit">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-10" class="col-sm-3 control-label">ROI Estimate</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control " id="input-10" name="roi-estimate"
+                  [(ngModel)]="updateBody.ROIEstimate">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-11" class="col-sm-3 control-label">Status</label>
+              <div class="col-sm-9">
+
+                <select name="status" class="form-select" [(ngModel)]="defaultStatus" (change)="doUpdateState()">
+                  <option [ngValue]="status.available">Available</option>
+                  <option [ngValue]="status.taken">Sold out</option>
+                </select>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#property-detail"
+            data-bs-dismiss="modal" (click)="makeUpdate(propertyData.id)">Save</button>
+          <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+            data-bs-dismiss="modal">Back</button>
+          <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Property Create -->
+  <div class="modal section-a" id="create-property" aria-hidden="true" data-bs-backdrop="static" tabindex="-1">
+    <div class="modal-dialog modal-dialog-scrollable">
+      <div class="modal-content">
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <div class="image">
+            <img [src]="postPreview" alt="">
+          </div>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <div class="form-group d-flex justify-content-center">
+              <div class="text-center control-label message" *ngIf="message">{{message}}</div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-001" class="col-sm-3 control-label">Image</label>
+              <div class="col-sm-9">
+                <input type="file" class="form-control" id="input-001" name="uploadfile"
+                  (change)="postImage($event); selectPostFile($event)">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-002" class="col-sm-3 control-label">Name</label>
+              <div class="col-sm-9">
+                <input type="text" name="name" class="form-control" id="input-002" placeholder="Property Name"
+                  [(ngModel)]="postBody.name">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-003" class="col-sm-3 control-label">Description</label>
+              <div class="col-sm-9">
+                <textarea name="description" class="form-control" id="input-003"
+                  [(ngModel)]="postBody.description"></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-004" class="col-sm-3 control-label">Location</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="input-004" name="location" placeholder="Location"
+                  [(ngModel)]="postBody.location">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-005" class="col-sm-3 control-label">Size</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-005" name="size" placeholder="Size"
+                  [(ngModel)]="postBody.size">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-006" class="col-sm-3 control-label">Year Built</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-006" name="year-built" placeholder="Year Built"
+                  [(ngModel)]="postBody.yearBuilt">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-007" class="col-sm-3 control-label">Total Units</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-007" name="total-units" placeholder="Total Units"
+                  [(ngModel)]="postBody.totalUnits">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-008" class="col-sm-3 control-label">Units Available</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-008" name="units-available"
+                  placeholder="Units Available" [(ngModel)]="postBody.unitsAvailable">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-009" class="col-sm-3 control-label">Cost per Unit</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control" id="input-009" name="cost-per-unit"
+                  placeholder="Cost per Unit" [(ngModel)]="postBody.costPerUnit">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="input-010" class="col-sm-3 control-label">ROI Estimate</label>
+              <div class="col-sm-9">
+                <input type="number" class="form-control " id="input-010" name="roi-estimate" placeholder="ROI Estimate"
+                  [(ngModel)]="postBody.ROIEstimate">
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-primary" data-bs-toggle="modal" (click)="createNew()">Save</button>
+          <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,21 +6,21 @@ import { AuthService } from '../services/auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class ValidateAccountGuard implements CanActivate {
+export class AdminGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router
   ) { }
 
-  private isVerified: boolean = this.authService.getCurrentUser().is_verified
+  private role = this.authService.getUserRole()
 
   canActivate(): boolean {
-    if (this.isVerified) {
-      return true;
+    const roles = ['facilitator', 'admin']
+    if (!roles.includes(this.role)) {
+      this.router.navigate(['dashboard', 'overview'])
+      return false
     } else {
-      this.router.navigateByUrl('/verify-account');
-      return false;
+      return true
     }
   }
-
 }

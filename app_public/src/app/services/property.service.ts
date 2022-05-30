@@ -50,4 +50,31 @@ export class PropertyService {
       .catch(this.handleError);
   }
 
+  public createProperty(body: any) {
+    const url = `${this.apiBase}/properties`;
+    return this.http
+      .post(url, body, { headers: this.sendTokenHeader() })
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
+
+  public updateProperty(id: string, body: any) {
+    const url = `${this.apiBase}/properties/${id}`;
+    return this.http
+      .patch(url, body, { headers: this.sendTokenHeader() })
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
+
+  public deletePropertyById(id: string) {
+    const url = `${this.apiBase}/properties/${id}`;
+    return this.http
+      .delete(url, { headers: this.sendTokenHeader() })
+      .toPromise()
+      .then(response => response)
+      .catch(this.handleError);
+  }
+
 }

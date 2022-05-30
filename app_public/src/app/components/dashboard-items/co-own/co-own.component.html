@@ -10,27 +10,33 @@
 
       <!-- Content -->
       <div class="con-content contents">
-        <div class="con-card" id="con-card" *ngIf="!animatedBg">
-          <div class="items position-relative mb-lg-3 col-12 col-lg-4 col-md-6" *ngFor="let property of properties">
-            <div class="info d-flex align-items-center">
-              <div class="img">
-                <img src="{{property.image}}" alt="">
-              </div>
-              <div class="data" id="wgt-02">
-                <div class="title">
-                  {{property.name}}
+
+        <div class="con-card" *ngIf="!animatedBg">
+
+          <div class="cards position-relative mb-lg-3 col-12" *ngFor="let property of properties">
+            <div *ngIf="!property.isPrivate" class="col-lg-4 col-md-6">
+              <div class="info">
+                <div class="img">
+                  <img src="assets/images/{{property.image}}" alt="">
                 </div>
-                <a data-bs-toggle="modal" href="#display-property" role="button">
-                  <button class="cta" (click)="getPropertyId(property.id)">
-                    See More
-                  </button>
-                </a>
+                <div class="data" id="wgt-02">
+                  <div class="title py-2">
+                    {{property.name | titlecase}}
+                  </div>
+                  <a data-bs-toggle="modal" href="#display-property" role="button">
+                    <button class="cta" (click)="getPropertyId(property.id)">
+                      See More
+                    </button>
+                  </a>
+                </div>
+              </div>
+              <div id="wgt-02" class="price position-absolute px-3 py-2">
+                {{property.ROIEstimate}}%
               </div>
             </div>
-            <div id="wgt-02" class="price position-absolute">
-              {{property.ROIEstimate}}%
-            </div>
+
           </div>
+
         </div>
 
         <div id="anime" *ngIf="animatedBg">
@@ -43,7 +49,7 @@
                 </div>
                 <div class="title animated-bg animated-bg-text ">
                 </div>
-                <button class="cta animated-bg animated-bg-text "></button>
+                <button class="animated-bg animated-bg-text "></button>
               </div>
             </div>
           </div>
@@ -57,7 +63,7 @@
                 </div>
                 <div class="title animated-bg animated-bg-text ">
                 </div>
-                <button class="cta animated-bg animated-bg-text "></button>
+                <button class="animated-bg animated-bg-text "></button>
               </div>
             </div>
           </div>
@@ -71,7 +77,7 @@
                 </div>
                 <div class="title animated-bg animated-bg-text ">
                 </div>
-                <button class="cta animated-bg animated-bg-text "></button>
+                <button class="animated-bg animated-bg-text "></button>
               </div>
             </div>
           </div>
@@ -85,7 +91,7 @@
                 </div>
                 <div class="title animated-bg animated-bg-text ">
                 </div>
-                <button class="cta animated-bg animated-bg-text "></button>
+                <button class="animated-bg animated-bg-text "></button>
               </div>
             </div>
           </div>
@@ -99,7 +105,7 @@
                 </div>
                 <div class="title animated-bg animated-bg-text ">
                 </div>
-                <button class="cta animated-bg animated-bg-text "></button>
+                <button class="animated-bg animated-bg-text "></button>
               </div>
             </div>
           </div>
@@ -113,7 +119,7 @@
                 </div>
                 <div class="title animated-bg animated-bg-text ">
                 </div>
-                <button class="cta animated-bg animated-bg-text "></button>
+                <button class="animated-bg animated-bg-text "></button>
               </div>
             </div>
           </div>

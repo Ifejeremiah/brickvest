@@ -49,6 +49,7 @@ export class ProfileComponent implements OnInit {
     accountNumber: '',
     accountName: '',
     phoneNumber: '',
+    role: '',
   }
 
   public message: string = '';
@@ -91,7 +92,6 @@ export class ProfileComponent implements OnInit {
     setTimeout(() => this.clearMsg(), 4000)
   }
 
-
   private getActions(id: string, page: number, limit: number) {
     this.userService.getUserActions(id, page, limit)
       .then(response => {
@@ -128,7 +128,7 @@ export class ProfileComponent implements OnInit {
     const response = await this.userService.getUserById(id)
     const { name, email,
       bank, state, city,
-      accountNumber, accountName, phoneNumber
+      accountNumber, accountName, phoneNumber, role
     } = response.data
 
     this.profileData = response.data
@@ -141,6 +141,7 @@ export class ProfileComponent implements OnInit {
     this.credentials['accountNumber'] = accountNumber
     this.credentials['accountName'] = accountName
     this.credentials['phoneNumber'] = phoneNumber
+    this.credentials['role'] = role
   }
 
   private async updateUser(formBody: any) {

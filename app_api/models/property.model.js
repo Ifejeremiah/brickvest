@@ -5,21 +5,37 @@ const aggregatePaginate = require("mongoose-aggregate-paginate-v2");
 const schema = new Schema({
   name: { type: String, required: true },
 
-  image: String,
+  image: {
+    type: String
+  },
 
-  location: { type: String, required: true },
+  location: {
+    type: String
+  },
 
-  yearBuilt: Number,
+  yearBuilt: {
+    type: Number
+  },
 
-  size: Number,
+  size: {
+    type: Number
+  },
 
-  description: String,
+  description: {
+    type: String
+  },
 
-  totalUnits: { type: Number, required: true },
+  totalUnits: {
+    type: Number
+  },
 
-  unitsAvailable: { type: Number, required: true },
+  unitsAvailable: {
+    type: Number
+  },
 
-  costPerUnit: { type: Number, required: true },
+  costPerUnit: {
+    type: Number
+  },
 
   status: {
     type: String,
@@ -27,11 +43,18 @@ const schema = new Schema({
     default: 'available'
   },
 
-  ROIEstimate: Number,
+  ROIEstimate: {
+    type: Number
+  },
+
+  isPrivate: {
+    type: Boolean,
+    default: true
+  },
 
   createdBy: { type: Schema.Types.ObjectId, ref: 'User' },
 
-  updatededBy: { type: Schema.Types.ObjectId, ref: 'User' },
+  updatedBy: { type: Schema.Types.ObjectId, ref: 'User' },
 
 }, { timestamps: true });
 

@@ -19,6 +19,10 @@ import { TransactionsPageComponent } from '../components/dashboard-items/transac
 import { UsersComponent } from '../components/dashboard-items/users/users.component';
 import { TransactionsComponent } from '../components/dashboard-items/transactions/transactions.component';
 import { RequestResponseComponent } from '../components/dashboard-items/request-response/request-response.component'
+import { PropertyPageComponent } from '../components/dashboard-items/property-page/property-page.component';
+import { SuperAdminGuard } from '../guards/super-admin.guard';
+import { AdminGuard } from '../guards/admin.guard';
+import { UserGuard } from '../guards/user.guard';
 
 
 const routes: Routes = [
@@ -34,14 +38,22 @@ const routes: Routes = [
       },
       {
         path: 'co-own',
+        canActivate: [UserGuard],
         component: CoOwnComponent
       },
       {
         path: 'requests',
+        canActivate: [UserGuard],
         component: RequestComponent
       },
       {
+        path: 'properties',
+        canActivate: [AdminGuard],
+        component: PropertyPageComponent
+      },
+      {
         path: 'user/requests',
+        canActivate: [AdminGuard],
         component: RequestResponseComponent
       },
       {
@@ -50,10 +62,12 @@ const routes: Routes = [
       },
       {
         path: 'users',
+        canActivate: [SuperAdminGuard],
         component: UsersComponent
       },
       {
         path: 'transactions',
+        canActivate: [SuperAdminGuard],
         component: TransactionsComponent
       },
     ]

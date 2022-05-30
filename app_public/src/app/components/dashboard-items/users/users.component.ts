@@ -19,7 +19,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle('Onebrick - User Management')
-    this.checkRoles()
     this.getUsers(1, this.totalLimit)
   }
 
@@ -41,33 +40,23 @@ export class UsersComponent implements OnInit {
 
   public defaultRole: string = this.roleSet.user
 
-  public isFacilitator: boolean = false;
-
   public users!: any[];
 
   public user: any;
 
   public message: string = '';
 
-  private checkRoles(): void {
-    if (this.authService.isFacilitator()) {
-      this.isFacilitator = true
-    }
-  }
-
   public data: any;
 
   public noDataInfo = 'No data'
 
   private getUsers(page: number, limit: number, role: string = '') {
-    if (this.isFacilitator) {
-      this.userService.getUsers(page, limit, role)
-        .then(response => {
-          this.users = response.data.results
-          response.data['totalLimit'] = this.totalLimit
-          this.data = response.data;
-        })
-    }
+    this.userService.getUsers(page, limit, role)
+      .then(response => {
+        this.users = response.data.results
+        response.data['totalLimit'] = this.totalLimit
+        this.data = response.data;
+      })
   }
 
   public getParamsFromChild(value: any): void {

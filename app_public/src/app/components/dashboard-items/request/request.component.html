@@ -21,8 +21,12 @@
             <div class="con-list" *ngIf="!animatedBg">
               <ul>
                 <li *ngFor="let request of requests" (click)="doShowId(request.id); clicked = request; doToggle()"
-                  [class.new-response]="request.response && request.responseTime" [class.seen]="request.userViewed && request.response"
-                  [class.active]="clicked === request">
+
+                  [class.new-response]="request.response && request.responseTime"
+                  [class.seen]="request.userViewed && request.response" 
+                  [class.active]="clicked === request"
+                  
+                  >
                   <div>
                     {{request.title|slice:0:10 }}{{ request.title.length > 10 ? '...' : '' }}
                   </div>

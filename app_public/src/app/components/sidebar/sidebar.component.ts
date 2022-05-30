@@ -13,20 +13,34 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.checkRoles()
   }
 
-  public isFacilitator: boolean = false;
+  private role: string = this.authService.getUserRole()
 
-  public isAdmin: boolean = false;
-
-  private checkRoles(): void {
-    if (this.authService.isFacilitator()) {
-      this.isFacilitator = true
-    } else if (this.authService.isAdmin()) {
-      this.isAdmin = true
+  public checkSuper(): boolean {
+    if (this.role !== 'facilitator') {
+      return false
+    } else {
+      return true
     }
   }
 
+  public checkAdmin(): boolean {
+    const roles = ['facilitator', 'admin']
+    if (!roles.includes(this.role)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  public checkUser(): boolean {
+    const roles = ['facilitator', 'admin']
+    if (roles.includes(this.role)) {
+      return false
+    } else {
+      return true
+    }
+  }
 
 }

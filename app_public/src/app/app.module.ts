@@ -31,6 +31,7 @@ import { TransactionsPageComponent } from './components/dashboard-items/transact
 import { UsersComponent } from './components/dashboard-items/users/users.component';
 import { TransactionsComponent } from './components/dashboard-items/transactions/transactions.component';
 import { RequestResponseComponent } from './components/dashboard-items/request-response/request-response.component';
+import { PropertyPageComponent } from './components/dashboard-items/property-page/property-page.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { RequestResponseComponent } from './components/dashboard-items/request-r
     TransactionsPageComponent,
     UsersComponent,
     TransactionsComponent,
-    RequestResponseComponent
+    RequestResponseComponent,
+    PropertyPageComponent
   ],
   imports: [
     BrowserModule,

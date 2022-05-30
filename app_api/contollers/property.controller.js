@@ -23,7 +23,8 @@ function getById(req, res, next) {
 }
 
 function createNew(req, res, next) {
-  req.body['createdBy'] = req.user.id
+  req.body.createdBy = req.user.id
+  if (req.file) req.body.image = req.file.filename
   propertyService.create(req.body)
     .then(data => successResponse(res, 'Create successfully', data, 201))
     .catch(next)
@@ -31,7 +32,8 @@ function createNew(req, res, next) {
 
 function updateById(req, res, next) {
   const { id } = req.params
-  req.body['updatededBy'] = req.user.id
+  req.body.updatedBy = req.user.id
+  if (req.file) req.body.image = req.file.filename
   propertyService.updateById(id, req.body)
     .then(data => successResponse(res, 'Property updated successfully', data))
     .catch(next)
