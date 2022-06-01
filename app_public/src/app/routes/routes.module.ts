@@ -23,6 +23,7 @@ import { PropertyPageComponent } from '../components/dashboard-items/property-pa
 import { SuperAdminGuard } from '../guards/super-admin.guard';
 import { AdminGuard } from '../guards/admin.guard';
 import { UserGuard } from '../guards/user.guard';
+import { UserOnlyGuard } from '../guards/user-only.guard';
 
 
 const routes: Routes = [
@@ -33,8 +34,8 @@ const routes: Routes = [
     children: [
       {
         path: 'overview',
+        canActivate: [UserOnlyGuard],
         component: OverviewComponent,
-        pathMatch: 'full'
       },
       {
         path: 'co-own',

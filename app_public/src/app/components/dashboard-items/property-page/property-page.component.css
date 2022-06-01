@@ -39,9 +39,30 @@
 }
 
 /* Modals */
+.modal .modal-header .image {
+  height: 300px;
+  overflow: hidden;
+  width: 100%;
+}
+
 .modal .modal-header .image img {
-  max-height: 400px;
-  height: auto;
+  object-fit: cover;
+}
+
+.btn {
+  padding: 8px 24px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.btn-danger {
+  background: var(--primary-color);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px #ca2233 solid;
+  color: #ca2233;
 }
 
 /* Media Queries */

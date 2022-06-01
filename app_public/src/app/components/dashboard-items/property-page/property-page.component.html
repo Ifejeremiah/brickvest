@@ -27,11 +27,10 @@
               </div>
 
               <div class="data px-4" id="wgt-02">
-                <div class="title">
-                  {{property.name}}
-                </div>
-
-                <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="title">
+                    {{property.name}}
+                  </div>
                   <div class="label label-primary p-2" *ngIf="!property.isPrivate">
                     public
                   </div>
@@ -39,12 +38,12 @@
                     private
                   </div>
 
-                  <a data-bs-toggle="modal" href="#property-detail" role="button">
-                    <button class="cta rounded ms-4" (click)="getPropertyId(property.id)">
-                      View
-                    </button>
-                  </a>
                 </div>
+                <a data-bs-toggle="modal" href="#property-detail" role="button">
+                  <button class="cta rounded" (click)="getPropertyId(property.id)">
+                    View
+                  </button>
+                </a>
               </div>
 
             </div>
@@ -286,7 +285,7 @@
           <div class="modal-footer">
             <button class="btn btn-danger" data-bs-target="#property-detail" data-bs-toggle="modal"
               data-bs-dismiss="modal" (click)="makePublic()">Yes</button>
-            <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+            <button class="btn btn-secondary" data-bs-target="#property-detail" data-bs-toggle="modal"
               data-bs-dismiss="modal">No</button>
             <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
               aria-label="Close"></button>
@@ -319,7 +318,7 @@
           <div class="modal-footer">
             <button class="btn btn-danger" data-bs-target="#property-detail" data-bs-toggle="modal"
               data-bs-dismiss="modal" (click)="makePrivate()">Yes</button>
-            <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+            <button class="btn btn-secondary" data-bs-target="#property-detail" data-bs-toggle="modal"
               data-bs-dismiss="modal">No</button>
             <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
               aria-label="Close"></button>
@@ -353,7 +352,7 @@
         <div class="modal-footer">
           <button class="btn btn-danger" data-bs-toggle="modal" data-bs-dismiss="modal"
             (click)="deleteProperty()">Yes</button>
-          <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+          <button class="btn btn-secondary" data-bs-target="#property-detail" data-bs-toggle="modal"
             data-bs-dismiss="modal">No</button>
           <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
             aria-label="Close"></button>
@@ -469,9 +468,9 @@
 
         <!-- Modal Footer -->
         <div class="modal-footer">
-          <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#property-detail"
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#property-detail"
             data-bs-dismiss="modal" (click)="makeUpdate(propertyData.id)">Save</button>
-          <button class="btn btn-primary btn-light" data-bs-target="#property-detail" data-bs-toggle="modal"
+          <button class="btn btn-secondary" data-bs-target="#property-detail" data-bs-toggle="modal"
             data-bs-dismiss="modal">Back</button>
           <button type="button" class="btn-close close-button mt-md-0" data-bs-dismiss="modal"
             aria-label="Close"></button>
