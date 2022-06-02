@@ -46,6 +46,10 @@
   background: var(--ash-color-02);
 }
 
+.profile-user-img {
+  border: 0
+}
+
 
 /* Media Queries */
 @media (min-width:992px) {

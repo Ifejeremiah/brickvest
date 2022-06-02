@@ -60,7 +60,6 @@ export class RequestResponseComponent implements OnInit {
     this.requestService.getRequestById(id)
       .then(response => {
         this.request = response.data
-        console.log(this.request)
         this.view = false
       });
   }

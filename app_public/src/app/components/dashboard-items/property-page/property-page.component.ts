@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { PropertyService } from 'src/app/services/property.service';
 
@@ -14,9 +15,11 @@ export class PropertyPageComponent implements OnInit {
     private titleService: Title,
     private authService: AuthService,
     private propertyService: PropertyService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
+    this.checkUser()
     this.titleService.setTitle('Onebrick - Properties')
     this.getAll(1, this.totalLimit)
   }
@@ -49,6 +52,16 @@ export class PropertyPageComponent implements OnInit {
   private role: string = this.authService.getUserRole()
 
   public postPreview: any
+
+  public checkUser(): boolean {
+    const roles = ['facilitator', 'admin']
+    if (!roles.includes(this.role)) {
+      this.router.navigate(['dashboard', 'overview'])
+      return false
+    } else {
+      return true
+    }
+  }
 
   public doUpdateState(): void {
     this.updateBody.status = this.defaultStatus

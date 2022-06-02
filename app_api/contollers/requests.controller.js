@@ -24,12 +24,13 @@ function getAll(req, res, next) {
 function getById(req, res, next) {
   const { id } = req.params;
   const roles = [Role.Facilitator, Role.Admin]
-  
+
   let isAdmin = false
   if (roles.includes(req.user.role)) isAdmin = true
   requestService.getById(id, isAdmin)
     .then(data => {
-      return successResponse(res, 'Request fetched successfully', data)
+        userViewed: 
+        return successResponse(res, 'Request fetched successfully', data)
     })
     .catch(next);
 }

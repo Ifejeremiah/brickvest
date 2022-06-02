@@ -1,4 +1,5 @@
 const { db, build, paginate } = require('../config');
+const notifyService = require('./notify.service')
 
 module.exports = {
   getAll,
@@ -23,9 +24,23 @@ async function getById(id, isAdmin) {
   if (isAdmin) {
     Object.assign(request, { adminViewed: true })
     await request.save()
+    await notifyService.save({
+      userId: request.user.id,
+      body: {
+        message: 'Admin has viewed notify',
+        adminViewed: true,
+      }
+    })
   } else {
     Object.assign(request, { userViewed: true })
     await request.save()
+    await notifyService.save({
+      userId: request.user.id,
+      body: {
+        message: 'User has viewed nofify',
+        userViewed: true
+      }
+    })
   }
   return format(request);
 }
@@ -41,7 +56,16 @@ async function getByUserId(id, page, limit) {
 }
 
 async function save({ id, title, subject, body }) {
-  return await db.Request.create({ user: id, title, subject, body });
+  const request = await db.Request.create({ user: id, title, subject, body });
+  await notifyService.save({
+    userId: id,
+    body: {
+      message: 'New request from user',
+      userViewed: true,
+      adminViewed: false
+    }
+  })
+  return request
 }
 
 async function updateById(id, response) {
@@ -49,6 +73,14 @@ async function updateById(id, response) {
   response.userViewed = false
   Object.assign(request, response);
   await request.save();
+  await notifyService.save({
+    userId: request.user.id,
+    body: {
+      message: 'New response from admin ',
+      adminViewed: true,
+      userViewed: false
+    }
+  })
   return request;
 }
 

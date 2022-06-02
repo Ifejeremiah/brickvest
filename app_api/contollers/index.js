@@ -5,3 +5,4 @@ module.exports.activityController = require('./activity.contoller');
 module.exports.requestsController = require('./requests.controller');
 module.exports.transactionController = require('./transaction.controller')
 module.exports.propertyController = require('./property.controller')
+module.exports.notifyController = require('./notify.controller')

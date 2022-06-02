@@ -68,7 +68,6 @@ export class RequestComponent implements OnInit {
       this.message = 'Please fill all fields to make a request';
       setTimeout(() => { this.message = '' }, 4000)
     } else {
-      console.log(this.requestBody)
       this.postRequest(this.requestBody);
     }
   }

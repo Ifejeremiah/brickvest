@@ -19,10 +19,10 @@ export class OverviewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.checkUser()
     this.titleService.setTitle('Onebrick - Overview')
     this.removeAnime()
     this.getAllProperties(1, 10)
-    this.checkUser()
   }
 
   private role: string = this.authService.getUserRole()

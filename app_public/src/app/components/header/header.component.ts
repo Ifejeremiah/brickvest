@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotifyService } from 'src/app/services/notify.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,11 +14,14 @@ export class HeaderComponent implements OnInit {
   constructor(
     private router: Router,
     private authService: AuthService,
-    private userService: UserService
+    private userService: UserService,
+    private notifyService: NotifyService,
   ) { }
 
   ngOnInit(): void {
     this.checkRole()
+    this.getAllNotifications()
+    this.getNotificationsById()
   }
 
   public doLogout(): void {
@@ -25,9 +29,13 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  public notify: boolean = true;
-
   public isFacilitator: boolean = false;
+
+  public notifications: any
+
+  public notification: any
+
+  private role = this.authService.getUserRole()
 
   public body = {
     currentPassword: '',
@@ -71,12 +79,50 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  public checkOut() {
-    this.notify = false;
+  public adminView() {
+    setTimeout(() => {
+      this.notifications = true
+    }, 4000)
+  }
+
+  public userView() {
+    setTimeout(() => {
+      this.notification.userViewed = true
+    }, 4000)
   }
 
   private checkRole() {
     this.isFacilitator = this.authService.isFacilitator()
+  }
+
+  public checkForAdmin(): boolean {
+    const roles = ['facilitator', 'admin']
+    if (!roles.includes(this.role)) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+  private getAllNotifications() {
+    if (this.checkForAdmin()) {
+      this.notifyService.getAllNotification()
+        .then(response => {
+          const x = response.data
+          const y = x.find((a: any) => a.adminViewed === false)
+          this.notifications = y ? false : true
+
+        })
+    }
+  }
+
+  private getNotificationsById() {
+    if (!this.checkForAdmin()) {
+      this.notifyService.getNotificationByUserId()
+        .then(response => {
+          this.notification = response.data
+        })
+    }
   }
 
 }

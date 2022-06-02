@@ -6,17 +6,21 @@
       <div class="section">
 
         <div class="con-header d-flex align-items-center">
-          <button class="first" [ngClass]="firstBtn" (click)="doShowFirstRow()">
+          <!-- <button class="first" [ngClass]="firstBtn" (click)="doShowFirstRow()">
             My Apartments
-          </button>
-          <button class="second" [ngClass]="secondBtn" (click)="doShowSecondRow()">
+          </button> -->
+          <!-- <button class="second" [ngClass]="secondBtn" (click)="doShowSecondRow()">
+            Explore
+          </button> -->
+          <button class="second active">
             Explore
           </button>
         </div>
 
-        <!-- Apartments -->
         <div class="con-row">
-          <div class="row first" *ngIf="!toggle">
+
+          <!-- Apartments -->
+          <!-- <div class="row first" *ngIf="!toggle">
             <div class="col-12">
               <div class="box">
                 <div class="box-body table-responsive no-padding">
@@ -126,11 +130,12 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
 
 
           <!-- Explore -->
-          <div class="row second explore" *ngIf="toggle">
+          <div class="row second explore">
+            <!-- <div class="row second explore" *ngIf="toggle"> -->
             <div>
               <div class="con-card" *ngIf="!animatedBg">
                 <div class="cards position-relative mb-4" *ngFor="let property of properties">
@@ -157,7 +162,7 @@
 
             </div>
             <a routerLink="/dashboard/co-own" *ngIf="!animatedBg">
-              <button class="cta m-4 px-5 py-2 rounded pull-right" id="wgt-02">
+              <button class="cta my-4 px-4 py-2 rounded" id="wgt-02">
                 View All
               </button>
             </a>

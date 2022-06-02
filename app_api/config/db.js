@@ -17,6 +17,7 @@ module.exports = {
   Request: require('../models/request.model'),
   Property: require('../models/property.model'),
   Transaction: require('../models/transactions.model'),
+  Notification: require('../models/notify.models'),
   ObjectId: mongoose.Types.ObjectId,
   isValidId
 };

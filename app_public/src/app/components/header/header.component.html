@@ -14,19 +14,48 @@
     <div class="navbar-custom-menu">
       <ul class="nav navbar-nav">
 
-        <!-- Notifications Toggle -->
-        <li class="dropdown notifications-menu">
+        <!-- Notification for Admin Dashboard -->
+        <li class="dropdown notifications-menu" *ngIf="checkForAdmin()">
           <a data-toggle="dropdown">
             <i class="fa fa-bell-o"></i>
-            <span class="label label-danger" *ngIf="notify">&nbsp;1&nbsp;</span>
+            <span class="label label-danger" *ngIf="!notifications">
+              &nbsp;1&nbsp;
+            </span>
           </a>
 
           <ul class="dropdown-menu">
-            <li routerLink="/dashboard/requests" *ngIf="notify" (click)="checkOut()">You have a new response from
+            <li routerLink="/dashboard/user/requests" *ngIf="!notifications" (click)="adminView()">You have a new
+              <b>Request</b>
+            </li>
+            <li *ngIf="notifications">You have no notifications yet</li>
+          </ul>
+        </li>
+
+        <!-- Nofication for User Dashboard -->
+        <li *ngIf="notification && !checkForAdmin()" class="dropdown notifications-menu">
+          <a data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+            <span class="label label-danger" *ngIf="!notification.userViewed">
+              &nbsp;1&nbsp;
+            </span>
+          </a>
+
+          <ul class="dropdown-menu">
+            <li routerLink="/dashboard/requests" *ngIf="!notification.userViewed" (click)="userView()">You have a new
+              response from
               <b>Support
                 Team</b>
             </li>
-            <li *ngIf="!notify">You have no notifications yet</li>
+            <li *ngIf="notification.userViewed">You have no notifications yet</li>
+          </ul>
+        </li>
+
+        <li *ngIf="!notification && !checkForAdmin()" class="dropdown notifications-menu">
+          <a data-toggle="dropdown">
+            <i class="fa fa-bell-o"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li>You have no notifications yet</li>
           </ul>
         </li>
 

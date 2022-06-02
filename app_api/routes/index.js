@@ -7,6 +7,7 @@ const requestRoute = require('./requests.route');
 const dashboardRoute = require('./dashboard.route');
 const transactionRoute = require('./transaction.route')
 const propertyRoute = require('./property.route')
+const notifyRoute = require('./notify.route')
 
 
 const routes = [
@@ -33,6 +34,10 @@ const routes = [
   {
     path: '/properties',
     route: propertyRoute
+  },
+  {
+    path: '/notifications',
+    route: notifyRoute
   },
 ];
 

@@ -10,7 +10,8 @@
         <!-- Modal Header -->
         <div class="modal-header" *ngIf="data">
           <div class="image">
-            <img src="assets/images/{{data.image}}" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header" [class.sold-out-img]="data.status !== 'available'">
+            <span class="sold-out-text position-absolute" *ngIf="data.status !== 'available'">Sold out</span>
           </div>
         </div>
 
@@ -85,7 +86,8 @@
 
         <div class="modal-header" *ngIf="data">
           <div class="image">
-            <img src="assets/images/{{data.image}}" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header" [class.sold-out-img]="data.status !== 'available'">
+            <span class="sold-out-text position-absolute" *ngIf="data.status !== 'available'">Sold out</span>
           </div>
         </div>
 
@@ -149,7 +151,8 @@
         <!-- Header -->
         <div class="modal-header" *ngIf="data">
           <div class="image">
-            <img src="assets/images/{{data.image}}" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header" [class.sold-out-img]="data.status !== 'available'">
+            <span class="sold-out-text position-absolute" *ngIf="data.status !== 'available'">Sold out</span>
           </div>
         </div>
 
@@ -228,7 +231,8 @@
       <div class="modal-content">
         <div class="modal-header" *ngIf="isAttached">
           <div class="image">
-            <img src="assets/images/{{data.image}}" alt="property header">
+            <img src="assets/images/{{data.image}}" alt="property header" [class.sold-out-img]="data.status !== 'available'">
+            <span class="sold-out-text position-absolute" *ngIf="data.status !== 'available'">Sold out</span>
           </div>
         </div>
 
