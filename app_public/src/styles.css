@@ -159,7 +159,7 @@ p {
 }
 
 #con-ht-01 {
-  height: 83vh;
+  height: 79vh;
   border-radius: 1.4rem;
   padding: 20px 18px;
 }
@@ -265,6 +265,18 @@ p {
 
 
 /* Media Queries */
+@media (min-width: 380px) {
+  #con-ht-01 {
+    height: 83vh;
+  }
+}
+
+@media (min-width: 400px) {
+  #con-ht-01 {
+    height: 85vh;
+  }
+}
+
 @media (min-width: 992px) {
   #con-ht-01 {
     height: 87vh;
@@ -278,7 +290,6 @@ p {
 @media (min-width: 1200px) {
   #con-ht-01 {
     height: 80vh;
-    /* padding: 40px 30px; */
   }
 
   .con-section .con-content.contents {

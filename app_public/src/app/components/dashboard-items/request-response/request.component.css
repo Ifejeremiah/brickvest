@@ -15,7 +15,7 @@ button.submit {
 
 /* Left Container */
 .con-left .con-requests .con-list {
-  height: 56vh;
+  height: 60vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -134,9 +134,22 @@ button.submit {
 
 
 /* Media Queries */
-@media (min-width:992px) {
+@media (min-width: 380px) {
   .con-left .con-requests .con-list {
-    height: 58vh;
+    height: 66vh;
+  }
+}
+
+@media (min-width: 400px) {
+  .con-left .con-requests .con-list {
+    height: 70vh;
+  }
+}
+
+@media (min-width:992px) {
+
+  .con-left .con-requests .con-list {
+    height: 66vh;
   }
 
   .con-left .con-requests .con-list li {

@@ -2,7 +2,7 @@
   <div class="col-12">
 
     <!-- Left Section-->
-    <div class="con-section left">
+    <div id="con-ht-01" class="con-section left">
       <div class="section">
 
         <div class="con-header d-flex align-items-center">
@@ -140,8 +140,13 @@
               <div class="con-card" *ngIf="!animatedBg">
                 <div class="cards position-relative mb-4" *ngFor="let property of properties">
                   <div *ngIf="!property.isPrivate" class="col-lg-4 col-md-6">
-                    <div class="img">
-                      <img src="assets/images/{{property.image}}" alt="">
+                    <div class="img position-relative">
+
+                      <img src="assets/images/{{property.image}}"
+                        [class.sold-out-img]="property.status !== 'available'">
+                      <span class="sold-out-text position-absolute" *ngIf="property.status !== 'available'">Sold
+                        out</span>
+
                     </div>
                     <div class="data" id="wgt-02">
                       <div class="title py-2">

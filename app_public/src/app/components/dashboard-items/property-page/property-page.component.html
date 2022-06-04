@@ -3,7 +3,7 @@
     <div id="con-ht-01" class="con-section sections">
       <!-- Header -->
       <div class="con-header d-flex flex-column flex-lg-row align-items-lg-center justify-content-between">
-        <h3 class="color-red wgt-02 mb-lg-0">Properties</h3>
+        <h3 class="color-red wgt-02 mb-lg-0 text-center pb-3 pb-lg-0">Properties</h3>
         <div class="d-flex align-items-center justify-content-between px-3 pb-2 pb-lg-0">
           <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
           <button data-bs-toggle="modal" href="#create-property"
@@ -40,7 +40,7 @@
 
                 </div>
                 <a data-bs-toggle="modal" href="#property-detail" role="button">
-                  <button class="cta rounded" (click)="getPropertyId(property.id)">
+                  <button class="cta" (click)="getPropertyId(property.id)">
                     View
                   </button>
                 </a>

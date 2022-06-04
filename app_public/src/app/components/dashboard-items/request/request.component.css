@@ -15,7 +15,7 @@ button.submit {
 
 /* Left Container */
 .con-left .con-requests .con-list {
-  height: 56vh;
+  height: 48vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -130,10 +130,19 @@ button.submit {
 
 
 /* Media Queries */
-@media (min-width:992px) {
+@media (min-width:380px) {
   .con-left .con-requests .con-list {
-    height: 50vh;
+    height: 58vh;
   }
+}
+
+@media (min-width:400px) {
+  .con-left .con-requests .con-list {
+    height: 62vh;
+  }
+}
+
+@media (min-width:992px) {
 
   .con-left .con-requests .con-list li {
     padding: 12px 30px;
@@ -141,5 +150,11 @@ button.submit {
 
   .con-left .con-requests .con-new {
     padding: 12px 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .con-left .con-requests .con-list {
+    height: 57vh;
   }
 }

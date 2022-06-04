@@ -1,7 +1,6 @@
 /* Section */
 
 .con-section {
-  height: 83vh;
   background: #fff;
   border-radius: 1.4rem;
   padding: 20px 18px;
@@ -29,7 +28,7 @@
 .con-section .section .con-row {
   overflow-y: auto;
   overflow-x: hidden;
-  height: 68vh;
+  height: 62vh;
 }
 
 td span.label {
@@ -70,6 +69,37 @@ td span.label {
   padding: 6px 18px;
 }
 
+/* Sold-Out Styling */
+img.sold-out-img {
+  filter: brightness(20%);
+}
+
+.sold-out-text {
+  position: absolute;
+  border: 2px white solid;
+  color: white;
+  padding: 20px 30px;
+  font-size: 1rem;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+/* Media Queries */
+@media (min-width:380px) {
+  .con-section .section .con-row {
+    height: 68vh;
+  }
+}
+
+@media (min-width:400px) {
+  .con-section .section .con-row {
+    height: 72vh;
+  }
+}
+
 @media (min-width: 992px) {
   .con-section {
     height: 87vh;
@@ -98,6 +128,6 @@ td span.label {
   }
 
   .con-section .section .con-row {
-    height: 60vh;
+    height: 64vh;
   }
 }

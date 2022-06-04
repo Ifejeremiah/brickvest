@@ -3,58 +3,50 @@
   <!-- Left Container -->
   <div class="col-12 col-md-12 col-lg-5 con-left" *ngIf="!toggle || !isMobile()">
     <div id="con-ht-01" class="con-section sections">
-      <div class="con-content contents">
-
-        <div class="con-left">
-          <div class="con-requests">
-            <div class="con-header px-3 py-3 border rounded d-flex justify-content-between align-items-center">
-              <h4 class="title color-red" id="wgt-02">Your Requests</h4>
-              <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
-            </div>
-
-            <div class="con-new">
-              <button class="con-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                New Request
-              </button>
-            </div>
-
-            <div class="con-list" *ngIf="!animatedBg">
-              <ul>
-                <li *ngFor="let request of requests" (click)="doShowId(request.id); clicked = request; doToggle()"
-
-                  [class.new-response]="request.response && request.responseTime"
-                  [class.seen]="request.userViewed && request.response" 
-                  [class.active]="clicked === request"
-                  
-                  >
-                  <div>
-                    {{request.title|slice:0:10 }}{{ request.title.length > 10 ? '...' : '' }}
-                  </div>
-                  <div class="data">
-                    {{request.subject|slice:0:20 }}{{ request.subject.length > 20 ? '...' : '' }}
-                  </div>
-                  <div>
-                    {{request.createdAt | date: "MMM dd"}}
-                  </div>
-                </li>
-                <li class="wgt-02" *ngIf="noData">{{noData}}</li>
-              </ul>
-            </div>
-
-            <div id="anime" *ngIf="animatedBg">
-              <div class=" animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-              <div class="animated-bg animated-bg-text"></div>
-            </div>
-
+      <div class="con-left">
+        <div class="con-requests">
+          <div class="con-header px-3 py-3 border rounded d-flex justify-content-between align-items-center">
+            <h4 class="title color-red" id="wgt-02">Your Requests</h4>
+            <app-paginate [allData]="data" (returnDataEvent)="getParamsFromChild($event)"></app-paginate>
           </div>
-        </div>
 
+          <div class="con-new">
+            <button class="con-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              New Request
+            </button>
+          </div>
+
+          <div class="con-list" *ngIf="!animatedBg">
+            <ul>
+              <li *ngFor="let request of requests" (click)="doShowId(request.id); clicked = request; doToggle()"
+                [class.new-response]="request.response && request.responseTime"
+                [class.seen]="request.userViewed && request.response" [class.active]="clicked === request">
+                <div>
+                  {{request.title|slice:0:10 }}{{ request.title.length > 10 ? '...' : '' }}
+                </div>
+                <div class="data">
+                  {{request.subject|slice:0:20 }}{{ request.subject.length > 20 ? '...' : '' }}
+                </div>
+                <div>
+                  {{request.createdAt | date: "MMM dd"}}
+                </div>
+              </li>
+              <li class="wgt-02" *ngIf="noData">{{noData}}</li>
+            </ul>
+          </div>
+
+          <div id="anime" *ngIf="animatedBg">
+            <div class=" animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+            <div class="animated-bg animated-bg-text"></div>
+          </div>
+
+        </div>
       </div>
     </div>
   </div>

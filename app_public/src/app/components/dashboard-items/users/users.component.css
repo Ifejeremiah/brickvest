@@ -3,6 +3,12 @@
   padding: 10px 0px 20px 0px;
 }
 
+.con-table .con-row .first {
+  height: 52vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
 .con-table .con-header .drop-down {
   background: rgb(238, 237, 237);
   padding: 10px 20px;
@@ -45,6 +51,12 @@
 }
 
 /* Media Queries */
+@media (min-width: 380px) {
+  .con-table .con-row .first {
+    height: 62vh;
+  }
+}
+
 @media (min-width:992px) {
   .con-table .con-header {
     padding: 10px 30px 30px 30px;

@@ -17,7 +17,7 @@ export class CoOwnComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Onebrick - Co own')
     this.removeAnime()
-    this.getAllProperties(1, 10)
+    this.getAllProperties(1, 50)
   }
 
   public properties: any;
@@ -33,6 +33,7 @@ export class CoOwnComponent implements OnInit {
   private async getAllProperties(page: number, limit: number) {
     const { data } = await this.propertyService.getAllProperties(page, limit)
     this.properties = data.results
+    console.log('Here is the response from server', this.properties)
   }
 
   public async getPropertyId(id: string) {

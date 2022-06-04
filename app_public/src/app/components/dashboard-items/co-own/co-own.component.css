@@ -4,7 +4,6 @@
 
 .con-card .cards img {
   border-radius: .6rem;
-  filter: brightness(90%);
   height: 330px;
   width: 100%;
 }
@@ -26,3 +25,39 @@
   padding: 6px 18px;
 }
 
+/* Sold-Out Styling */
+img.sold-out-img {
+  filter: brightness(20%);
+}
+
+.sold-out-text {
+  position: absolute;
+  border: 2px white solid;
+  color: white;
+  padding: 20px 30px;
+  font-size: 1rem;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+
+/* Media Queries */
+@media (min-width:380px) {
+  .con-section .con-content {
+    height: 72vh;
+  }
+}
+
+@media (min-width:400px) {
+  .con-section .con-content {
+    height: 72vh;
+  }
+}
+
+@media (min-width: 1200px) {
+  .con-section .con-content {
+    height: 66vh;
+  }
+}

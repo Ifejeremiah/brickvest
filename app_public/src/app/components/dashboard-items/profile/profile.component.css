@@ -1,5 +1,9 @@
+#con-ht-01 {
+  height: 82vh;
+}
+
 .main-row {
-  height: 80vh;
+  height: 79vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -52,11 +56,15 @@
 
 
 /* Media Queries */
+@media (min-width: 380px) {
+  .main-row {
+    height: 83vh;
+  }
+}
+
 @media (min-width:992px) {
   .main-row {
     height: 87vh;
-    overflow-x: hidden;
-    overflow-y: auto;
   }
 
   .content-header button {
