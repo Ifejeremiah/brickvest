@@ -54,6 +54,16 @@
   border: 0
 }
 
+form .form-group button {
+  background: var(--primary-color);
+  color: #fff;
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  border: 0;
+  border-radius: 0;
+}
+
 
 /* Media Queries */
 @media (min-width: 380px) {
