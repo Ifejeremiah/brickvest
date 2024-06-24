@@ -8,7 +8,6 @@ const cors = require('cors');
 
 const { errorHandler } = require('./app_api/middlewares')
 const { cross } = require('./app_api/config')
-console.log('Hello world')
 
 // Middlewares
 app.use(logger('dev'));
